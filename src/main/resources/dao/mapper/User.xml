@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.UserMapper">
+	<select id="list" resultType="User" parameterType="map">
+		select * from useraccount
+		<if test="userId!=null" >
+			where userid=#{userId}
+		</if>
+		<if test="ids!=null">
+			where userid in
+			<!-- collection : 여러 객체의 집합.(그냥 스트링이었다면 적용 안됨) -->
+			<foreach collection="ids" item="id" open="(" close=")" separator=",">
+				<!-- # : 받은 값의 자료형도 그대로 받는다. ''써줄 필요가 없음. -->
+				#{id}		
+			</foreach>
+		</if>
+		order by userid
+	</select>
+</mapper>

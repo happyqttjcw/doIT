@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<decorators defaultdir="/decorator">
+	<decorator name="company" page="comdecorator.jsp" >
+		<pattern>/com/*.shop</pattern>
+	</decorator>
+	<decorator name="user" page="userdecorator.jsp" >
+		<pattern>/user/*.shop</pattern>
+	</decorator>
+	<!-- layout 제외 설정 -->
+	<excludes>
+		<pattern>/board/imgupload*</pattern>
+		<pattern>/admin/graph*</pattern>
+	</excludes>
+</decorators>
