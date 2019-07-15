@@ -12,14 +12,14 @@ import logic.Cart;
 import logic.Item;
 import logic.ItemSet;
 import logic.Sale;
-import logic.ShopService;
+import logic.PageService;
 import logic.User;
 
 @Controller
 @RequestMapping("cart")
 public class CartController {
 	@Autowired
-	private ShopService service;
+	private PageService service;
 	
 	@RequestMapping("cartAdd")
 	public ModelAndView add(Integer id, Integer quantity,

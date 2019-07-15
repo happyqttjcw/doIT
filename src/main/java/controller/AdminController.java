@@ -32,14 +32,14 @@ import org.springframework.web.servlet.ModelAndView;
 import exception.LogInException;
 import logic.Board;
 import logic.Mail;
-import logic.ShopService;
+import logic.PageService;
 import logic.User;
 
 @Controller
 @RequestMapping("admin")
 public class AdminController {
 	@Autowired
-	private ShopService service;
+	private PageService service;
 	
 	@RequestMapping("list")
 	public ModelAndView list(HttpSession session) {

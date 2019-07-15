@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import logic.Item;
-import logic.ShopService;
+import logic.PageService;
 
 @Controller
 //@RequestMapping("item") 이렇게 설정해서 밑에를
 //@RequestMapping("list") 로 설정해도 된다.
 public class ItemController {
 	@Autowired
-	private ShopService service;
+	private PageService service;
 	
 	@RequestMapping("item/list")
 	public ModelAndView list() {

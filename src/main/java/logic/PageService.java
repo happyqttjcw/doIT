@@ -26,7 +26,7 @@ import dao.SaleItemDao;
 import dao.UserDao;
 
 @Service
-public class ShopService {
+public class PageService {
 	@Autowired
 	private ItemDao itemDao;
 	@Autowired

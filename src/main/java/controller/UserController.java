@@ -22,14 +22,14 @@ import exception.LogInException;
 import logic.Item;
 import logic.Sale;
 import logic.SaleItem;
-import logic.ShopService;
+import logic.PageService;
 import logic.User;
 
 @Controller
 @RequestMapping("user")
 public class UserController {
 	@Autowired
-	private ShopService service;
+	private PageService service;
 	
 	@GetMapping("*")
 	public String form(Model model) {

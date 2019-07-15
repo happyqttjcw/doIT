@@ -19,13 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.LogInException;
 import logic.Board;
-import logic.ShopService;
+import logic.PageService;
 
 @Controller
 @RequestMapping("board")
 public class BoardController {
 	@Autowired
-	private ShopService service;
+	private PageService service;
 	
 	@RequestMapping("list")
 	public ModelAndView list(Integer pageNum, String searchtype, String searchcontent) {
