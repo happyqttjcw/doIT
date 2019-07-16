@@ -65,6 +65,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: sans-serif, "Open Sans"}
  </div>
 <!-- End Navbar -->
 <br><br><br>
-<div><decorator:body/></div>
+<div class = "w3-main">
+<div style="margin-top: 200px;"><decorator:body/></div>
+</div>
 </body>
 </html>

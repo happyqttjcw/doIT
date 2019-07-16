@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.BoardDao;
+import dao.CompanyDao;
 import dao.ItemDao;
 import dao.SaleDao;
 import dao.SaleItemDao;
@@ -37,14 +38,13 @@ public class ShopService {
 	private SaleItemDao saleItemDao;
 	@Autowired
 	private BoardDao boardDao;
-	
+	@Autowired
+	private CompanyDao companyDao;
+
 	private static byte[] randomKey;
 	AlgorithmParameterSpec paramSpec = new IvParameterSpec(iv);
-	private final static byte[] iv = new byte[] { 
-			(byte) 0x8E, 0x12, 0x39, (byte) 0x9C, 
-			0x07, 0x72, 0x6F, (byte) 0x5A,
-			(byte) 0x8E, 0x12, 0x39, (byte) 0x9C, 
-			0x07, 0x72, 0x6F, (byte) 0x5A };
+	private final static byte[] iv = new byte[] { (byte) 0x8E, 0x12, 0x39, (byte) 0x9C, 0x07, 0x72, 0x6F, (byte) 0x5A,
+			(byte) 0x8E, 0x12, 0x39, (byte) 0x9C, 0x07, 0x72, 0x6F, (byte) 0x5A };
 	static Cipher cipher;
 	static {
 		try {
@@ -53,44 +53,43 @@ public class ShopService {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<Item> getItemList() {
 		return itemDao.list();
 	}
-	
+
 	public Item getItemDetail(Integer id) {
 		return itemDao.selectOne(id);
 	}
 
 	public void itemCreate(Item item, HttpServletRequest request) {
-		//itemDao는 db에서 가져오는 역할만 수행할 수 있다. 나머지는 service가 수행함.
-		if(item.getPicture()!=null && !item.getPicture().isEmpty()) {
+		// itemDao는 db에서 가져오는 역할만 수행할 수 있다. 나머지는 service가 수행함.
+		if (item.getPicture() != null && !item.getPicture().isEmpty()) {
 			uploadFileCreate(item.getPicture(), request, "item/img/");
-			//item.getPicture().getOriginalFilename() : 실제 파일의 이름.
+			// item.getPicture().getOriginalFilename() : 실제 파일의 이름.
 			item.setPictureUrl(item.getPicture().getOriginalFilename());
 		}
 		itemDao.insert(item);
 	}
 
 	private void uploadFileCreate(MultipartFile picture, HttpServletRequest request, String path) {
-		//업로드된 실제 파일의 이름
+		// 업로드된 실제 파일의 이름
 		String orgFile = picture.getOriginalFilename();
-		String uploadPath = request.getServletContext().getRealPath("/")
-				+ path;
+		String uploadPath = request.getServletContext().getRealPath("/") + path;
 		File fpath = new File(uploadPath);
-		if(!fpath.exists()) {
+		if (!fpath.exists()) {
 			fpath.mkdirs();
 		}
 		try {
-			//업로드 파일 생성하기
+			// 업로드 파일 생성하기
 			picture.transferTo(new File(uploadPath + orgFile));
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void itemUpdate(Item item, HttpServletRequest request) {
-		if(item.getPicture()!=null && !item.getPicture().isEmpty()) {
+		if (item.getPicture() != null && !item.getPicture().isEmpty()) {
 			uploadFileCreate(item.getPicture(), request, "item/img/");
 			item.setPictureUrl(item.getPicture().getOriginalFilename());
 		}
@@ -111,14 +110,13 @@ public class ShopService {
 	public String encrypt(String plain, String password) {
 		byte[] cipherMsg = new byte[1024];
 		try {
-			Key genKey = new SecretKeySpec
-						(password.substring(0,16).getBytes(),"AES");
+			Key genKey = new SecretKeySpec(password.substring(0, 16).getBytes(), "AES");
 			cipher.init(Cipher.ENCRYPT_MODE, genKey, paramSpec);
 			cipherMsg = cipher.doFinal(plain.getBytes());
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//Byte형 암호문을 hexa 값으로 변경하여 전달한다.
+		// Byte형 암호문을 hexa 값으로 변경하여 전달한다.
 		return byteToHex(cipherMsg);
 	}
 
@@ -127,7 +125,7 @@ public class ShopService {
 			return null;
 		String str = "";
 		for (byte b : cipherMsg) {
-			//1바이트씩 출력하여 2자리수의 16진수 값으로 변경한다.
+			// 1바이트씩 출력하여 2자리수의 16진수 값으로 변경한다.
 			str += String.format("%02X", b);
 		}
 		return str;
@@ -138,13 +136,13 @@ public class ShopService {
 		byte[] hash = null;
 		String result = "";
 		MessageDigest md;
-		try{
+		try {
 			md = MessageDigest.getInstance("SHA-256");
 			hash = md.digest(plain);
-			for(byte b : hash) {
+			for (byte b : hash) {
 				result += String.format("%02X", b);
 			}
-		}catch(NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		return result;
@@ -152,8 +150,8 @@ public class ShopService {
 
 	public User userSelect(String userId) {
 		User user = userDao.selectOne(userId);
-		if(user != null) {
-			user.setEmail(decript(user.getEmail(),user.getPassword()));
+		if (user != null) {
+			user.setEmail(decript(user.getEmail(), user.getPassword()));
 		}
 		return user;
 	}
@@ -165,14 +163,14 @@ public class ShopService {
 		sale.setUpdatetime(new Date());
 		List<ItemSet> itemList = cart.getItemSetList();
 		int i = 0;
-		for(ItemSet is : itemList) {
+		for (ItemSet is : itemList) {
 			int saleItemId = ++i;
 			SaleItem saleItem = new SaleItem(sale.getSaleId(), saleItemId, is);
 			sale.getItemList().add(saleItem);
 		}
 		saleDao.insert(sale);
 		List<SaleItem> saleItemList = sale.getItemList();
-		for(SaleItem si : saleItemList) {
+		for (SaleItem si : saleItemList) {
 			saleItemDao.insert(si);
 		}
 		return sale;
@@ -197,16 +195,16 @@ public class ShopService {
 
 	public List<User> userList() {
 		List<User> list = userDao.list();
-		for(User u : list) {
-			u.setEmail(decript(u.getEmail(),u.getPassword()));
+		for (User u : list) {
+			u.setEmail(decript(u.getEmail(), u.getPassword()));
 		}
 		return list;
 	}
 
 	public List<User> userList(String[] idchks) {
 		List<User> list = userDao.list(idchks);
-		for(User u : list) {
-			u.setEmail(decript(u.getEmail(),u.getPassword()));
+		for (User u : list) {
+			u.setEmail(decript(u.getEmail(), u.getPassword()));
 		}
 		return list;
 	}
@@ -214,11 +212,10 @@ public class ShopService {
 	public String decript(String cipherMsg, String password) {
 		byte[] plainMsg = new byte[1024];
 		try {
-			Key genKey = new SecretKeySpec
-							(password.substring(0,16).getBytes(), "AES");
+			Key genKey = new SecretKeySpec(password.substring(0, 16).getBytes(), "AES");
 			cipher.init(Cipher.DECRYPT_MODE, genKey, paramSpec);
 			plainMsg = cipher.doFinal(hexToByte(cipherMsg.trim()));
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new String(plainMsg).trim();
@@ -246,18 +243,18 @@ public class ShopService {
 	}
 
 	public Board getBoard(Integer num, HttpServletRequest request) {
-		if(request.getRequestURI().contains("detail")) {
+		if (request.getRequestURI().contains("detail")) {
 			boardDao.readcntadd(num);
-		}//조회 할때만 조회수를 올려야 하므로 uri를 받아서 따로 처리해준다.
+		} // 조회 할때만 조회수를 올려야 하므로 uri를 받아서 따로 처리해준다.
 		return boardDao.selectOne(num);
 	}
 
 	public void write(Board board, HttpServletRequest request) {
-		if(board.getFile1()!=null && !board.getFile1().isEmpty()) {
+		if (board.getFile1() != null && !board.getFile1().isEmpty()) {
 			uploadFileCreate(board.getFile1(), request, "board/file/");
 			board.setFileurl(board.getFile1().getOriginalFilename());
 		}
-		
+
 		int maxnum = boardDao.maxNum();
 		board.setNum(++maxnum);
 		board.setRef(maxnum);
@@ -268,14 +265,13 @@ public class ShopService {
 		boardDao.updateRefStep(board);
 		int maxnum = boardDao.maxNum();
 		board.setNum(++maxnum);
-		board.setReflevel(board.getReflevel()+1);
+		board.setReflevel(board.getReflevel() + 1);
 		board.setRefstep(board.getRefstep() + 1);
 		boardDao.insert(board);
 	}
 
-
 	public void boardUpdate(Board board, HttpServletRequest request) {
-		if(board.getFile1()!=null && !board.getFile1().isEmpty()) {
+		if (board.getFile1() != null && !board.getFile1().isEmpty()) {
 			uploadFileCreate(board.getFile1(), request, "board/file/");
 			board.setFileurl(board.getFile1().getOriginalFilename());
 		}
@@ -288,14 +284,16 @@ public class ShopService {
 
 	public Map<String, Object> graph() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		//boardDao.graph() : List<Map<String, Object>>객체임.
-		for(Map<String, Object> m : boardDao.graph()) {
-			//m.get("key1") : "홍길동"
-			//m.get("value1") : 15
-			map.put((String)m.get("key1"), m.get("value1"));
+		// boardDao.graph() : List<Map<String, Object>>객체임.
+		for (Map<String, Object> m : boardDao.graph()) {
+			// m.get("key1") : "홍길동"
+			// m.get("value1") : 15
+			map.put((String) m.get("key1"), m.get("value1"));
 		}
 		return map;
 	}
 
-
+	public Company comselect(String comid) {
+		return companyDao.selectOne(comid);
+	}
 }
