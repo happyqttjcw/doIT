@@ -9,12 +9,12 @@
 <title>¾È³ç</title>
 <style>
 body{
-	background-color: pink;
+	
 }
 </style>
 </head>
 <body >
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 <h1>111</h1>
 ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 <h1>111</h1>

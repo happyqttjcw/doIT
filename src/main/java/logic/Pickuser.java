@@ -4,6 +4,7 @@ public class Pickuser {
 	private int pickuserno;
 	private int comno;
 	private int userno;
+	private int cvno;
 	private int calluser;
 	public int getPickuserno() {
 		return pickuserno;
@@ -23,6 +24,12 @@ public class Pickuser {
 	public void setUserno(int userno) {
 		this.userno = userno;
 	}
+	public int getCvno() {
+		return cvno;
+	}
+	public void setCvno(int cvno) {
+		this.cvno = cvno;
+	}
 	public int getCalluser() {
 		return calluser;
 	}
@@ -31,9 +38,8 @@ public class Pickuser {
 	}
 	@Override
 	public String toString() {
-		return "Pickuser [pickuserno=" + pickuserno + ", comno=" + comno + ", userno=" + userno + ", calluser="
-				+ calluser + "]";
+		return "Pickuser [pickuserno=" + pickuserno + ", comno=" + comno + ", userno=" + userno + ", cvno=" + cvno
+				+ ", calluser=" + calluser + "]";
 	}
-	
 	
 }

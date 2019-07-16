@@ -239,6 +239,7 @@ CREATE TABLE pickuser
 	pickuserno int(20) NOT NULL,
 	comno int(100) unsigned NOT NULL,
 	userno int(20),
+	cvno int(20),
 	calluser int(2),
 	PRIMARY KEY (pickuserno)
 );
