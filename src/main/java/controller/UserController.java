@@ -19,11 +19,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import exception.LoginException;
+import logic.CV;
 import logic.Company;
 import logic.PageService;
 import logic.User;
@@ -240,7 +244,6 @@ public class UserController {
 			return mav;
 		}
 		String compass =  CipherUtil.messageDigest(company.getCompass());
-		
 		if(compass.equals(dbCompany.getCompass())){
 			session.setAttribute("loginCompany",dbCompany);
 			mav.setViewName("redirect:../com/commypage.shop");	
@@ -250,6 +253,16 @@ public class UserController {
 			return mav;
 		}
 		return mav;
-		
 	}
+	
+	@PostMapping("cv")
+	public ModelAndView cv(User user,CV cv) {
+		ModelAndView mav = new ModelAndView();
+		user = service.cvinsert(user.getUserno());
+		mav.addObject("user", user);
+		mav.addObject("cv",cv);
+		return mav;
+	}
+	
+	
 }

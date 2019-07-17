@@ -6,6 +6,8 @@
 <head>
 <meta charset="EUC-KR">
 <title>사용자 등록</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#minfo").show();
@@ -33,39 +35,52 @@
 	.select{
 		padding:3px;
 		text-decoration:none; font-weight:bold;
-		background-color:#0000ff;
+		background-color:#46556d;
 	}
 	.select>a{color:white;}
 	table {
    width : 100%;
-   border-collapse : collapse;
-	}
-th,td {
-   border : 3px solid #bcbcbc;
-   text-align : center;
+   border-collapse: collapse;
+}
+th,td { border-bottom: 1px solid #c1c1c1;
+   text-align: center;
    padding : 8px;
-	}
-th {
-   background-color : #4CAF50;
-   color : white;
-	}
-td {
-   background-color : #F2F2F2;
-	}
+   }
+th {background-color: #46556d; color : white;}
+td {background-color:#ffffff;}
 caption {
-   color : #111111;
-   font-size : 20px;
-   background-color : #FFFFFF;
-	}
-input[type=text], input[type=password],textarea {
-   width : 100%;
-	}
+   color : #111111; font-size:20px;
+   background-color: #FFFFFF;
+}
+input[type=text],input[type=password],textarea {
+   width : 80%;
+}
+input[type=button],input[type=submit] {
+   w3-button; w3-teal; w3-rigth;
+}
+.login {
+   border: solid 0px #000000;
+   background-color:#ffffff;
+}
+.submit {
+   border-radius: 5px; 
+   background-color: #46556d;
+   color: white;
+   }
+   
+
+   html,body{
+  height:100%;
+}
+
 	
 	
 </style>
 </head>
 <body>
 <h2>사용자 등록</h2>
+<div class="w3-container" style="width:60%; margin:auto;">
+<div class="w3-panel w3-card-2">
 <table>
 	<tr><td id="tab1" class="tab">
 		<a href="javascript:disp_div('minfo','tab1')">일반 회원</a></td>	
@@ -83,26 +98,26 @@ input[type=text], input[type=password],textarea {
 		</font>
 	</spring:hasBindErrors>
  <table id="minfo" class="info" border="1" style="border-collapse: collapse;">
-      <tr height="40px"><td>아이디</td><td><form:input path="id"/>
+      <tr height="40px"><th>아이디</th><td><form:input path="id"/>
          <font color="red"><form:errors path="id"/></font></td></tr>
-      <tr height="40px"><td>비밀번호</td><td><form:password path="pass"/>
+      <tr height="40px"><th>비밀번호</th><td><form:password path="pass"/>
          <font color="red"><form:errors path="pass"/></font></td></tr>
-      <tr height="40px"><td>이름</td><td><form:input path="name"/>
+      <tr height="40px"><th>이름</th><td><form:input path="name"/>
          <font color="red"><form:errors path="name"/></font></td></tr>
-      <tr height="40px"><td>전화번호</td><td><form:input path="phone"/>
+      <tr height="40px"><th>전화번호</th><td><form:input path="phone"/>
          <font color="red"><form:errors path="phone"/></font></td></tr>
-      <tr height="40px"><td>나이</td><td><form:input path="age"/>
+      <tr height="40px"><th>나이</th><td><form:input path="age"/>
          <font color="red"><form:errors path="age"/></font></td></tr>
-      <tr height="40px"><td>이메일</td><td><form:input path="email"/>
+      <tr height="40px"><th>이메일</th><td><form:input path="email"/>
          <font color="red"><form:errors path="email"/></font></td></tr>
-      <tr height="40px"><td>성별</td>
+      <tr height="40px"><th>성별</th>
       <td><form:radiobutton path="gender" value="1" checked="checked"/>남자
       	  <form:radiobutton path="gender" value="2"/>여자
           <font color="red"><form:errors path="gender"/></font></td></tr>
       <tr height="40px">
       <td colspan="2" align="center">
-      	<input type="submit" value="등록">
-      	<input type="reset" value="초기화">
+      	<input type="submit" value="등록" >
+      	<input type="reset" value="초기화" >
       </td></tr>
    </table>
 </form:form>
@@ -116,19 +131,19 @@ input[type=text], input[type=password],textarea {
 		</font> 
 	</spring:hasBindErrors>
  <table id="oinfo" class="info" border="1" style="border-collapse: collapse;"> 
-      <tr height="40px"><td>기업 ID</td><td><form:input path="comid"/>
+      <tr height="40px"><th>기업 ID</th><td><form:input path="comid"/>
          <font color="red"><form:errors path="comid"/></font></td></tr>
-      <tr height="40px"><td>비밀번호</td><td><form:password path="compass"/>
+      <tr height="40px"><th>비밀번호</th><td><form:password path="compass"/>
          <font color="red"><form:errors path="compass"/></font></td></tr>
-      <tr height="40px"><td>기업명</td><td><form:input path="comname"/>
+      <tr height="40px"><th>기업명</th><td><form:input path="comname"/>
          <font color="red"><form:errors path="comname"/></font></td></tr>
-      <tr height="40px"><td>사업자 번호</td><td><form:input path="bussno"/>
+      <tr height="40px"><th>사업자 번호</th><td><form:input path="bussno"/>
          <font color="red"><form:errors path="bussno"/></font></td></tr>
-      <tr height="40px"><td>담당자</td><td><form:input path="managername"/>
+      <tr height="40px"><th>담당자</th><td><form:input path="managername"/>
          <font color="red"><form:errors path="managername"/></font></td></tr>
-      <tr height="40px"><td>핸드폰 번호</td><td><form:input path="managerphone"/>
+      <tr height="40px"><th>핸드폰 번호</th><td><form:input path="managerphone"/>
          <font color="red"><form:errors path="managerphone"/></font></td></tr>
-      <tr height="40px"><td>이메일</td><td><form:input path="manageremail"/>
+      <tr height="40px"><th>이메일</th><td><form:input path="manageremail"/>
          <font color="red"><form:errors path="manageremail"/></font></td></tr>
       <tr height="40px">
        <td colspan="2" align="center"> 
@@ -136,6 +151,8 @@ input[type=text], input[type=password],textarea {
       	<input type="reset" value="초기화">
        </td></tr> 
    </table> 
-</form:form> 
+</form:form>
+</div> 
+</div>
 </body>
 </html>

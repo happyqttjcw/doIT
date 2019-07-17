@@ -13,6 +13,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import dao.mapper.UserMapper;
+import logic.CV;
 import logic.User;
 
 @Repository
@@ -56,6 +57,15 @@ public class UserDao {
 		return sqlSession.selectList(NS+"list",param);
 		
 	}
+
+	public User cvinsert(int userno) {
+		return sqlSession.getMapper(UserMapper.class).cvinsert(userno);
+		
+	}
+
+	
+
+	
 	
 
 }

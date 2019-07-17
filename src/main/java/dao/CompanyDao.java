@@ -14,7 +14,7 @@ import logic.Company;
 public class CompanyDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	private final String NS = "dao.mapper.UserMapper.";
+	private final String NS = "dao.mapper.CompanyMapper.";
 	private Map<String,Object> param = new HashMap<String,Object>();
 	
 	

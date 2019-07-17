@@ -65,23 +65,22 @@ public class CompanyController {
 			bindResult.reject("error.input.company");
 			return mav;
 		}
+		System.out.println(company.getComid());
 		Company dbCompany = service.companySelect(company.getComid());
 		if(dbCompany == null) {
 			bindResult.reject("error.login.comid");
 			return mav;
 		}
 		String compass =  CipherUtil.messageDigest(company.getCompass());
-		
 		if(compass.equals(dbCompany.getCompass())){
 			session.setAttribute("loginCompany",dbCompany);
-			mav.setViewName("redirect:mypage.shop");	
+			mav.setViewName("redirect:../com/commypage.shop");	
 		}else {
 			bindResult.reject("error.login.compass");
 			mav.getModel().putAll(bindResult.getModel());
 			return mav;
 		}
 		return mav;
-		
 	}
 	
 	

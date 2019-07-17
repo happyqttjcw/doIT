@@ -2,8 +2,10 @@ package dao.mapper;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import logic.CV;
 import logic.User;
 
 public interface UserMapper {
@@ -19,6 +21,9 @@ public interface UserMapper {
 	
 	@Delete("delete from user where id=#{Id}")
 	void delete(User user);
+	
+	@Select("select * from user where userno=#{userno}")
+	User cvinsert(int userno);
 	
 	
 	

@@ -7,10 +7,7 @@
 		<if test="id != null">
 			where id=#{id}
 		</if>
-		<!-- 
-		where userid in ('test1','test3','hongkd',...)
 		
-		 -->
 		<if test="ids != null">
 			where id in
 			<foreach collection="ids" separator="," item="id" open="(" close=")">
