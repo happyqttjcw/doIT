@@ -4,8 +4,8 @@
 <mapper namespace="dao.mapper.UserMapper">
 	<select id="list" resultType="User" parameterType="map">
 		select * from user
-		<if test="Id != null">
-			where id=#{Id}
+		<if test="id != null">
+			where id=#{id}
 		</if>
 		<!-- 
 		where userid in ('test1','test3','hongkd',...)

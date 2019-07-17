@@ -27,6 +27,7 @@ import exception.LoginException;
 import logic.Company;
 import logic.PageService;
 import logic.User;
+import security.CipherUtil;
 
 @Controller
 @RequestMapping("user")
@@ -35,6 +36,7 @@ public class UserController {
 	@Autowired
 	private PageService service;
 	
+	
 	@GetMapping("*")
 	public String form(Model model) {
 		model.addAttribute(new User());
@@ -42,29 +44,58 @@ public class UserController {
 		return null;
 	}
 	@PostMapping("userEntry")
-	public ModelAndView userEntry(@Valid User user,BindingResult bindResult) {
-		ModelAndView mav = new ModelAndView();
-		if(bindResult.hasErrors()) {
-			mav.getModel().putAll(bindResult.getModel());
-			mav.addObject("user",user);
-			mav.setViewName("../user/userEntry.shop");
-			return mav;
-		}
-		try {
-			service.userCreate(user);
-			mav.setViewName("user/login");
-			mav.addObject("user",user);
-			mav.addObject("company",new Company());
-		
-		}catch(DataIntegrityViolationException e) {
-			e.printStackTrace();
-			bindResult.reject("error.duplicate.user");
-		}
-		return mav;
+	   public ModelAndView userEntry(@Valid User user, BindingResult bindResult) {
+	      ModelAndView mav = new ModelAndView();
+	      if (bindResult.hasErrors()) {
+	         mav.getModel().putAll(bindResult.getModel());
+	         mav.addObject("user", user);
+	         mav.setViewName("../user/userEntry.shop");
+	         return mav;
+	      }
+	      try {
+	         if (service.userSelect(user.getId()) != null) {
+	            mav.addObject("msg", "이미 존재하는 아이디입니다.");
+	            mav.addObject("url", "../user/userEntry.shop");
+	            mav.setViewName("alert");
+	            return mav;
+	         } else {
+	            service.userCreate(user);
+	            mav.setViewName("user/login");
+	            mav.addObject("user", user);
+	            mav.addObject("company", new Company());
+	         }
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	         bindResult.reject("error.duplicate.user");
+	      }
+	      return mav;
 	}
 	
 	
 
+//	@PostMapping("login")
+//	   public ModelAndView login(@Valid User user , HttpSession session) {
+//	      ModelAndView mav = new ModelAndView();
+//	      
+//	      User dbUser = service.userSelect(user.getId());
+//	      
+//	      if(dbUser == null) {
+//	         return mav;
+//	      }
+//	      String password = service.messageDigest(user.getPass());
+//	      if(password.equals(dbUser.getPass())) {
+//	         session.setAttribute("loginUser", dbUser);
+//	         mav.setViewName("redirect:main.shop");
+//	      } else {
+//	    	  System.out.println("비번 틀림");
+//	         return mav;
+//	      }
+//	         // 아이디 없음(), 비밀번호 오류, 화면에 출력
+//	         // 로그인 성공 : 세션에 loginUser 이름으로 dbUser 저장 
+//	         //         main.shop 리다이렉트
+//	      return mav;
+//	   }
+	
 	@PostMapping("login")
 	   public ModelAndView login(@Valid User user, BindingResult bindResult , HttpSession session) {
 	      ModelAndView mav = new ModelAndView();
@@ -80,7 +111,7 @@ public class UserController {
 	         bindResult.reject("error.login.id");
 	         return mav;
 	      }
-	      String password = service.messageDigest(user.getPass());
+	      String password = CipherUtil.messageDigest(user.getPass());
 	      if(password.equals(dbUser.getPass())) {
 	         session.setAttribute("loginUser", dbUser);
 	         mav.setViewName("redirect:main.shop");
@@ -123,7 +154,7 @@ public class UserController {
 	      }
 	      User loginUser = (User)session.getAttribute("loginUser");
 	      User dbUser = service.userSelect(user.getId());
-	      String password = service.messageDigest(user.getPass());
+	      String password = CipherUtil.messageDigest(user.getPass());
 	      if(!dbUser.getPass().equals(password)) {
 	         bindResult.reject("error.login.password");
 	         return mav;
@@ -133,7 +164,7 @@ public class UserController {
 	         service.userUpdate(user);
 	         mav.setViewName("redirect:mypage.shop?id="+user.getId());
 	         if(!loginUser.getId().equals("admin"))
-	        	password = service.messageDigest(user.getPass());
+	        	password = CipherUtil.messageDigest(user.getPass());
 	         	user.setPass(password);
 	            session.setAttribute("loginUser", user);
 	      } catch(Exception e) {
@@ -146,7 +177,7 @@ public class UserController {
 	   public ModelAndView delete(User user,HttpSession session) {
 	      ModelAndView mav = new ModelAndView();
 	      User loginUser = (User) session.getAttribute("loginUser");
-	      String password = service.messageDigest(user.getPass());
+	      String password = CipherUtil.messageDigest(user.getPass());
 	      if(!loginUser.getPass().equals(password)) {
 	         throw new LoginException("비밀번호가 일치하지 않습니다.","delete.shop?id="+ user.getId());
 	      }
@@ -168,26 +199,57 @@ public class UserController {
 	      return mav;
 	   }
 	@PostMapping("companyEntry")
-	public ModelAndView userEntry(@Valid Company company,BindingResult bindResult) {
+	   public ModelAndView userEntry(@Valid Company company, BindingResult bindResult) {
+	      ModelAndView mav = new ModelAndView();
+	      if (bindResult.hasErrors()) {
+	         mav.getModel().putAll(bindResult.getModel());
+	         mav.addObject("company", company);
+	         mav.setViewName("../user/userEntry.shop");
+	         return mav;
+	      }
+
+	      try {
+	         if (service.companySelect(company.getComid())!=null) {
+	            mav.addObject("msg", "이미 존재하는 아이디입니다.");
+	            mav.addObject("url", "../user/userEntry.shop");
+	            mav.setViewName("alert");
+	            return mav;
+	         } else {
+	            service.companyCreate(company);
+	            mav.setViewName("user/login");
+	            mav.addObject("user", new User());
+	            mav.addObject("company", company);
+	         }
+	      } catch (DataIntegrityViolationException e) {
+	         e.printStackTrace();
+	         bindResult.reject("error.duplicate.user");
+	      }
+	      return mav;
+	   }
+	@PostMapping("comlogin")
+	public ModelAndView login(@Valid Company company,BindingResult bindResult,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		if(bindResult.hasErrors()) {
-			mav.getModel().putAll(bindResult.getModel());
-			mav.addObject("company",company);
-			mav.setViewName("../user/userEntry.shop");
+			bindResult.reject("error.input.company");
 			return mav;
 		}
+		System.out.println(company.getComid());
+		Company dbCompany = service.companySelect(company.getComid());
+		if(dbCompany == null) {
+			bindResult.reject("error.login.comid");
+			return mav;
+		}
+		String compass =  CipherUtil.messageDigest(company.getCompass());
 		
-		try {
-			
-			service.companyCreate(company);
-			mav.setViewName("user/login");
-			mav.addObject("company",company);
-			mav.addObject("user",new User());
-		
-		}catch(DataIntegrityViolationException e) {
-			e.printStackTrace();
-			bindResult.reject("error.duplicate.user");
+		if(compass.equals(dbCompany.getCompass())){
+			session.setAttribute("loginCompany",dbCompany);
+			mav.setViewName("redirect:../com/commypage.shop");	
+		}else {
+			bindResult.reject("error.login.compass");
+			mav.getModel().putAll(bindResult.getModel());
+			return mav;
 		}
 		return mav;
+		
 	}
 }

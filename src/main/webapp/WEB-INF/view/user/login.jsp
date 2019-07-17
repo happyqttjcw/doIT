@@ -68,7 +68,7 @@
         </td></tr>
 	</table>
 </form:form>
-<form:form modelAttribute="user" method="post" action="Companylogin.shop">
+<form:form modelAttribute="company" method="post" action="comlogin.shop">
 	<input type="hidden" name="userName" value="유효성 검증을 위한 의미없는 이름"/>
 	<spring:hasBindErrors name="user">
 		<font color="red">
@@ -78,10 +78,10 @@
 		</font>
 	</spring:hasBindErrors>
 	<table id="oinfo" class="info" border="1" style="border-collapse:collapse;">
-		<tr height="40px"><td>기업 아이디</td><td><form:input path="id"/>
-		<font color="red"><form:errors path="id"/></font></td></tr>
-		<tr height="40px"><td>비밀번호</td><td><form:password path="pass"/>
-        <font color="red"><form:errors path="pass"/></font></td></tr>
+		<tr height="40px"><td>기업 아이디</td><td><form:input path="comid"/>
+		<font color="red"><form:errors path="comid"/></font></td></tr>
+		<tr height="40px"><td>비밀번호</td><td><form:password path="compass"/>
+        <font color="red"><form:errors path="compass"/></font></td></tr>
         <tr height="40px"><td colspan="2" align="center">
         <input type="submit" value="로그인">
         <input type="button" value="회원가입" 

@@ -4,13 +4,9 @@
 <mapper namespace="dao.mapper.CompanyMapper">
 	<select id="list" resultType="Company" parameterType="map">
 		select * from company
-		<if test="companyid != null">
+		<if test="comid != null">
 			where comid=#{comid}
 		</if>
-		<!-- 
-		where userid in ('test1','test3','hongkd',...)
-		
-		 -->
 		<if test="ids != null">
 			where comid in
 			<foreach collection="ids" separator="," item="id" open="(" close=")">

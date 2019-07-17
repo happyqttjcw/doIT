@@ -1,5 +1,7 @@
 package controller;
 
+
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import logic.Company;
 import logic.PageService;
 import logic.User;
+import security.CipherUtil;
 
 
 
@@ -23,6 +26,7 @@ import logic.User;
 public class CompanyController {
 	@Autowired
 	private PageService service;
+	
 	
 	@GetMapping("*")
 	public String form(Model model) {
@@ -52,6 +56,32 @@ public class CompanyController {
 			bindResult.reject("error.duplicate.user");
 		}
 		return mav;
+	}
+	
+	@PostMapping("comlogin")
+	public ModelAndView login(@Valid Company company,BindingResult bindResult,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(bindResult.hasErrors()) {
+			bindResult.reject("error.input.company");
+			return mav;
+		}
+		Company dbCompany = service.companySelect(company.getComid());
+		if(dbCompany == null) {
+			bindResult.reject("error.login.comid");
+			return mav;
+		}
+		String compass =  CipherUtil.messageDigest(company.getCompass());
+		
+		if(compass.equals(dbCompany.getCompass())){
+			session.setAttribute("loginCompany",dbCompany);
+			mav.setViewName("redirect:mypage.shop");	
+		}else {
+			bindResult.reject("error.login.compass");
+			mav.getModel().putAll(bindResult.getModel());
+			return mav;
+		}
+		return mav;
+		
 	}
 	
 	

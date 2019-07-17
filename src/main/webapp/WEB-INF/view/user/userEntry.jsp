@@ -36,9 +36,36 @@
 		background-color:#0000ff;
 	}
 	.select>a{color:white;}
+	table {
+   width : 100%;
+   border-collapse : collapse;
+	}
+th,td {
+   border : 3px solid #bcbcbc;
+   text-align : center;
+   padding : 8px;
+	}
+th {
+   background-color : #4CAF50;
+   color : white;
+	}
+td {
+   background-color : #F2F2F2;
+	}
+caption {
+   color : #111111;
+   font-size : 20px;
+   background-color : #FFFFFF;
+	}
+input[type=text], input[type=password],textarea {
+   width : 100%;
+	}
+	
+	
 </style>
 </head>
 <body>
+<h2>사용자 등록</h2>
 <table>
 	<tr><td id="tab1" class="tab">
 		<a href="javascript:disp_div('minfo','tab1')">일반 회원</a></td>	
@@ -46,7 +73,7 @@
 		<a href="javascript:disp_div('oinfo','tab2')">기업 회원</a></td>
 	</tr>
 </table>
-<h2>사용자 등록</h2>
+
 <form:form modelAttribute="user"  method="post" action="../user/userEntry.shop">
 	<spring:hasBindErrors name="user">
 		<font color="red">
@@ -95,6 +122,8 @@
          <font color="red"><form:errors path="compass"/></font></td></tr>
       <tr height="40px"><td>기업명</td><td><form:input path="comname"/>
          <font color="red"><form:errors path="comname"/></font></td></tr>
+      <tr height="40px"><td>사업자 번호</td><td><form:input path="bussno"/>
+         <font color="red"><form:errors path="bussno"/></font></td></tr>
       <tr height="40px"><td>담당자</td><td><form:input path="managername"/>
          <font color="red"><form:errors path="managername"/></font></td></tr>
       <tr height="40px"><td>핸드폰 번호</td><td><form:input path="managerphone"/>

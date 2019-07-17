@@ -7,8 +7,8 @@ import logic.Company;
 
 public interface CompanyMapper {
 	
-	@Insert("insert into company (comno,comid,comname,compass,managername,managerphone,manageremail)"
-			+ " value (#{comno},#{comid},#{comname},#{compass},#{managername},#{managerphone},#{manageremail})")
+	@Insert("insert into company (comno,comid,comname,bussno,compass,managername,managerphone,manageremail)"
+			+ " value (#{comno},#{comid},#{comname},bussno,#{compass},#{managername},#{managerphone},#{manageremail})")
 	void insert(Company company);
 	
 	@Select("select ifnull(max(comno),0) from company")
