@@ -1,26 +1,25 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import logic.Company;
-
+import logic.CV;
 
 @Repository
-public class CompanyDao {
+public class CVDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	private final String NS = "dao.mapper.CompanyMapper.";
+	private final String NS = "dao.mapper.CVMapper.";
 	private Map<String, Object> param = new HashMap<>();
 
-
-	public Company selectOne(String comid) {
+	public CV selectOne(int userno, int cvno) {
 		param.clear();
-		param.put("comid", comid);
+		param.put("userno", userno);
+		param.put("cvno", cvno);
 		return sqlSession.selectOne(NS + "list", param);
-	}
-}
+	}}

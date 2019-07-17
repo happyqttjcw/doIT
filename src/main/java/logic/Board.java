@@ -2,44 +2,35 @@ package logic;
 
 import java.util.Date;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.web.multipart.MultipartFile;
-
 public class Board {
-	private int num;
-	@NotEmpty(message="글쓴이는 필수입니다.")
-	private String name;
-	@NotEmpty(message="비밀번호는 필수입니다.")
-	private String pass;
-	@NotEmpty(message="제목은 필수입니다.")
+	private int bno;
+	private int userno;
+	private String bname;
 	private String subject;
-	@NotEmpty(message="내용은 필수입니다.")
 	private String content;
-	private MultipartFile file1;
-	private String fileurl;
+	private String file;
 	private Date regdate;
 	private int readcnt;
 	private int ref;
 	private int reflevel;
 	private int refstep;
-	
-	public int getNum() {
-		return num;
+	public int getBno() {
+		return bno;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
-	public String getName() {
-		return name;
+	public int getUserno() {
+		return userno;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUserno(int userno) {
+		this.userno = userno;
 	}
-	public String getPass() {
-		return pass;
+	public String getBname() {
+		return bname;
 	}
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setBname(String bname) {
+		this.bname = bname;
 	}
 	public String getSubject() {
 		return subject;
@@ -53,17 +44,11 @@ public class Board {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public MultipartFile getFile1() {
-		return file1;
+	public String getFile() {
+		return file;
 	}
-	public void setFile1(MultipartFile file1) {
-		this.file1 = file1;
-	}
-	public String getFileurl() {
-		return fileurl;
-	}
-	public void setFileurl(String fileurl) {
-		this.fileurl = fileurl;
+	public void setFile(String file) {
+		this.file = file;
 	}
 	public Date getRegdate() {
 		return regdate;
@@ -97,9 +82,9 @@ public class Board {
 	}
 	@Override
 	public String toString() {
-		return "Board [num=" + num + ", name=" + name + ", pass=" + pass + ", subject=" + subject + ", content="
-				+ content + ", file1=" + file1 + ", fileurl=" + fileurl + ", regdate=" + regdate + ", readcnt="
-				+ readcnt + ", ref=" + ref + ", reflevel=" + reflevel + ", refstep=" + refstep + "]";
+		return "Board [bno=" + bno + ", userno=" + userno + ", bname=" + bname + ", subject=" + subject + ", content="
+				+ content + ", file=" + file + ", regdate=" + regdate + ", readcnt=" + readcnt + ", ref=" + ref
+				+ ", reflevel=" + reflevel + ", refstep=" + refstep + "]";
 	}
 	
 	

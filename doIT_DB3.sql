@@ -3,21 +3,20 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 /* Drop Tables */
 
 DROP TABLE IF EXISTS activity;
+DROP TABLE IF EXISTS board;
 DROP TABLE IF EXISTS career;
 DROP TABLE IF EXISTS pickjob;
 DROP TABLE IF EXISTS recruit;
 DROP TABLE IF EXISTS job;
+DROP TABLE IF EXISTS pickuser;
 DROP TABLE IF EXISTS company;
 DROP TABLE IF EXISTS haveskill;
 DROP TABLE IF EXISTS LL;
-DROP TABLE IF EXISTS pluspoint;
 DROP TABLE IF EXISTS portfolio;
+DROP TABLE IF EXISTS CV;
 DROP TABLE IF EXISTS resumecomment;
 DROP TABLE IF EXISTS resumeEdit;
 DROP TABLE IF EXISTS resume;
-DROP TABLE IF EXISTS workcondition;
-DROP TABLE IF EXISTS workskill;
-DROP TABLE IF EXISTS CV;
 DROP TABLE IF EXISTS jemok;
 DROP TABLE IF EXISTS user;
 
@@ -38,12 +37,30 @@ CREATE TABLE activity
 );
 
 
+CREATE TABLE board
+(
+	bno int(10) NOT NULL,
+	userno int(100) unsigned NOT NULL,
+	bname varchar(10),
+	subject varchar(20),
+	content varchar(1000),
+	file varchar(100),
+	regdate date,
+	readcnt int(20),
+	ref int(20),
+	reflevel int(20),
+	refstep int(20),
+	PRIMARY KEY (bno)
+);
+
+
 CREATE TABLE career
 (
 	careerno int(100) unsigned NOT NULL,
 	cvno int(100) unsigned NOT NULL,
 	ename varchar(20),
-	period varchar(30),
+	workstart date,
+	workend date,
 	reason varchar(1000),
 	position varchar(10),
 	pyear int(10),
@@ -95,6 +112,7 @@ CREATE TABLE CV
 (
 	cvno int(100) unsigned NOT NULL,
 	userno int(100) unsigned NOT NULL,
+	subject varchar(20),
 	name varchar(20),
 	birth varchar(30),
 	email varchar(20),
@@ -113,8 +131,25 @@ CREATE TABLE CV
 	-- 입력 4.5기준
 	-- 
 	score double(5,5),
-	public int(1),
+	skillcontent varchar(3000),
+	bohun varchar(30),
+	army varchar(20),
+	armytype varchar(30),
+	armyclass varchar(20),
+	armyreason varchar(1000),
+	bohunreason varchar(1000),
+	cdtsalary varchar(30),
+	cdtlocation1 varchar(10),
+	cdtlocation2 varchar(10),
+	cdtlocation3 varchar(10),
+	cdtjob1 varchar(10),
+	cdtjob2 varchar(10),
+	cdtjob3 varchar(10),
+	cdtjob4 varchar(10),
+	cdtjob5 varchar(10),
+	publicornot int(1),
 	date date,
+	resumeno int(20) NOT NULL,
 	PRIMARY KEY (cvno)
 );
 
@@ -146,10 +181,10 @@ CREATE TABLE job
 	subject varchar(100) NOT NULL,
 	duty varchar(30),
 	career varchar(30),
-	enploy varchar(30),
+	employ varchar(30),
 	education varchar(30),
 	major varchar(10),
-	condition varchar(100),
+	likecdt varchar(100),
 	language varchar(100),
 	skill varchar(100),
 	gender varchar(10),
@@ -159,7 +194,8 @@ CREATE TABLE job
 	worklocation varchar(100),
 	workday varchar(100),
 	worktime varchar(50),
-	receiveday varchar(50),
+	startdate datetime,
+	enddate datetime,
 	receivetype varchar(30),
 	name varchar(30),
 	phone varchar(30),
@@ -175,7 +211,7 @@ CREATE TABLE LL
 	cvno int(100) unsigned NOT NULL,
 	type varchar(10),
 	name varchar(20),
-	group varchar(1000),
+	place varchar(1000),
 	lang varchar(10),
 	testtype varchar(10),
 	score int(10),
@@ -188,27 +224,23 @@ CREATE TABLE LL
 
 CREATE TABLE pickjob
 (
-	pickno int(100) unsigned NOT NULL,
+	pickjobno int(100) unsigned NOT NULL,
 	userno int(100) unsigned NOT NULL,
-	jobno int(100) unsigned NOT NULL,
-	read int(1),
+	readornot int(1),
 	apply int(1),
 	pick int(1),
-	PRIMARY KEY (pickno)
+	recruitno int(100) unsigned NOT NULL,
+	PRIMARY KEY (pickjobno)
 );
 
 
-CREATE TABLE pluspoint
+CREATE TABLE pickuser
 (
-	lpno int(100) unsigned NOT NULL,
-	cvno int(100) unsigned NOT NULL,
-	bohun varchar(30),
-	bohunreason varchar(1000),
-	army varchar(20),
-	armytype varchar(30),
-	armyclass varchar(20),
-	armyreason varchar(1000),
-	PRIMARY KEY (lpno)
+	pickuserno int(20) NOT NULL,
+	comno int(100) unsigned NOT NULL,
+	userno int(20),
+	calluser int(2),
+	PRIMARY KEY (pickuserno)
 );
 
 
@@ -237,9 +269,8 @@ CREATE TABLE recruit
 
 CREATE TABLE resume
 (
-	resumeno  NOT NULL,
+	resumeno int(20) NOT NULL,
 	jemokno int(100) unsigned NOT NULL,
-	cvno int(100) unsigned,
 	subject varchar(30) NOT NULL,
 	content varchar(1000) NOT NULL,
 	date date NOT NULL,
@@ -267,7 +298,7 @@ CREATE TABLE resumecomment
 CREATE TABLE resumeEdit
 (
 	editno int(10) unsigned NOT NULL,
-	resumeno  NOT NULL,
+	resumeno int(20) NOT NULL,
 	userno int(100) unsigned NOT NULL,
 	subject varchar(20),
 	name varchar(20),
@@ -285,38 +316,12 @@ CREATE TABLE user
 	id varchar(20) NOT NULL,
 	pass varchar(400) NOT NULL,
 	age int(10) unsigned NOT NULL,
-	gender binary(1) NOT NULL,
+	gender int(2) NOT NULL,
 	phone varchar(20) NOT NULL,
 	email varchar(400) NOT NULL,
 	emailkey int(10),
 	emailkeycheck int(10),
 	PRIMARY KEY (userno)
-);
-
-
-CREATE TABLE workcondition
-(
-	cdtno int(100) unsigned NOT NULL,
-	cvno int(100) unsigned NOT NULL,
-	cdtsalary varchar(30),
-	cdtlocation1 varchar(10),
-	cdtlocation2 varchar(10),
-	cdtlocation3 varchar(10),
-	cdtjob1 varchar(10),
-	cdtjob2 varchar(10),
-	cdtjob3 varchar(10),
-	cdtjob4 varchar(10),
-	cdtjob5 varchar(10),
-	PRIMARY KEY (cdtno)
-);
-
-
-CREATE TABLE workskill
-(
-	skillno int(100) unsigned NOT NULL,
-	cvno int(100) unsigned NOT NULL,
-	skillcontent varchar(3000),
-	PRIMARY KEY (skillno)
 );
 
 

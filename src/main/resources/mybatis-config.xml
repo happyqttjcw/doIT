@@ -4,19 +4,17 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="logic.Item" alias="Item"/>
-		<typeAlias type="logic.User" alias="User"/>
-		<typeAlias type="logic.Sale" alias="Sale"/>
-		<typeAlias type="logic.SaleItem" alias="SaleItem"/>
-		<typeAlias type="logic.Board" alias="Board"/>
 		<typeAlias type="logic.Company" alias="Company"/>
+		<typeAlias type="logic.Job" alias="Job"/>
+		<typeAlias type="logic.CV" alias="CV"/>
+		<typeAlias type="logic.Pickuser" alias="Pickuser"/>
+		<typeAlias type="logic.User" alias="User"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="dao/mapper/Item.xml"/>
-		<mapper resource="dao/mapper/User.xml"/>
-		<mapper resource="dao/mapper/Sale.xml"/>
-		<mapper resource="dao/mapper/SaleItem.xml"/>
-		<mapper resource="dao/mapper/Board.xml"/>
 		<mapper resource="dao/mapper/Company.xml"/>
+		<mapper resource="dao/mapper/Job.xml"/>
+		<mapper resource="dao/mapper/CV.xml"/>
+		<mapper resource="dao/mapper/Pickuser.xml"/>
+		<mapper resource="dao/mapper/User.xml"/>
 	</mappers>
 </configuration>
