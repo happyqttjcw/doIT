@@ -78,6 +78,10 @@ th, td {
 					</div>
 				</c:forEach>
 			</c:if>
+			<c:if test="${empty job }">
+				<hr>
+				등록된 공고가 없습니다.
+			</c:if>
 			<br>
 			<br>
 		</div>
@@ -111,6 +115,10 @@ th, td {
 						</div>
 					</c:forEach>
 				</c:forEach>
+			</c:if>
+			<c:if test="${empty cvlist }">
+				<hr>
+				찜한 인재가 없습니다.
 			</c:if>
 			<br>
 			<br>

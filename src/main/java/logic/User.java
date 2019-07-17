@@ -1,5 +1,7 @@
 package logic;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class User {
 	private int userno;
 	private String name;
@@ -11,6 +13,9 @@ public class User {
 	private String email;
 	private int emailkey;
 	private int emailkeycheck;
+	private String picture;
+	private MultipartFile pictureUrl;
+	
 	public int getUserno() {
 		return userno;
 	}
@@ -71,11 +76,25 @@ public class User {
 	public void setEmailkeycheck(int emailkeycheck) {
 		this.emailkeycheck = emailkeycheck;
 	}
+	
+	public MultipartFile getPictureUrl() {
+		return pictureUrl;
+	}
+	public void setPictureUrl(MultipartFile pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
+	
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 	@Override
 	public String toString() {
 		return "User [userno=" + userno + ", name=" + name + ", id=" + id + ", pass=" + pass + ", age=" + age
 				+ ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", emailkey=" + emailkey
-				+ ", emailkeycheck=" + emailkeycheck + "]";
+				+ ", emailkeycheck=" + emailkeycheck + ", picture=" + picture + ", pictureUrl=" + pictureUrl + "]";
 	}
 	
 }

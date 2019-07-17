@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -33,43 +34,48 @@ public class ComController {
 	@Autowired
 	private PageService service;
 
-	// 우리 기업 부분//
+	// 해인, 찬웅 기업 부분//
 	@RequestMapping("commypage")
 	public ModelAndView commypage(HttpSession session) {
-		//String comid, Integer userno, Integer comno,
+		// String comid, Integer userno, Integer comno,
 		ModelAndView mav = new ModelAndView();
-		Company com = (Company)session.getAttribute("logincom");
+		Company com = (Company) session.getAttribute("logincom");
 		CV cv = null;
 		User user = null;
 		List<Job> job = null;
 		List<User> userlist = new ArrayList<User>();
-		List<Pickuser> pulist = service.getlist(com.getComno());//comno
+		List<Pickuser> pulist = new ArrayList<Pickuser>();
 		List<CV> cvlist = new ArrayList<CV>();
-		
+		if(service.getlist(com.getComno())==null) {
+			pulist = null; 
+		}else {
+			pulist = service.getlist(com.getComno());
+		}
 		System.out.println("pulist:" + pulist);
-		
-		for(int i=0;i<pulist.size();i++) {
+
+		for (int i = 0; i < pulist.size(); i++) {
 			cv = service.getCV(pulist.get(i).getUserno(), pulist.get(i).getCvno());
 			user = service.userSelect(pulist.get(i).getUserno());
-			System.out.println("user"+user);
+			System.out.println("user" + user);
 			userlist.add(user);
 			cvlist.add(cv);
 		}
 		job = service.jobselect(com.getComno());
-		
-		mav.addObject("userlist",userlist);
-		mav.addObject("cvlist",cvlist);
+
+		mav.addObject("userlist", userlist);
+		mav.addObject("cvlist", cvlist);
 		mav.addObject("com", com);
-		mav.addObject("job",job);
-		
+		mav.addObject("job", job);
+
 		return mav;
 	}
 
-	@RequestMapping(value= {"setting","writejob"})
-	public ModelAndView setting() throws IOException {
+	@RequestMapping(value = { "setting", "writejob" })
+	public ModelAndView setting(HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView();
-		File file = new File(
-				"C:\\Users\\gd_4\\Desktop\\doIT\\workspace\\doIT\\src\\main\\webapp\\WEB-INF\\view\\com\\setting.txt");
+		String rootPath = request.getSession().getServletContext().getRealPath("/") ;
+		String filePath = rootPath + "\\WEB-INF\\view\\com\\setting.txt";
+		File file = new File(filePath);
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
 		String line = "";
@@ -83,7 +89,17 @@ public class ComController {
 		return mav;
 	}
 
-	// End 우리부분//
+	@RequestMapping("comdetail")
+	public ModelAndView comdetail(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		String comid = request.getParameter("comid");
+		Company com = service.comselect(comid);
+		// * 로 설정한 경우 뷰 설정 못함.
+		System.out.println("com:"+com);
+		mav.addObject("com", com);
+		return mav;
+	}
+	// End 해인, 찬웅 부분//
 
 	// 기환, 태민 부분//
 	@GetMapping("*")
@@ -93,29 +109,5 @@ public class ComController {
 		return null;
 	}
 
-	@PostMapping("companyEntry")
-	public ModelAndView userEntry(@Valid Company company, BindingResult bindResult) {
-		ModelAndView mav = new ModelAndView();
-		if (bindResult.hasErrors()) {
-			mav.getModel().putAll(bindResult.getModel());
-			mav.addObject("company", company);
-			mav.setViewName("../user/userEntry.shop");
-			return mav;
-		}
-
-		try {
-			service.companyCreate(company);
-			mav.setViewName("user/login");
-			mav.addObject("company", company);
-			mav.addObject("user", new User());
-
-		} catch (DataIntegrityViolationException e) {
-			e.printStackTrace();
-			bindResult.reject("error.duplicate.user");
-		}
-		return mav;
-	}
-	
-	
 	// End 기환, 태민 부분//
 }

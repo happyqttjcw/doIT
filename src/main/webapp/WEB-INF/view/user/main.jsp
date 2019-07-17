@@ -25,31 +25,40 @@
   height: 500px;
   max-width: 500px;
   max-height: 500px;  
-   }
-   table {
+	}
+table {
    width : 100%;
-   border-collapse : collapse;
-   }
-th,td {
-   border : 3px solid #bcbcbc;
-   text-align : center;
+   border-collapse: collapse;
+}
+th,td { border-bottom: 1px solid #c1c1c1;
+   text-align: center;
    padding : 8px;
    }
-th {
-   background-color : #4CAF50;
-   color : white;
-   }
-td {
-   background-color : #F2F2F2;
-   }
+th {background-color: #46556d; color : white;}
+td {background-color:#ffffff;}
 caption {
-   color : #111111;
-   font-size : 20px;
-   background-color : #FFFFFF;
+   color : #111111; font-size:20px;
+   background-color: #FFFFFF;
+}
+input[type=text],input[type=password],textarea {
+   width : 80%;
+}
+input[type=button],input[type=submit] {
+   w3-button; w3-teal; w3-rigth;
+}
+.login {
+   border: solid 0px #000000;
+   background-color:#ffffff;
+}
+.submit {
+   border-radius: 5px; 
+   background-color: #46556d;
+   color: white;
    }
-input[type=text], input[type=password],textarea {
-   width : 100%;
-   }
+   
+   html,body{
+  height:100%;
+}
   </style>
 <title>회원 정보</title>
 </head>
@@ -93,28 +102,28 @@ input[type=text], input[type=password],textarea {
 <hr>
  <h3 style="padding:50px;">맞춤 공고</h3>
  <div>
-    <div style="padding-left:20%;">
-    <c:forEach var="i" begin="0" end="7">
-    <c:forEach var="b3" items="${list3 }" varStatus="stat">
+ 	<div style="padding-left:20%;">
+ 	<c:forEach var="i" begin="0" end="7">
+ 	<c:forEach var="b3" items="${list3 }" varStatus="stat">
                 <c:if test="${stat.index%3==0 }"><br>
-    <span id="rcorners2" style="padding:10px;">기업 로고<br>
-                                       기업명<br>
-                                                           공고 제목<br></span>
-               </c:if>                                                           
-          </c:forEach>
+ 	<span id="rcorners2" style="padding:10px;">기업 로고<br>
+ 						 					    기업명<br>
+ 						                                        공고 제목<br></span>
+               </c:if> 						                                        
+ 			</c:forEach>
     </c:forEach>
-    </div>
+ 	</div>
  </div>
  <hr>
  <h3 style="padding:50px;">자소서 첨삭 게시판</h3>
  <div style="padding-left:5%;">
-    <table border="1" style="border-collapse:collapse;" >
-       <tr><td width="80">번호</td>
-          <td width="320">제목</td>
-          <td width="100">작성자</td>
-          <td width="80">등록일</td>
-          <td width="80">조회수</td></tr>
-    </table>
+ 	<table border="1" style="border-collapse:collapse;" >
+ 		<tr><th width="80">번호</th>
+ 			<th width="320">제목</th>
+ 			<th width="100">작성자</th>
+ 			<th width="80">등록일</th>
+ 			<th width="80">조회수</th></tr>
+ 	</table>
  </div>
 
 </body>

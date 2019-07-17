@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.File;
 import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -38,11 +39,11 @@ public class PageService {
 	@Autowired
 	private CVDao cvDao;
 
-	//기업 부분//
+	// 기업 부분//
 	public Company comselect(String comid) {
-		Company company = companyDao.selectOne(comid); 
+		Company company = companyDao.selectOne(comid);
 		if (company != null) {
-			company.setManageremail(CipherUtil.decript(company.getManageremail(),company.getCompass()));
+			company.setManageremail(CipherUtil.decript(company.getManageremail(), company.getCompass()));
 		}
 		return company;
 	}
@@ -51,20 +52,22 @@ public class PageService {
 		System.out.println("comno:" + comno);
 		return jobDao.list(comno);
 	}
-	
+
 	public List<Pickuser> getlist(Integer comno) {
 		return pickuserDao.list(comno);
 	}
-	
+
 	public CV getCV(Integer userno, Integer cvno) {
-		System.out.println("userno"+userno);
+		System.out.println("userno" + userno);
 		return cvDao.selectOne(userno, cvno);
 	}
-	
-	
-	//End 기업부분//
-	
-	//유저부분 - 태민//
+
+	public User userSelect(Integer userno) {
+		return userDao.selectOneByNo(userno);
+	}
+	// End 기업부분//
+
+	// 유저부분 - 태민//
 	public User userSelect(String id) {
 		User user = userDao.selectOneById(id);
 		if (user != null) {
@@ -74,11 +77,6 @@ public class PageService {
 
 	}
 
-	public User userSelect(Integer userno) {
-		return userDao.selectOneByNo(userno);
-	}
-
-	
 	public void userCreate(User user) {
 		String pass = CipherUtil.messageDigest(user.getPass());
 		user.setPass(pass);
@@ -104,15 +102,45 @@ public class PageService {
 		companyDao.insert(company);
 
 	}
-	//End 유저 부분 - 태민//
 
-	
+	public User cvinsert(int userno) {
+		// TODO: git에 안올라와 있어서 수정 못함. 0717
+		return null;
+	}
 
-	
+	// End 유저 부분 - 태민//
 
-	
-	
-	//유저 부분 - 기환//
-	//End 유저 부분 - 기환//
-	
+	// 유저 부분 - 기환//
+	public void userUpdate(User user, HttpServletRequest request) {
+		if (user.getPictureUrl() != null && !user.getPictureUrl().isEmpty()) {
+			uploadFileCreate(user.getPictureUrl(), request, "user/img/");
+			user.setPicture(user.getPictureUrl().getOriginalFilename());
+		}
+		userDao.update(user);
+	}
+
+	private void uploadFileCreate(MultipartFile picture, HttpServletRequest request, String path) {
+		// 업로드된 실제 파일의 이름
+		String orgFile = picture.getOriginalFilename();
+		String uploadPath = request.getServletContext().getRealPath("/") + path;
+		File fpath = new File(uploadPath);
+		if (!fpath.exists())
+			fpath.mkdirs();
+		try {
+			// 업로드된 파일 생성하기
+			picture.transferTo(new File(uploadPath + orgFile));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void passUpdate(User user) {
+		user.setEmail(CipherUtil.decrypt(user.getEmail(), user.getPass()));
+		user.setPass(CipherUtil.encrypt(user.getPass()));
+		user.setEmail(CipherUtil.decrypt(user.getEmail(), user.getPass()));
+		userDao.passUpdate(user);
+	}
+
+	// End 유저 부분 - 기환//
+
 }

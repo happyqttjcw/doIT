@@ -1,11 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <title>사용자 마이페이지</title>
+<link href='${path }/fullcalendar/core/main.css' rel='stylesheet'/>
+<link href='${path }/fullcalendar/daygrid/main.css' rel='stylesheet'/>
+<script src='${path }/fullcalendar/core/main.js'></script>
+<script src='${path }/fullcalendar/daygrid/main.js'></script>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			plugins : [ 'dayGrid' ],
+			height: 650,
+			events: [{
+				 title: 'The Title', // a property!
+			      start: '2019-07-01', // a property!
+			      end: '2019-07-02' // a property! ** see important note below about 'end' **
+			}]
+		});
+		calendar.render();
+	});
+</script>
+<style>
+#calendar {
+	width: 1000px;
+	margin-bottom: 50px;
+}
+.fc-view-container {
+	z-index: -1;
+}
+</style>
 </head>
 <body>
 <div style="display: inline-block; min-height: 500px; min-width: 1000px; padding: 0 30px 0 30px;">
@@ -69,7 +98,7 @@
 			</c:forEach>
 		</div>
 	</div>
-	<div style="min-height: 500px;">달력</div> <!-- 달력 -->
+	<div style="min-height: 500px;"><div id="calendar"></div></div> <!-- 달력 -->
 	<div style="font-size: 30px;">찜한 공고</div>
 	<div class="" style="width: 100%; min-height: 300px; padding: 5px 0 5px 0; margin-bottom: 200px;">
 		<div style="font-size: 20px; width: 900px; height:31px; margin: auto;"></div>
@@ -83,9 +112,10 @@
 					<p style="font-size: 20px;">공고 제목</p>
 					<p style="font-size: 15px;">간략정보(신입/경력 학력 정규직/계약직 주소)</p>
 				</div>
-				<div style="position: absolute; top: 115px; right: 30px;">
+				<div style="position: absolute; top: 85px; right: 50px;">
 					<p style="font-size: 15px;">~ 7/30(화)</p>
 				</div>
+				<p id="event" style="cursor: pointer; cursor: pointer; display: inline-block; position: absolute; top: 112px; right: 50px;">달력에 등록하기</p>
 			</div>
 			</c:forEach>
 		</div>

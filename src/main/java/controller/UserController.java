@@ -1,5 +1,9 @@
 package controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,8 +28,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.LogInException;
+import logic.CV;
 import logic.Company;
 import logic.PageService;
+import logic.SettingArray;
 import logic.User;
 import security.CipherUtil;
 
@@ -232,4 +238,72 @@ public class UserController {
 		return mav;
 	}
 
+	@PostMapping("cv")
+	public ModelAndView cv(User user,CV cv) {
+		ModelAndView mav = new ModelAndView();
+		user = service.cvinsert(user.getUserno());
+		mav.addObject("user", user);
+		mav.addObject("cv",cv);
+		return mav;
+	}
+	
+	@RequestMapping("settingForm")
+	public ModelAndView settingForm(HttpServletRequest request) throws IOException {
+		ModelAndView mav = new ModelAndView();
+		String rootPath = request.getSession().getServletContext().getRealPath("/") ;
+		String filePath = rootPath + "\\WEB-INF\\view\\user\\setting.txt";
+		File file = new File(filePath);
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
+		String line = "";
+		String[] str;
+		String[] fstr;
+		while ((line = br.readLine()) != null) {
+			str = line.split(":");
+			fstr = str[1].split(",");
+			mav.addObject(str[0], fstr);
+		}
+		return mav;
+	}
+
+	@RequestMapping(value = { "userInfo", "editUser" })
+	public ModelAndView userInfo(String id) {
+		ModelAndView mav = new ModelAndView();
+		User user = service.userSelect(id);
+		mav.addObject("user", user);
+		return mav;
+	}
+
+	@RequestMapping("passChgForm")
+	public ModelAndView passChgForm(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		User loginUser = (User) session.getAttribute("loginUser");
+		User user = service.userSelect(loginUser.getId());
+		user.setPass(CipherUtil.decrypt(user.getPass()));
+		mav.addObject("user", user);
+		return mav;
+	}
+
+	@PostMapping("userUpdate")
+	public ModelAndView userUpdate(User user, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("user/userInfo");
+		service.userUpdate(user, request);
+		return mav;
+	}
+	
+	@PostMapping("setting")
+	public ModelAndView setting(SettingArray setting, HttpSession session) {
+		ModelAndView mav = new ModelAndView("user/userMyPage"); //맞춤 공고 페이지 아직 없어서 마이페이지로 일단 보냄.
+		
+//		User loginUser = (User)session.getAttribute("loginUser");
+//		service.userSetting(loginUser.getUserno(), setting);
+		return mav;
+	}
+	
+	@PostMapping("passChg")
+	public ModelAndView passChg(User user) {
+		ModelAndView mav = new ModelAndView("user/userMyPage");
+		service.passUpdate(user);
+		return mav;
+	}
 }

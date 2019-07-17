@@ -61,4 +61,12 @@ public class UserDao {
 		return sqlSession.selectOne(NS + "list", param);
 	}
 
+	public User cvinsert(int userno) {
+		return sqlSession.getMapper(UserMapper.class).cvinsert(userno);
+		
+	}
+
+	public void passUpdate(User user) {
+		sqlSession.getMapper(UserMapper.class).passUpdate(user);
+	}
 }
