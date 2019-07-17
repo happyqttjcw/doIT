@@ -4,6 +4,7 @@ public class User {
 	private int userno;
 	private String name;
 	private String id;
+	private String pass;
 	private int age;
 	private int gender;
 	private String phone;
@@ -27,6 +28,12 @@ public class User {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 	public int getAge() {
 		return age;
@@ -66,10 +73,9 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [userno=" + userno + ", name=" + name + ", id=" + id + ", age=" + age + ", gender=" + gender
-				+ ", phone=" + phone + ", email=" + email + ", emailkey=" + emailkey + ", emailkeycheck="
-				+ emailkeycheck + "]";
+		return "User [userno=" + userno + ", name=" + name + ", id=" + id + ", pass=" + pass + ", age=" + age
+				+ ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", emailkey=" + emailkey
+				+ ", emailkeycheck=" + emailkeycheck + "]";
 	}
-	
 	
 }

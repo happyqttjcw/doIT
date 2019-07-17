@@ -36,8 +36,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: 'Noto Sans KR', sans-serif;  }
 <div class="w3-center w3-top" style="height: 100px; padding-top: 10px;"><a href="#" style="font-size:20px; color:#46556d; text-decoration: none;">IT에서 일하자<span style="font-size:40px; font-weight: bold;">doIT</span></a></div>
 <div class="w3-top" id="deco1" style="background-color: #46556d; min-width:500px; margin-top:5%; height:80px; padding: 0 300px 0 300px; " >
   <div style="margin-top:20px;">
-	  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
-	  			style="text-decoration:none; font-size:20px;">공고등록</a>
+	  <a href="writejob.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
+	  			style="text-decoration:none; font-size:20px;">공고 등록</a>
 	  <div class="w3-dropdown-hover w3-hide-small">
 			<a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
 						style="text-decoration:none; font-size:20px;">공고/지원자 관리</a>
@@ -53,14 +53,20 @@ html, body, h1, h2, h3, h4, h5 {font-family: 'Noto Sans KR', sans-serif;  }
 	  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
 	  				style="text-decoration:none; font-size:20px;">찜한 인재</a>
 	 
-	  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
-	  				style="text-decoration:none; font-size:20px;">회원가입</a>
-	  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
-	  				style="text-decoration:none; font-size:20px;">로그인</a>
-	  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
-	  				style="text-decoration:none; font-size:20px;">로그아웃</a>
-	  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
-	  				style="text-decoration:none; font-size:20px;">마이페이지</a>
+	   <c:choose>
+  		  	<c:when test="${empty logincom }">
+		  		<a href="../user/userEntry.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
+				  				style="text-decoration:none; font-size:20px;">회원가입</a>
+				<a href="../user/login.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
+				  				style="text-decoration:none; font-size:20px;">로그인</a>
+		  	</c:when>
+		  	<c:otherwise>
+				<a href="../user/logout.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
+								style="text-decoration: none; font-size: 20px;">로그아웃</a>
+  			    <a href="commypage.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
+			  					style="text-decoration:none; font-size:20px;">마이페이지</a>
+			</c:otherwise>
+	  </c:choose>
 	  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
 	  				style="text-decoration:none; font-size:20px;">기업 회원 님</a>
 	</div>
@@ -71,8 +77,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: 'Noto Sans KR', sans-serif;  }
 		<a href="#" class="w3-bar-item w3-padding-large w3-margin-top" title="doIT"
 					style="font-size:28px; color:white; font-weight:bold; text-decoration: none; ">
 					<i class="fa fa-home"></i>&nbsp;doIT</a>
-		 <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
-		  			style="text-decoration:none; font-size:20px;">공고등록</a>
+		 <a href="writejob.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
+		  			style="text-decoration:none; font-size:20px;">공고 등록</a>
 		  <div class="w3-dropdown-hover w3-hide-small">
 				<a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
 							style="text-decoration:none; font-size:20px;">공고/지원자 관리</a>
@@ -87,15 +93,20 @@ html, body, h1, h2, h3, h4, h5 {font-family: 'Noto Sans KR', sans-serif;  }
 		  				style="text-decoration:none; font-size:20px;">인재추천</a>
 		  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
 		  				style="text-decoration:none; font-size:20px;">찜한 인재</a>
-		  
-		  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
-		  				style="text-decoration:none; font-size:20px;">회원가입</a>
-		  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
-		  				style="text-decoration:none; font-size:20px;">로그인</a>
-		  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
-		  				style="text-decoration:none; font-size:20px;">로그아웃</a>
-		  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
-		  				style="text-decoration:none; font-size:20px;">마이페이지</a>
+		  <c:choose>
+  		  	<c:when test="${empty logincom }">
+		  		<a href="../user/userEntry.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
+				  				style="text-decoration:none; font-size:20px;">회원가입</a>
+				<a href="../user/login.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
+				  				style="text-decoration:none; font-size:20px;">로그인</a>
+		  	</c:when>
+		  	<c:otherwise>
+				<a href="../user/logout.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
+								style="text-decoration: none; font-size: 20px;">로그아웃</a>
+  			    <a href="commypage.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
+			  					style="text-decoration:none; font-size:20px;">마이페이지</a>
+			</c:otherwise>
+		  </c:choose>
 		  <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
 		  				style="text-decoration:none; font-size:20px;">기업 회원 님</a>
 	  </div>
@@ -108,14 +119,13 @@ html, body, h1, h2, h3, h4, h5 {font-family: 'Noto Sans KR', sans-serif;  }
     <!-- Left Column -->
     <div class="w3-col m2 w3-hide-small">
       <!-- Profile -->
-      <div class="w3-card w3-round w3-white">
+      <div class="w3-card w3-round w3-white" style="margin-top:25px;">
       	<br>
       	<p class="w3-center">
       		<img src="../img/bonobono.jpg" class="w3-circle" style="height:106px;width:106px">
-        	
         </p>
         <div class="w3-center">
-        	<div class="w3-text-green">${com.comname } 님</div><br>
+        	<div class="w3-text-green">${sessionScope.logincom.comname } 님</div><br>
         	<a href="#">기업 정보 관리</a><br><br>
         	<a href="setting.shop">기업 맞춤 설정</a><br><br>
         	<a href="#">비밀번호 변경</a><br><br>
@@ -131,11 +141,13 @@ html, body, h1, h2, h3, h4, h5 {font-family: 'Noto Sans KR', sans-serif;  }
     <!-- End Left Column -->
    
 	<!-- Middle,Right Column -->
-    <div class="w3-col m10 " style="min-width:500px; max-width:1800px; padding-left: 50px;">
-		<decorator:body />
+	<div class="w3-col m10 w3-container" style="padding-left:30px;">
+	    <div class="w3-card" style="min-width:500px; max-width:1800px;">
+			<decorator:body />
+		</div>
 	</div>
-    </div>
 	<!-- End Middle Column -->
+  </div>
 </div>
 
 </body>

@@ -8,11 +8,15 @@
 		<typeAlias type="logic.Board" alias="Board"/>
 		<typeAlias type="logic.Job" alias="Job"/>
 		<typeAlias type="logic.Company" alias="Company"/>
+		<typeAlias type="logic.Pickuser" alias="Pickuser"/>
+		<typeAlias type="logic.CV" alias="CV"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="dao/mapper/Board.xml"/>
 		<mapper resource="dao/mapper/User.xml"/>
 		<mapper resource="dao/mapper/Company.xml"/>
 		<mapper resource="dao/mapper/Job.xml"/>
+		<mapper resource="dao/mapper/Pickuser.xml"/>
+		<mapper resource="dao/mapper/CV.xml"/>
 	</mappers>
 </configuration>
