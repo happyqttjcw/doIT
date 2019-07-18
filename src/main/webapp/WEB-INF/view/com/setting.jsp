@@ -74,7 +74,7 @@
       </div>
       <div style="padding-left: 10px; font-size: 30px; font-family:'Do Hyeon', sans-serif; color: #333c;">ม๗มพ</div>
       <div style="height: 100%; padding-left: 50px; margin-bottom: 30px;"> 
-         <c:forEach items="${job }" var="j_name">
+         <c:forEach items="${joblist }" var="j_name">
             <div style="font-family: 'Noto Sans KR', sans-serif; width: 200px; display: inline-block;  margin-bottom: 5px;"><input type="checkbox" name="job" value="${j_name }">${j_name }</div>
          </c:forEach>
       <script>

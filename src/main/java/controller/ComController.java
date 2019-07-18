@@ -70,8 +70,8 @@ public class ComController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "setting", "writejob" })
-	public ModelAndView setting(HttpServletRequest request) throws IOException {
+	@RequestMapping(value = { "setting", "writejobform" })
+	public ModelAndView settingform(HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		String rootPath = request.getSession().getServletContext().getRealPath("/") ;
 		String filePath = rootPath + "\\WEB-INF\\view\\com\\setting.txt";
@@ -86,6 +86,7 @@ public class ComController {
 			fstr = str[1].split(",");
 			mav.addObject(str[0], fstr);
 		}
+		mav.addObject("job", new Job());
 		return mav;
 	}
 

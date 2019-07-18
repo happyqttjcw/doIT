@@ -28,6 +28,14 @@ public class Job {
 	private String phone;
 	private String mobile;
 	private String email;
+	private Recruit recruit;
+	
+	public Recruit getRecruit() {
+		return recruit;
+	}
+	public void setRecruit(Recruit recruit) {
+		this.recruit = recruit;
+	}
 	public int getJobno() {
 		return jobno;
 	}
