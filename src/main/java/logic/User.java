@@ -1,17 +1,25 @@
 package logic;
 
+import javax.validation.constraints.Size;
+
 public class User {
+	
 	private int userno;
+	
 	private String name;
+	
 	private String id;
 	private int age;
 	private int gender;
+
 	private String pass;
 	private String phone;
 	private String email;
 	private int emailkey;
 	private int emailkeycheck;
 	private String picture;
+	
+	
 	public int getUserno() {
 		return userno;
 	}

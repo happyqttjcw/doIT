@@ -26,7 +26,9 @@ public class UserDao {
 				
 	
 	public void insert(User user) {
-		sqlSession.getMapper(UserMapper.class).insert(user);	
+		
+		sqlSession.getMapper(UserMapper.class).insert(user);
+		
 	}
 
 	public User selectOne(String id) {
@@ -59,6 +61,7 @@ public class UserDao {
 	}
 
 	public User cvinsert(int userno) {
+		
 		return sqlSession.getMapper(UserMapper.class).cvinsert(userno);
 		
 	}

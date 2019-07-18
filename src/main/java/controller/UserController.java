@@ -1,30 +1,32 @@
 package controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import exception.LoginException;
 import logic.CV;
@@ -40,11 +42,11 @@ public class UserController {
 	@Autowired
 	private PageService service;
 	
-	
 	@GetMapping("*")
 	public String form(Model model) {
 		model.addAttribute(new User());
 		model.addAttribute(new Company());
+		model.addAttribute(new CV());
 		return null;
 	}
 	@PostMapping("userEntry")
@@ -105,7 +107,6 @@ public class UserController {
 	      ModelAndView mav = new ModelAndView();
 	      if(bindResult.hasErrors()) {
 	         bindResult.reject("error.input.user");
-//	         mav.getModel().putAll(bindResult.getModel());
 	         return mav;
 	      }
 	      
@@ -118,90 +119,23 @@ public class UserController {
 	      String password = CipherUtil.messageDigest(user.getPass());
 	      if(password.equals(dbUser.getPass())) {
 	         session.setAttribute("loginUser", dbUser);
-	         mav.setViewName("redirect:main.shop");
+	         mav.setViewName("redirect:usermain.shop");
 	      } else {
-	         bindResult.reject("error.login.password");
-	         mav.getModel().putAll(bindResult.getModel());
-	         return mav;
+	    	  mav.addObject("msg", "비밀번호가 틀립니다");
+	          mav.addObject("url", "../user/login.shop");
+	          mav.setViewName("alert");
+	          return mav;
 	      }
-	         // 아이디 없음(), 비밀번호 오류, 화면에 출력
-	         // 로그인 성공 : 세션에 loginUser 이름으로 dbUser 저장 
-	         //         main.shop 리다이렉트
 	      return mav;
 	   }
 	
-	@RequestMapping("logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:login.shop";
-	}
+	
 	@RequestMapping("main")
 	public String checkmain(HttpSession session) {
 		return "user/main";
 	}
 	
-	@GetMapping(value= {"update","delete"})
-	   public ModelAndView checkUpdateForm(String id, HttpSession session) {
-	      ModelAndView mav = new ModelAndView();
-	      User user = service.userSelect(id);
-	      mav.addObject("user",user);
-	      return mav;
-	   }
 	
-	@PostMapping("update")
-	   public ModelAndView update(@Valid User user, BindingResult bindResult, HttpSession session) {
-	      ModelAndView mav = new ModelAndView();
-	      if(bindResult.hasErrors()) {
-	         bindResult.reject("error.input.user");
-	         mav.getModel().putAll(bindResult.getModel());
-	         return mav;
-	      }
-	      User loginUser = (User)session.getAttribute("loginUser");
-	      User dbUser = service.userSelect(user.getId());
-	      String password = CipherUtil.messageDigest(user.getPass());
-	      if(!dbUser.getPass().equals(password)) {
-	         bindResult.reject("error.login.password");
-	         return mav;
-	      }
-	      try {
-	    	 user.setPass(password);
-	         service.userUpdate(user);
-	         mav.setViewName("redirect:mypage.shop?id="+user.getId());
-	         if(!loginUser.getId().equals("admin"))
-	        	password = CipherUtil.messageDigest(user.getPass());
-	         	user.setPass(password);
-	            session.setAttribute("loginUser", user);
-	      } catch(Exception e) {
-	         e.printStackTrace();
-	         bindResult.reject("error.user.update");
-	      }
-	      return mav;
-	   }
-	@PostMapping("delete")
-	   public ModelAndView delete(User user,HttpSession session) {
-	      ModelAndView mav = new ModelAndView();
-	      User loginUser = (User) session.getAttribute("loginUser");
-	      String password = CipherUtil.messageDigest(user.getPass());
-	      if(!loginUser.getPass().equals(password)) {
-	         throw new LoginException("비밀번호가 일치하지 않습니다.","delete.shop?id="+ user.getId());
-	      }
-	      
-	      try {
-	         service.userdelete(user);
-	         if(loginUser.getId().equals("admin")) {
-	            mav.setViewName("redirect:../admin/list.shop?id="+loginUser.getId());
-	         } else {
-	            session.invalidate();
-	            mav.addObject("msg","탈퇴 되었습니다. 안녕히 가세요.");
-	            mav.addObject("url","login.shop");
-	            mav.setViewName("alert");
-	         }
-	      } catch(Exception e) {
-	         e.printStackTrace();
-	         throw new LoginException("회원탈퇴를 할 수 없습니다.","delete.shop?id="+ loginUser.getId());
-	      }
-	      return mav;
-	   }
 	@PostMapping("companyEntry")
 	   public ModelAndView userEntry(@Valid Company company, BindingResult bindResult) {
 	      ModelAndView mav = new ModelAndView();
@@ -237,7 +171,6 @@ public class UserController {
 			bindResult.reject("error.input.company");
 			return mav;
 		}
-		System.out.println(company.getComid());
 		Company dbCompany = service.companySelect(company.getComid());
 		if(dbCompany == null) {
 			bindResult.reject("error.login.comid");
@@ -248,8 +181,9 @@ public class UserController {
 			session.setAttribute("loginCompany",dbCompany);
 			mav.setViewName("redirect:../com/commypage.shop");	
 		}else {
-			bindResult.reject("error.login.compass");
-			mav.getModel().putAll(bindResult.getModel());
+			mav.addObject("msg", "비밀번호가 틀립니다..");
+            mav.addObject("url", "../user/login.shop");
+            mav.setViewName("alert");
 			return mav;
 		}
 		return mav;
@@ -262,6 +196,72 @@ public class UserController {
 		mav.addObject("user", user);
 		mav.addObject("cv",cv);
 		return mav;
+	}
+	@RequestMapping("emailAuth")
+	public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) {
+		String email = request.getParameter("email");
+		String authNum=RandomNum();
+		
+		sendEmail(email,authNum);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("user/emailAuth");
+		mav.addObject("email",email);
+		mav.addObject("authNum",authNum);
+		
+		
+		return mav;
+		
+	}
+	
+	private void sendEmail(String email, String authNum) {
+		String host= "smtp.gmail.com";
+		String subject = "인증번호";
+		String fromName = "doIT 관리자";
+		String from = "xoalas55@gmail.com";
+		String pass="rlaxo7080!";
+		String to1 = email;
+		System.out.println(email);
+		String content ="인증번호 [ " +authNum +"]";
+		try {
+			Properties props = new Properties();
+			props.put("mail.smtp.starttls.enable","true");
+			props.put("mail.transport.protocol","smtp");
+			props.put("mail.smtp.host",host);
+			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.port","465");
+			props.put("mail.smtp.user",from);
+			props.put("mail.smtp.auth","true");
+			
+			Session mailSession = Session.getInstance(props,new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(from,pass);
+				}
+			});
+			Message msg = new MimeMessage(mailSession);
+			msg.setFrom(new InternetAddress(from,MimeUtility.encodeText(fromName,"euc-kr","B")));
+			
+			InternetAddress[] address1 = {new InternetAddress(to1)};
+			msg.setRecipients(Message.RecipientType.TO, address1);
+			msg.setSubject(subject);
+			msg.setSentDate(new java.util.Date());
+			msg.setContent(content,"text/html; charst=euc-kr");
+			Transport.send(msg);
+		}catch(MessagingException e) {
+			e.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private String RandomNum() {
+		StringBuffer buffer = new StringBuffer();
+		for(int i=0; i<=6; i++) {
+			int n = (int)(Math.random()*10);
+			buffer.append(n);
+		}
+		return buffer.toString();
 	}
 	
 	

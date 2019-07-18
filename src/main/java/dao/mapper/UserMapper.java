@@ -14,6 +14,8 @@ public interface UserMapper {
 				+ " value (#{userno},#{name},#{id},#{pass},#{age},#{gender},#{phone},#{email})")
 	void insert(User user);
 	
+	
+	
 	@Update("update user set name=#{name},"
 	            + " age=#{age},phone=#{phone},email=#{email} ,picture=#{picture}"
 	            + " where id=#{id}")
@@ -24,6 +26,7 @@ public interface UserMapper {
 	
 	@Select("select * from user where userno=#{userno}")
 	User cvinsert(int userno);
+
 	
 	
 	

@@ -12,10 +12,10 @@
 	$(document).ready(function(){
 		$("#minfo").show();
 		$("#oinfo").hide();
-		$(".saleLine").each(function(){ // 주문상품 목록 숨김.
+		$(".saleLine").each(function(){ 
 			$(this).hide();
 		})
-		$("#tab1").addClass("select"); //class 속성에 select 값을 추가.
+		$("#tab1").addClass("select");
 	})
 	function disp_div(id,tab){
 		$(".info").each(function(){
@@ -29,6 +29,10 @@
 	}
 	function list_disp(id){
 		$("#"+id).toggle(); //
+	}
+	function messageAuthontation(email){
+		var op = "width=500, height=150, left=50, top=150";
+		open("emailAuth.shop?email="+email,"",op);
 	}
 </script>
 <style type="text/css">
@@ -109,8 +113,11 @@ input[type=button],input[type=submit] {
       <tr height="40px"><th>나이</th><td><form:input path="age"/>
          <font color="red"><form:errors path="age"/></font></td></tr>
       <tr height="40px"><th>이메일</th><td><form:input path="email"/>
+
+      	 <input type="button" value="인증하기"  onclick="messageAuthontation('xoalas55@gmail.com')"> 
          <font color="red"><form:errors path="email"/></font></td></tr>
       <tr height="40px"><th>성별</th>
+
       <td><form:radiobutton path="gender" value="1" checked="checked"/>남자
       	  <form:radiobutton path="gender" value="2"/>여자
           <font color="red"><form:errors path="gender"/></font></td></tr>
