@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dao.mapper.UserMapper;
+import logic.Setting;
 import logic.User;
 
 @Repository
@@ -34,5 +35,11 @@ public class UserDao {
 	}
 	public int getMaxno() {
 		return sqlSession.getMapper(UserMapper.class).maxno();
+	}
+	public int likeMaxNo() {
+		return sqlSession.getMapper(UserMapper.class).likeMaxNo();
+	}
+	public void likeCreate(Setting st) {
+		sqlSession.getMapper(UserMapper.class).likeCreate(st);
 	}
 }

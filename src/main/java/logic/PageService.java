@@ -44,24 +44,38 @@ public class PageService {
 
 	public User userSelect(String id) {
 		User user = userDao.selectOne(id);
-		if (user != null) {
-			user.setEmail(CipherUtil.decrypt(user.getEmail(), user.getPass()));
-		}
 		return user;
 	}
 
 	public void passUpdate(User user) {
-		user.setEmail(CipherUtil.decrypt(user.getEmail(), user.getPass()));
-		user.setPass(CipherUtil.encrypt(user.getPass()));
-		user.setEmail(CipherUtil.decrypt(user.getEmail(), user.getPass()));
 		userDao.passUpdate(user);
 	}
 
 	public void userCreate(User user) {
-		int maxno = userDao.getMaxno();
+		int maxno = userDao.getMaxno()+1;
 		user.setUserno(maxno);
-		user.setPass(CipherUtil.encrypt(user.getPass()));
+		user.setPass(CipherUtil.encrypt(user.getPass(), user.getId()));
 		user.setEmail(CipherUtil.encrypt(user.getEmail(), user.getPass()));
 		userDao.insert(user);
+	}
+
+	public void companyCreate(Company company) {
+		int maxno = companyDao.maxNo();
+		company.setComno(maxno);
+		company.setCompass(CipherUtil.decrypt(company.getCompass()));
+		company.setManageremail(CipherUtil.decrypt(company.getManageremail()));
+		companyDao.insert(company);
+	}
+
+	public Object companySelect(String comid) {
+		return companyDao.selectOne(comid);
+	}
+
+	public int likeMaxNo() {
+		return userDao.likeMaxNo();
+	}
+
+	public void likeCreat(Setting st) {
+		userDao.likeCreate(st);
 	}
 }

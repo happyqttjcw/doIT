@@ -28,6 +28,10 @@
 	function list_disp(id) {
 		$("#" + id).toggle(); //
 	}
+	function messageAuthontation(email){
+		var op = "width=500, height=150, left=50, top=150";
+		open("emailAuth.shop?email="+email,"",op);
+	}
 </script>
 <style type="text/css">
 .select {
@@ -36,7 +40,6 @@
 	font-weight: bold;
 	background-color: #0000ff;
 }
-
 .select>a {
 	color: white;
 }
@@ -90,8 +93,9 @@
 			</tr>
 			<tr height="40px">
 				<td>이메일</td>
-				<td><form:input path="email" /> <font color="red"><form:errors
-							path="email" /></font></td>
+				<td><form:input path="email" /> 
+				<input type="button" value="인증하기"  onclick="messageAuthontation('xoalas55@gmail.com')"> 
+				<font color="red"><form:errors path="email" /></font></td>
 			</tr>
 			<tr height="40px">
 				<td>성별</td>
@@ -106,7 +110,7 @@
 		</table>
 	</form:form>
 
-	<form:form modelAttribute="company" action="companyEntry.shop">
+<%-- 	<form:form modelAttribute="company" action="companyEntry.shop">
 		<spring:hasBindErrors name="company">
 			<font color="red"> <c:forEach items="${errors.globalErrors}"
 					var="error">
@@ -132,6 +136,11 @@
 							path="comname" /></font></td>
 			</tr>
 			<tr height="40px">
+				<td>사업자등록번호</td>
+				<td><form:input path="bussno" /> <font color="red"><form:errors
+							path="bussno" /></font></td>
+			</tr>
+			<tr height="40px">
 				<td>담당자</td>
 				<td><form:input path="managername" /> <font color="red"><form:errors
 							path="managername" /></font></td>
@@ -151,6 +160,6 @@
 					<input type="reset" value="초기화"></td>
 			</tr>
 		</table>
-	</form:form>
+	</form:form> --%>
 </body>
 </html>

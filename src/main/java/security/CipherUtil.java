@@ -31,28 +31,14 @@ public class CipherUtil {
              e.printStackTrace();
           }
     }
+       
     public static byte[] getRandomKey(String algo) throws NoSuchAlgorithmException {
        KeyGenerator keyGen = KeyGenerator.getInstance(algo);
        keyGen.init(128); //128bit로 키를 생성.
        SecretKey key = keyGen.generateKey();
        return key.getEncoded();
     }
-    public static String encrypt(String plain) {
-       byte[] cipherMsg = new byte[1024];
-       try {
-    	   //AES 암호 알고리즘용 128bit짜리 key
-          randomKey = getRandomKey("AES");
-          Key key = new SecretKeySpec(randomKey,"AES");
-          AlgorithmParameterSpec paramSpec = new IvParameterSpec(iv);
-          //AES 알고리즘으로 암호화를 하기 위한 암호 객체 초기화
-          cipher.init(Cipher.ENCRYPT_MODE, key, paramSpec);
-          //cipherMsg : 암호문 생성
-          cipherMsg = cipher.doFinal(paddingString(plain).getBytes());
-       }catch (Exception e) {
-          e.printStackTrace();
-       }
-       return byteToHex(cipherMsg).trim();
-    }
+    
     public static String encrypt(String plain, String key) {
     	byte[] cipherMsg = new byte[1024];
     	try {
@@ -65,22 +51,14 @@ public class CipherUtil {
     	}
     	return byteToHex(cipherMsg);
     }
+    
     private static byte[] makeKey(String key) {
 		int len = key.length();
 		char ch = 'A';
 		for(int i=len;i<16;i++) key += ch++;
 		return key.substring(0,16).getBytes();
 	}
-	private static String paddingString(String plain) {
-       char paddingChar=' ';
-       int size = 16;
-       int x = plain.length() % size;
-       int len = size - x;
-       for(int i=0; i<len; i++) {
-          plain += paddingChar;
-       }
-       return plain;
-    }
+    
     private static String byteToHex(byte[] cipherMsg) {
        if(cipherMsg == null ) return null;
        String str = "";
@@ -89,6 +67,7 @@ public class CipherUtil {
        }
        return str;
     }
+    
     public static String decrypt(String cipherMsg) {
        byte[] plainMsg = new byte[1024];
        try {
@@ -102,6 +81,7 @@ public class CipherUtil {
        }
        return new String(plainMsg).trim();
     }
+    
     public static String decrypt(String cipher1, String key) {
     	byte[] plainMsg = new byte[1024];
     	try {

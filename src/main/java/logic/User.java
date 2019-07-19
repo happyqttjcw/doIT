@@ -11,6 +11,8 @@ public class User {
 	private int gender;
 	private String phone;
 	private String email;
+	private String emailkey;
+	private String emailkeycheck;
 	private MultipartFile pictureUrl;
 	private String picture;
 	
@@ -61,6 +63,18 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getEmailkey() {
+		return emailkey;
+	}
+	public void setEmailkey(String emailkey) {
+		this.emailkey = emailkey;
+	}
+	public String getEmailkeycheck() {
+		return emailkeycheck;
+	}
+	public void setEmailkeycheck(String emailkeycheck) {
+		this.emailkeycheck = emailkeycheck;
 	}
 	public MultipartFile getPictureUrl() {
 		return pictureUrl;
