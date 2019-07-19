@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,24 +20,33 @@ hr{
   	background-color: #333c;
   	border: none;
 }
-#rtable {
-	border:0.1px solid  #333c;
+table {
+	border:0.1px solid #333c;
+	max-width: 80%;
 }
-#rtable td{
-	width:50%;
+#rtable-container td{
+	width:20%;
 }
-
 </style>
+<script type="text/javascript">
+function addrecruit() {
+	$('#rtable').clone().appendTo('#rtable-add-container');
+	$('#rtable-add-container > #rtable:last-child').attr("id","rtable-add");
+}
+function delrecruit() {
+	$('#rtable-add:last-child').empty();
+}
+</script>
 </head>
 
 <body>
-<div class="w3-container w3-center">
+
+<div class="w3-container w3-center"><br>
 <h1>어떤 인재를 뽑을 계획이세요?</h1>
 <br>
-<form:form modelAttribute="job" method="post" action="writejob.shop">
+<form:form modelAttribute="job" method="post" action="writejob.shop" onsubmit="">
 	<spring:hasBindErrors name="job">
-		<font color="red"> <c:forEach items="${errors.globalErrors}"
-				var="error">
+		<font color="red"> <c:forEach items="${errors.globalErrors}" var="error">
 				<spring:message code="${error.code}" />
 			</c:forEach>
 		</font>
@@ -49,19 +57,33 @@ hr{
 	<br><br>
 	<div id="title">모집요강</div>
 	<hr>
-	<div class="w3-center" id="rtable">
-		<table>
+	<div class="w3-container w3-center" id="rtable-container">
+		<table id="rtable" class="w3-center" >
 		<tr><td>직종/직무</td><td>
-		<form:select path="recruit.field" style="width:400px; height:40px;">
-			<c:forEach items="${joblist}" var="jobs">
-				<form:option value="">${jobs}</form:option>
-			</c:forEach>
-		</form:select></td></tr>
+			<form:select path="field" style="width:400px; height:40px;">
+				<c:forEach items="${joblist}" var="jobs">
+					<form:option value="">${jobs}</form:option>
+				</c:forEach>
+			</form:select>
+			<font color="red"><form:errors path="field" /></font></td></tr>
 		<tr><td>모집인원</td><td>
-			<form:input path="recruit.num" style="width:500px; height:40px;"/>
-			<font color="red"><form:errors path="subject" /></font>
-			<td>
+			<form:input path="num" style="width:100px; height:40px;"/>
+			<font color="red"><form:errors path="num" /></font>명</td></tr>
+		<tr><td>담당업무</td><td>
+			<form:textarea path="task" style="width:400px; height:200px;"/>
+			<font color="red"><form:errors path="task" /></font></td></tr>
+		<tr><td>근무부서</td><td>
+			<form:input path="dept" style="width:400px; height:40px;"/>
+			<font color="red"><form:errors path="dept" /></font></td></tr>
+		<tr><td>직급/직책</td><td>
+			<form:input path="position" style="width:400px; height:40px;"/>
+			<font color="red"><form:errors path="position" /></font></td></tr>
+		<tr><td colspan="2">
+			<a href="javascript:addrecruit()" class="w3-button w3-blue">+추가</a>
+			<a href="javascript:delrecruit()" class="w3-button w3-blue">-삭제</a></td></tr>
 		</table>
+		<input type="submit" value="보내기">
+		<div id="rtable-add-container" class="w3-center"></div>
 	</div>
 	<div id="title">자격요건 및 우대조건</div>
 	<hr>

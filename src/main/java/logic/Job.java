@@ -1,6 +1,8 @@
 package logic;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class Job {
 	private int jobno;
@@ -28,14 +30,13 @@ public class Job {
 	private String phone;
 	private String mobile;
 	private String email;
-	private Recruit recruit;
+	private Integer[] num;
+	private String[] field;
+	private String[] task;
+	private String[] dept;
+	private String[] position;
+
 	
-	public Recruit getRecruit() {
-		return recruit;
-	}
-	public void setRecruit(Recruit recruit) {
-		this.recruit = recruit;
-	}
 	public int getJobno() {
 		return jobno;
 	}
@@ -186,6 +187,36 @@ public class Job {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String[] getField() {
+		return field;
+	}
+	public void setField(String[] field) {
+		this.field = field;
+	}
+	public String[] getTask() {
+		return task;
+	}
+	public void setTask(String[] task) {
+		this.task = task;
+	}
+	public String[] getDept() {
+		return dept;
+	}
+	public void setDept(String[] dept) {
+		this.dept = dept;
+	}
+	public String[] getPosition() {
+		return position;
+	}
+	public void setPosition(String[] position) {
+		this.position = position;
+	}
+	public Integer[] getNum() {
+		return num;
+	}
+	public void setNum(Integer[] num) {
+		this.num = num;
+	}
 	@Override
 	public String toString() {
 		return "Job [jobno=" + jobno + ", comno=" + comno + ", subject=" + subject + ", duty=" + duty + ", career="
@@ -194,8 +225,11 @@ public class Job {
 				+ ", salary=" + salary + ", industry=" + industry + ", worklocation=" + worklocation + ", workday="
 				+ workday + ", worktime=" + worktime + ", startdate=" + startdate + ", enddate=" + enddate
 				+ ", receivetype=" + receivetype + ", name=" + name + ", phone=" + phone + ", mobile=" + mobile
-				+ ", email=" + email + "]";
+				+ ", email=" + email + ", num=" + Arrays.toString(num) + ", field=" + Arrays.toString(field) + ", task="
+				+ Arrays.toString(task) + ", dept=" + Arrays.toString(dept) + ", position=" + Arrays.toString(position)
+				+ "]";
 	}
+
 	
 	
 }

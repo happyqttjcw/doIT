@@ -102,6 +102,13 @@ public class ComController {
 	}
 	// End 해인, 찬웅 부분//
 
+	@RequestMapping("writejob")
+	public ModelAndView writejob(Job job) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(job);
+		return mav;
+	}
+	
 	// 기환, 태민 부분//
 	@GetMapping("*")
 	public String form(Model model) {

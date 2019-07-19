@@ -6,7 +6,6 @@ DROP TABLE IF EXISTS activity;
 DROP TABLE IF EXISTS board;
 DROP TABLE IF EXISTS career;
 DROP TABLE IF EXISTS pickjob;
-DROP TABLE IF EXISTS recruit;
 DROP TABLE IF EXISTS job;
 DROP TABLE IF EXISTS pickuser;
 DROP TABLE IF EXISTS company;
@@ -201,6 +200,11 @@ CREATE TABLE job
 	phone varchar(30),
 	mobile varchar(30),
 	email varchar(30),
+	num int(10),
+	field varchar(30),
+	task varchar(1000),
+	dept varchar(30),
+	position varchar(50),
 	PRIMARY KEY (jobno)
 );
 
@@ -226,10 +230,10 @@ CREATE TABLE pickjob
 (
 	pickjobno int(100) unsigned NOT NULL,
 	userno int(100) unsigned NOT NULL,
+	jobno int(100) unsigned NOT NULL,
 	readornot int(1),
 	apply int(1),
 	pick int(1),
-	recruitno int(100) unsigned NOT NULL,
 	PRIMARY KEY (pickjobno)
 );
 
@@ -239,7 +243,6 @@ CREATE TABLE pickuser
 	pickuserno int(20) NOT NULL,
 	comno int(100) unsigned NOT NULL,
 	userno int(20),
-	cvno int(20),
 	calluser int(2),
 	PRIMARY KEY (pickuserno)
 );
@@ -252,19 +255,6 @@ CREATE TABLE portfolio
 	porturl varchar(100),
 	portcontent varchar(3000),
 	PRIMARY KEY (portno)
-);
-
-
-CREATE TABLE recruit
-(
-	recruitno int(100) unsigned NOT NULL,
-	jobno int(100) unsigned NOT NULL,
-	num int(10),
-	field varchar(30),
-	task varchar(1000),
-	dept varchar(30),
-	position varchar(50),
-	PRIMARY KEY (recruitno)
 );
 
 
@@ -322,6 +312,7 @@ CREATE TABLE user
 	email varchar(400) NOT NULL,
 	emailkey int(10),
 	emailkeycheck int(10),
+	picture varchar(100)
 	PRIMARY KEY (userno)
 );
 
