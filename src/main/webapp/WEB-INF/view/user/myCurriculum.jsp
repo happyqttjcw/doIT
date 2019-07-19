@@ -434,7 +434,7 @@ h1>a {
 								</h1>
 								<hr>
 								<div class="row content">
-									<div class="col-sm-3">
+									<div class="col-sm-3" style="padding-left: 35px;">
 										<h3>
 											<small>회사명</small>
 										</h3>
@@ -466,13 +466,86 @@ h1>a {
 									<div class="col-sm-6">
 										<h3>
 											<input type="text" name="ename" class="form-control"
-												placeholder="회사명">
+												placeholder="회사명" style="width: 350px;">
 										</h3>
 										<h3>
-											<input type="text" name="ename" class="form-control"
-												placeholder="회사명">
+											<input type="date" name="" class="form-control"
+												style="width: 162px; display: inline-block;"
+												placeholder="YYYYMMDD"> <span>~</span> <input
+												type="date" name="" class="form-control"
+												style="width: 162px; display: inline-block;"
+												placeholder="YYYYMMDD">
 										</h3>
-										<h3>직종</h3>
+										<h3>
+											<input type="text" class="form-control" style="width: 350px;"
+												placeholder="퇴사 사유">
+										</h3>
+										<div>
+											<input type="text" class="form-control" style="width: 350px;"
+												placeholder="직급/직책 선택" id="job">
+											<div
+												style="width: 450px; padding: 5px; border: 1px #D5D5D5 solid; border-radius: 5px;"
+												id="jobradio">
+												<div class="row content" style="width: 440px; margin: auto;">
+													<div class="col-sm-2"
+														style="border-right: 1px #D5D5D5 solid;">
+														직급
+													</div>
+													<div class="col-sm-10">
+														<input type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111
+													</div>
+													<div class="col-sm-2" style="border-right: 1px #D5D5D5 solid; 
+													border-top: 1px #D5D5D5 solid;">
+														직책
+													</div>
+													<div class="col-sm-10" style="border-top: 1px #D5D5D5 solid;">
+														<input type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111 <input
+															type="radio" name="" value="">1111
+													</div>
+												</div>
+											</div>
+											<script>
+												$(document)
+														.ready(
+																function() {
+																	$(
+																			'#jobradio')
+																			.hide();
+																	$('#job')
+																			.click(
+																					function() {
+																						$(
+																								'#jobradio')
+																								.slideToggle();
+																					});
+																});
+											</script>
+										</div>
 									</div>
 								</div>
 							</div>
