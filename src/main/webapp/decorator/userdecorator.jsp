@@ -40,7 +40,6 @@ html, body, h1, h2, h3, h4, h5 {
 #top1 {
 	padding: .5rem 18rem;
 	background-color: #46556d;
-	margin-bottom: 70px;
 }
 </style>
 <script>
