@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import logic.CV;
 import logic.Company;
 import logic.PageService;
 import logic.Setting;
@@ -46,6 +46,7 @@ public class UserController {
 	public String form(Model model) {
 		model.addAttribute(new User());
 		model.addAttribute(new Company());
+		model.addAttribute(new CV());
 		return null;
 	}
 
@@ -117,9 +118,10 @@ public class UserController {
 	}
 
 	@RequestMapping("settingForm")
-	public ModelAndView settingForm(HttpSession session) throws IOException {
+	public ModelAndView settingForm(HttpSession session, HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView();
-		File file = new File("C:/doIT/doIT/src/main/webapp/WEB-INF/view/user/setting.txt");
+		String path = request.getRealPath("/");
+		File file = new File(path+"/WEB-INF/view/user/setting.txt");
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
 		String line = "";
@@ -288,6 +290,51 @@ public class UserController {
 		return mav;
 	}
 	
+	/////////////////////
+	///////cv////////////
+	/////////////////////
+	
+	@RequestMapping("myCurriculum")
+	public ModelAndView myCurriculum(HttpServletRequest request) throws IOException {
+		ModelAndView mav = new ModelAndView();
+		String path = request.getRealPath("/");
+		File file = new File(path+"/WEB-INF/view/user/curriculumJob.txt");
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
+		String line = "";
+		String[] str;
+		String[] fstr;
+		while ((line = br.readLine()) != null) {
+			str = line.split(":");
+			fstr = str[1].split(",");
+			mav.addObject(str[0], fstr);
+		}
+		return mav;
+	}
+	
+	
+	
+	
+	@PostMapping("curriculum")
+	public ModelAndView curriculum(CV cv) {
+		ModelAndView mav = new ModelAndView();
+			
+		mav.setViewName("redirect:userMyPage.shop");
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//////////////////////
@@ -306,9 +353,7 @@ public class UserController {
 		mav.addObject("email",email);
 		mav.addObject("authNum",authNum);
 		
-		
 		return mav;
-		
 	}
 	
 	private void sendEmail(String email, String authNum) {
