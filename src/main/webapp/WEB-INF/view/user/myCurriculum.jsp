@@ -128,6 +128,42 @@ h1>a {
 			$('#jobiradio').slideToggle();
 		});
 	});
+	
+	function addcareer() {
+	      $('#career-parent').clone().appendTo('#career-clone');
+	     					      
+	      $('#career-clone:last-child > #career-parent').attr("id","career-parent-add");
+	      $('#career-clone:last-child #del').attr('id','del-add');
+	      $('#career-clone:last-child #btn-group').attr('id','btn-group-add');
+	      $('#career-clone:last-child #del-add').css('display','');
+	      $('#career-clone:last-child #btn-group-add').addClass('btn-group');
+	      $('#career-add:last-child select option').val('');
+	      $('#career-add:last-child input').val('');
+	}
+	function delcareer(b) {
+		$(b).closest('#career-parent-add').remove();
+	}
+	
+	function ca1() {
+		$('#ca1').addClass('btn-info');
+		$('#ca1').removeClass('btn-outline-info');
+		$('#ca2').removeClass('btn-info');
+		$('#ca2').addClass('btn-outline-info');
+		
+		$('#career').css('display','none');
+		$('#hr').css('display','none');
+		$('#careerbtn').css('display','none');
+	}
+	function ca2() {
+		$('#ca2').addClass('btn-info');
+		$('#ca2').removeClass('btn-outline-info');
+		$('#ca1').removeClass('btn-info');
+		$('#ca1').addClass('btn-outline-info');
+		
+		$('#career').css('display','');
+		$('#hr').css('display','');
+		$('#careerbtn').css('display','');
+	}
 </script>
 <meta charset="EUC-KR">
 <title>이력서</title>
@@ -359,143 +395,18 @@ h1>a {
 						</div>
 					</div>
 					
-					<!-- 보유기술 -->
-					<div class="container-fluid w3-card"
-						style="background-color: white;" id="haveskill">
-						<div class="row content">
-							<div class="col-sm-9" style="height: 100%;">
-								<h1><small>보유기술</small></h1>
-								<div class="row content">
-									<div class="col-sm-4">
-										<h3><small>보유능력</small></h3>
-										<h3><small>수준</small></h3>
-										<h3><small>상세내용</small></h3>
-									</div>
-									<div class="col-sm-8">
-										<h3>
-											<input class="form-control" type="text"
-												style="padding: 5px 10px;" name="hsability" value=""
-												placeholder="보유능력">
-										</h3>
-										<h3>
-											<input class="form-control" type="text"
-												style="padding: 5px 10px;" name="hslevel" value=""
-												placeholder="수준">
-										</h3>
-										<h3>
-											<input class="form-control" type="text"
-												style="padding: 5px 10px;" name="hscontent" value=""
-												placeholder="상세내용">
-										</h3>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<!-- 자격증/어학 -->
-					<div class="container-fluid w3-card"
-						style="background-color: white;">
-						<div class="row content">
-							<div class="col-sm-9" style="height: 100%;">
-								<h1>
-									<small>자격증/어학시험</small>
-								</h1>
-								<div class="row content">
-									<div class="col-sm-4">
-										<h3><small>항목선택</small></h3>
-										<h3><small>자격증명</small></h3>
-										<h3><small>발행처/기관</small></h3>
-										<h3><small>언어</small></h3>
-										<h3><small>시험종류</small></h3>
-										<h3><small>급수</small></h3>
-										<h3><small>취득여부</small></h3>
-										<h3><small>협격구분</small></h3>
-										<h3><small>취득일</small></h3>
-									</div>
-									<div class="col-sm-8">
-										<h3>
-											<select name="lltype" class="form-control" style="width: 350px;">
-												<option id="li" value="license">자격증/면허증</option>
-												<option id="lang" value="lang">어학시험</option>
-											</select>
-										</h3>
-										<h3>
-											<select name="lllang" class="form-control" style="width: 350px;">
-												<option>언어 선택</option>
-												<option value="kor">한국어</option>
-												<option value="eng">영어</option>
-												<option value="jap">일본어</option>
-												<option value="chi">중국어</option>
-												<option value="ger">독일어</option>
-												<option value="fren">불어</option>
-												<option value="spa">스페인어</option>
-												<option value="rus">러시아어</option>
-												<option value="ital">이탈리아어</option>
-												<option value="gita">기타</option>
-											</select>
-										</h3>
-										<h3>
-											<input class="form-control" type="text"
-												style="padding: 5px 10px;" name="llname" value=""
-												placeholder="자격증명">
-										</h3>
-										<h3>
-											<input class="form-control" type="text"
-												style="padding: 5px 10px;" name="llplace" value=""
-												placeholder="발행처/기관">
-										</h3>
-										<h3>
-											<select name="lltesttype" class="form-control" style="width: 350px;">
-												<option>합격구분 선택</option>
-												<option value="1cha">1차합격</option>
-												<option value="2cha">2차합격</option>
-												<option value="filgi">필기합격</option>
-												<option value="silgi">실기합격</option>
-												<option value="final">최종합격</option>
-											</select>
-										</h3>
-										<h3>
-											<input class="form-control" type="date"
-												style="padding: 5px 10px;" name="llpassdate" value=""
-												placeholder="취득일">
-										</h3>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
 					<!-- 경력 -->
 					<div class="container-fluid w3-card"
 						style="background-color: white;">
-						<div class="row content">
+						<h1><small>경력 사항</small></h1>
+						<h1 style="text-align: center;">
+							<a href="javascript:ca1()" class="btn btn-info btn-lg" id="ca1">신입</a>
+							<a href="javascript:ca2()" class="btn btn-outline-info btn-lg" id="ca2">경력</a>
+						</h1>
+						<div class="row content" id="career-parent">
 							<div class="col-sm-12" style="height: 100%;">
-								<h1><small>경력 사항</small></h1>
-								<h1 style="text-align: center;">
-									<a href="javascript:ca1()" class="btn btn-info btn-lg" id="ca1">신입</a>
-									<a href="javascript:ca2()" class="btn btn-outline-info btn-lg" id="ca2">경력</a>
-								</h1>
-								<script>
-									function ca1() {
-										$('#ca1').addClass('btn-info');
-										$('#ca1').removeClass('btn-outline-info');
-										$('#ca2').removeClass('btn-info');
-										$('#ca2').addClass('btn-outline-info');
-										
-										$('#carreer').css('display','none');
-									}
-									function ca2() {
-										$('#ca2').addClass('btn-info');
-										$('#ca2').removeClass('btn-outline-info');
-										$('#ca1').removeClass('btn-info');
-										$('#ca1').addClass('btn-outline-info');
-										
-										$('#carreer').css('display','');
-									}
-								</script>
 								<hr>
-								<div class="row content" id="carreer" style="display: none;">
+								<div class="row content" id="career" style="display: none;">
 									<div class="col-sm-3" style="padding-left: 35px;">
 										<h3><small>회사명</small></h3>
 										<h3><small>재직기간</small></h3>
@@ -531,17 +442,23 @@ h1>a {
 											<select name="cposition" class="form-control" style="display: inline; width: 133px;">
 												<option>직책 선택</option>
 											</select>
-											<span><input type="text" name="cpyear" style="width: 73px; height: 35.75px; border: 1px #D6D6D6 solid; 
-											border-radius: 5px;" placeholder="년차"></span>
+											<input type="text" name="cpyear" class="form-control" style="width: 73px; height: 35.75px; border: 1px #D6D6D6 solid; 
+											border-radius: 5px; display: inline;" placeholder="년차">
 										</div>
-										<div style="margin-bottom: 10px; height: 42px;">
+										<div style="margin-bottom: 10px; height: 42px; width: 100px;">
 											<select name="cjob" class="form-control" style="width: 350px;">
 												<option>직종 선택</option>
+												<c:forEach var="job" items="${job }">
+													<option value="${job }">${job }</option>
+												</c:forEach>
 											</select>
 										</div>
 										<div style="margin-bottom: 10px; height: 42px;">
 											<select name="clocation" class="form-control" style="width: 350px;">
 												<option>지역 선택</option>
+												<c:forEach var="location" items="${location }">
+													<option value="${location }">${location }</option>
+												</c:forEach>
 											</select>
 										</div>
 										<div style="margin-bottom: 10px; height: 42px;">
@@ -555,9 +472,19 @@ h1>a {
 											<input type="text" name="ctask" class="form-control" placeholder="담당업무" style="width: 430px;">
 										</div>
 									</div>
+									<div class="col-sm-3"></div>
+								</div>
+								<hr id="hr" style="display: none;" id="hr">
+								<div class="col-sm-12" style="min-height: 65px; display: none;" id="careerbtn">
+									<div class="" style="float: right;" id="btn-group">
+										<div class="btn btn-success btn-lg" onclick="addcareer()">경력 추가 +</div>
+										<div class="btn btn-success btn-lg" onclick="delcareer(this)" style="display: none;" id="del">삭제-</div>
+									</div>
 								</div>
 							</div>
 						</div>
+						<!-- 복사 -->
+						<div id="career-clone"></div>
 					</div>
 					
 					<!-- 대외활동 -->
@@ -608,6 +535,135 @@ h1>a {
 						</div>
 					</div>
 					
+					<!-- 자격증/어학 -->
+					<div class="container-fluid w3-card"
+						style="background-color: white;">
+						<div class="row content">
+							<div class="col-sm-9" style="height: 100%;">
+								<h1>
+									<small>자격증/어학시험</small>
+								</h1>
+								<div class="row content">
+									<div class="col-sm-4">
+										<h3><small>항목선택</small></h3>
+										<h3><small>자격증명</small></h3>
+										<h3><small>발행처/기관</small></h3>
+										<h3><small>언어</small></h3>
+										<h3><small>시험종류</small></h3>
+										<h3><small>급수</small></h3>
+										<h3><small>취득여부</small></h3>
+										<h3><small>협격구분</small></h3>
+										<h3><small>취득일</small></h3>
+									</div>
+									<div class="col-sm-8">
+										<h3>
+											<select name="lltype" class="form-control" style="width: 350px;">
+												<option id="li" value="license">자격증/면허증</option>
+												<option id="lang" value="lang">어학시험</option>
+											</select>
+										</h3>
+										<h3>
+											<input class="form-control" type="text"
+												style="padding: 5px 10px;" name="llname" value=""
+												placeholder="자격증명">
+										</h3>
+										<h3>
+											<input class="form-control" type="text"
+												style="padding: 5px 10px;" name="llplace" value=""
+												placeholder="발행처/기관">
+										</h3>
+										<h3>
+											<select name="lllang" class="form-control" style="width: 350px;">
+												<option>언어 선택</option>
+												<c:forEach var="lang" items="${language }">
+													<option value="${lang }">${lang }</option>
+												</c:forEach>
+											</select>
+										</h3>
+										<h3>
+											<input class="form-control" type="text"
+												style="padding: 5px 10px;" name="lltesttype" value=""
+												placeholder="시험종류">
+										</h3>
+										<h3>
+											<select name="lllevel" class="form-control" style="width: 350px;">
+												<option>급수 선택</option>
+												<c:forEach var="lv" items="${level }">
+													<option value="${lv }">${lv }</option>
+												</c:forEach>
+											</select>	
+										</h3>
+										<h3>
+											<select name="lltesttype" class="form-control" style="width: 350px;">
+												<option>취득여부 선택</option>
+												<option value="pass">취득(pass)</option>
+											</select>
+										</h3>
+										<h3>
+											<select name="lltesttype" class="form-control" style="width: 350px;">
+												<option>합격구분 선택</option>
+												<option value="1cha">1차합격</option>
+												<option value="2cha">2차합격</option>
+												<option value="filgi">필기합격</option>
+												<option value="silgi">실기합격</option>
+												<option value="final">최종합격</option>
+											</select>
+										</h3>
+										<h3>
+											<input class="form-control" type="date"
+												style="padding: 5px 10px;" name="llpassdate" value=""
+												placeholder="취득일">
+										</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 보유기술 -->
+					<div class="container-fluid w3-card"
+						style="background-color: white;" id="haveskill">
+						<div class="row content">
+							<div class="col-sm-9" style="height: 100%;">
+								<h1><small>보유기술</small></h1>
+								<div class="row content">
+									<div class="col-sm-4">
+										<h3><small>보유능력</small></h3>
+										<h3><small>수준</small></h3>
+										<h3><small>상세내용</small></h3>
+									</div>
+									<div class="col-sm-8">
+										<h3>
+											<input class="form-control" type="text"
+												style="padding: 5px 10px;" name="hsability" value=""
+												placeholder="보유능력">
+										</h3>
+										<h3>
+											<input class="form-control" type="text"
+												style="padding: 5px 10px;" name="hslevel" value=""
+												placeholder="수준">
+										</h3>
+										<h3>
+											<input class="form-control" type="text"
+												style="padding: 5px 10px;" name="hscontent" value=""
+												placeholder="상세내용">
+										</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>					
+					
+					<!-- 경력 기술서 -->
+					<div class="container-fluid w3-card"
+						style="background-color: white; min-height: 385px;">
+						<div class="row content" style="padding: 0 15px;">
+							<h1><small>경력 기술서</small></h1>
+							<textarea class="form-control" name="skillcontent" rows="5"
+								style="height: 250px; padding: .5rem 1rem;"></textarea>
+						</div>
+					</div>
+					
 					<!-- 포트폴리오 -->
 					<div class="container-fluid w3-card"
 						style="background-color: white;">
@@ -654,19 +710,8 @@ h1>a {
 						</div>
 					</div>
 					
-					<!-- 경력 기술서 -->
-					<div class="container-fluid w3-card"
-						style="background-color: white; min-height: 385px;">
-						<div class="row content" style="padding: 0 15px;">
-							<h1><small>경력 기술서</small></h1>
-							<textarea class="form-control" name="skillcontent" rows="5"
-								style="height: 250px; padding: .5rem 1rem;"></textarea>
-						</div>
-					</div>
-					
 					<!-- 희망근무조건 -->
-					<div class="container-fluid w3-card"
-						style="background-color: white;">
+					<div class="container-fluid w3-card" style="background-color: white;">
 						<div class="row content">
 							<div class="col-sm-9" style="height: 100%;">
 								<h1><small>희망 근무조건 선택</small></h1>
@@ -678,8 +723,7 @@ h1>a {
 									</div>
 									<div class="col-sm-8">
 										<h3>
-											<select name="cdtsalary" class="form-control"
-												style="width: 350px;">
+											<select name="cdtsalary" class="form-control" style="width: 350px;">
 												<option value="rule~rule">회사내규에 따름</option>
 												<option value="0~1400">1400만원 이하</option>
 												<c:forEach var="salary" begin="1400" end="3800" step="200">
@@ -692,10 +736,17 @@ h1>a {
 												<option value="interview~interview">면접후 결정</option>
 											</select>
 										</h3>
-										<h3>직역</h3>
+										<h3>지역</h3>
 										<div style="margin-bottom: 10px; height: 42px; border: 1px #d6d6d6 solid; padding: 12px 1rem; font-size: 11px;">
-											
-											<a href="#" style="float: right; color: blue; font-size: 12px;">수정·추가하기</a>
+											<a style="float: right; color: blue; font-size: 12px; cursor: pointer;" id="cdtjob">수정·추가하기</a>
+											<script>
+												$(document).ready(function(){
+													$('#cdtjob-box').hide();
+													$('#cdtjob').click(function(){
+														$('#cdtjob-box').slideToggle();
+													});
+												});
+											</script>
 										</div>
 									</div>
 								</div>

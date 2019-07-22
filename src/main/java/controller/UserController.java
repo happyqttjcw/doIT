@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -298,27 +300,48 @@ public class UserController {
 	public ModelAndView myCurriculum(HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		String path = request.getRealPath("/");
-		File file = new File(path+"/WEB-INF/view/user/curriculumJob.txt");
-		FileReader fr = new FileReader(file);
+		File file = new File(path+"/WEB-INF/view/user/");
+		
+		FileReader fr = new FileReader(file+"/setting.txt");
 		BufferedReader br = new BufferedReader(fr);
 		String line = "";
-		String[] str;
-		String[] fstr;
+		String[] str = null;
+		String[] fstr = null;
 		while ((line = br.readLine()) != null) {
 			str = line.split(":");
 			fstr = str[1].split(",");
 			mav.addObject(str[0], fstr);
+			mav.addObject(str[0]+"2", fstr);
+		}
+		
+		line = "";
+		str = null;
+		fstr = null;
+		fr = new FileReader(file+"/level.txt");
+		br = new BufferedReader(fr);
+		while((line = br.readLine()) != null) {
+			str = line.split(":");
+			fstr = str[1].split(",");
+			mav.addObject(str[0], fstr);
+		}
+		
+		line = "";
+		str = null;
+		fstr = null;
+		fr = new FileReader(file+"/curriculumJob.txt");
+		br = new BufferedReader(fr);
+		while((line = br.readLine()) != null) {
+			str = line.split(":");
+			fstr = str[1].split(",");
+			mav.addObject(str[0],fstr);
 		}
 		return mav;
 	}
 	
-	
-	
-	
 	@PostMapping("curriculum")
 	public ModelAndView curriculum(CV cv) {
 		ModelAndView mav = new ModelAndView();
-			
+				
 		mav.setViewName("redirect:userMyPage.shop");
 		return mav;
 	}
