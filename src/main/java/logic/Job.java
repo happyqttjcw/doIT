@@ -30,7 +30,7 @@ public class Job {
 	private String phone;
 	private String mobile;
 	private String email;
-	private Integer[] num;
+	private String[] num;
 	private String[] field;
 	private String[] task;
 	private String[] dept;
@@ -211,10 +211,10 @@ public class Job {
 	public void setPosition(String[] position) {
 		this.position = position;
 	}
-	public Integer[] getNum() {
+	public String[] getNum() {
 		return num;
 	}
-	public void setNum(Integer[] num) {
+	public void setNum(String[] num) {
 		this.num = num;
 	}
 	@Override
@@ -229,7 +229,8 @@ public class Job {
 				+ Arrays.toString(task) + ", dept=" + Arrays.toString(dept) + ", position=" + Arrays.toString(position)
 				+ "]";
 	}
-
+	
+	
 	
 	
 }

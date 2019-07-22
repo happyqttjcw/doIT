@@ -31,6 +31,11 @@ html, body, h1, h2, h3, h4, h5 {font-family: 'Noto Sans KR', sans-serif;  }
    });
    
 </script>
+<style type="text/css">
+body{
+	min-width:1500px;
+}
+</style>
 <decorator:head/>
 </head>
 <body class="w3-theme-l5">
@@ -146,7 +151,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: 'Noto Sans KR', sans-serif;  }
 	    <div class="w3-card" style="min-width:500px; max-width:1800px;">
 			<decorator:body />
 		</div>
-	</div>
+	</div><br><br>
 	<!-- End Middle Column -->
   </div>
 </div>

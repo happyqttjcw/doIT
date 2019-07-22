@@ -187,7 +187,8 @@ CREATE TABLE job
 	language varchar(100),
 	skill varchar(100),
 	gender varchar(10),
-	age varchar(50),
+	startage varchar(10),
+	endage varchar(10),
 	salary varchar(50),
 	industry varchar(400),
 	worklocation varchar(100),
@@ -312,7 +313,6 @@ CREATE TABLE user
 	email varchar(400) NOT NULL,
 	emailkey int(10),
 	emailkeycheck int(10),
-	picture varchar(100)
 	PRIMARY KEY (userno)
 );
 
