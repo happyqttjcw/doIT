@@ -78,4 +78,8 @@ public class PageService {
 	public void likeCreat(Setting st) {
 		userDao.likeCreate(st);
 	}
+
+	public int getCvno() {
+		return userDao.getCvno();
+	}
 }

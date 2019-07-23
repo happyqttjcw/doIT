@@ -136,7 +136,6 @@ h1>a {
 </head>
 <body>
 	<form:form action="curriculum.shop" modelAttribute="cv" enctype="multipart/form-data" name="f">
-	<input type="hidden" value="${param.userno }">
 		<div class="container-fluid text-center"
 			style="padding: 5rem 0; background-color: #F6F6F6;">
 			<div class="row content">
@@ -384,14 +383,15 @@ h1>a {
 									<div class="col-sm-6">
 										<h3>
 											<input type="text" name="career[0].cename" class="form-control"
-												placeholder="회사명" style="width: 350px;" id="cename">
+												placeholder="회사명" style="width: 350px;" id="#cename">
 										</h3>
 										<h3>
 											<input type="date" name="career[0].cworkstart" class="form-control"
-												style="width: 158px; display: inline-block;" id="cworkstart">
-											<span>~</span> 
+												style="width: 158px; display: inline-block;" id="cworkstart"
+												placeholder="YYYYMMDD"> <span>~</span> 
 											<input type="date" name="career[0].cworkend" class="form-control"
-												style="width: 158px; display: inline-block;" id="cworkend">
+												style="width: 158px; display: inline-block;" id="cworkend"
+												placeholder="YYYYMMDD">
 										</h3>
 										<h3>
 											<input type="text" name="career[0].creason" class="form-control" 
@@ -455,6 +455,7 @@ h1>a {
 							      $('#career-parent').clone().appendTo('#career-clone');
 							     
 							      i = $('#career-clone').children().length;
+							      console.log("i="+i)
 							      $('#career-clone:last-child > #career-parent').attr("id","career-parent-add");
 							      $('#career-clone:last-child #del').attr('id','del-add');
 							      $('#career-clone:last-child #btn-group').attr('id','btn-group-add');
@@ -465,19 +466,17 @@ h1>a {
 
 							      $('#career-clone:last-child #cename').attr('name','career['+i+'].cename');
 							      $('#career-clone:last-child #cworkstart').attr('name','career['+i+'].cworkstart');
-							      $('#career-clone:last-child #cworkend').attr('name','career['+i+'].cworkend');
-							      $('#career-clone:last-child #creason').attr('name','career['+i+'].creason');
-							      $('#career-clone:last-child #cposition').attr('name','career['+i+'].cposition');
-							      $('#career-clone:last-child #cpyear').attr('name','career['+i+'].cpyear');
-							      $('#career-clone:last-child #cworktype').attr('name','career['+i+'].cworktype');
-							      $('#career-clone:last-child #cworklocation').attr('name','career['+i+'].cworklocation');
-							      $('#career-clone:last-child #cdept').attr('name','career['+i+'].cdept');
-							      $('#career-clone:last-child #csalary').attr('name','career['+i+'].csalary');
-							      $('#career-clone:last-child #ctask').attr('name','career['+i+'].ctask');
+							      $('#career-parent-add:last-child #cworkend').attr('name','career['+i+'].cworkend');
+							      $('#career-parent-add:last-child #creason').attr('name','career['+i+'].creason');
+							      $('#career-parent-add:last-child #cposition').attr('name','career['+i+'].cposition');
+							      $('#career-parent-add:last-child #cpyear').attr('name','career['+i+'].cpyear');
+							      $('#career-parent-add:last-child #cworktype').attr('name','career['+i+'].cworktype');
+							      $('#career-parent-add:last-child #cworklocation').attr('name','career['+i+'].cworklocation');
+							      $('#career-parent-add:last-child #cdept').attr('name','career['+i+'].cdept');
+							      $('#career-parent-add:last-child #csalary').attr('name','career['+i+'].csalary');
+							      $('#career-parent-add:last-child #ctask').attr('name','career['+i+'].ctask');
 							}
 							function delcareer(b) {
-								$(b).closest('#career-parent-add input').val('');
-								$(b).closest('#career-parent-add select option').val('');
 								$(b).closest('#career-parent-add').remove();
 							}
 							

@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import logic.CV;
+import logic.Career;
 import logic.Company;
 import logic.PageService;
 import logic.Setting;
@@ -341,7 +342,10 @@ public class UserController {
 	@PostMapping("curriculum")
 	public ModelAndView curriculum(CV cv) {
 		ModelAndView mav = new ModelAndView();
-				
+		cv.setCvno(service.getCvno());
+		
+		
+		
 		mav.setViewName("redirect:userMyPage.shop");
 		return mav;
 	}

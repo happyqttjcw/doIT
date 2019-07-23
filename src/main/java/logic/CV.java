@@ -2,6 +2,7 @@ package logic;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,7 +13,7 @@ public class CV {
 	private Integer resumeno;
 	private String subject;
 	private String name;
-	private Date birth;
+	private String birth;
 	private String email;
 	private String phone;
 	private String[] addr;
@@ -41,12 +42,12 @@ public class CV {
 	private String cdtjob4;
 	private String cdtjob5;
 	private Date date;
-	private Activity[] activity;
-	private Career[] career;
-	private Haveskill[] haveskill;
-	private LL[] ll;
-	private Portfolio[] portfolio;
-	private Resume[] resume;
+	private List<Activity> activity;
+	private List<Career> career;
+	private List<Haveskill> haveskill;
+	private List<LL> ll;
+	private List<Portfolio> portfolio;
+	private List<Resume> resume;
 	public int getCvno() {
 		return cvno;
 	}
@@ -83,10 +84,10 @@ public class CV {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getBirth() {
+	public String getBirth() {
 		return birth;
 	}
-	public void setBirth(Date birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 	public String getEmail() {
@@ -257,55 +258,56 @@ public class CV {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Activity[] getActivity() {
+	public List<Activity> getActivity() {
 		return activity;
 	}
-	public void setActivity(Activity[] activity) {
+	public void setActivity(List<Activity> activity) {
 		this.activity = activity;
 	}
-	public Career[] getCareer() {
+	public List<Career> getCareer() {
 		return career;
 	}
-	public void setCareer(Career[] career) {
+	public void setCareer(List<Career> career) {
 		this.career = career;
 	}
-	public Haveskill[] getHaveskill() {
+	public List<Haveskill> getHaveskill() {
 		return haveskill;
 	}
-	public void setHaveskill(Haveskill[] haveskill) {
+	public void setHaveskill(List<Haveskill> haveskill) {
 		this.haveskill = haveskill;
 	}
-	public LL[] getLl() {
+	public List<LL> getLl() {
 		return ll;
 	}
-	public void setLl(LL[] ll) {
+	public void setLl(List<LL> ll) {
 		this.ll = ll;
 	}
-	public Portfolio[] getPortfolio() {
+	public List<Portfolio> getPortfolio() {
 		return portfolio;
 	}
-	public void setPortfolio(Portfolio[] portfolio) {
+	public void setPortfolio(List<Portfolio> portfolio) {
 		this.portfolio = portfolio;
 	}
-	public Resume[] getResume() {
+	public List<Resume> getResume() {
 		return resume;
 	}
-	public void setResume(Resume[] resume) {
+	public void setResume(List<Resume> resume) {
 		this.resume = resume;
 	}
 	@Override
 	public String toString() {
 		return "CV [cvno=" + cvno + ", userno=" + userno + ", publicornot=" + publicornot + ", resumeno=" + resumeno
 				+ ", subject=" + subject + ", name=" + name + ", birth=" + birth + ", email=" + email + ", phone="
-				+ phone + ", addr=" + addr + ", picture=" + picture + ", pictureUrl=" + pictureUrl + ", school="
-				+ school + ", schoolname=" + schoolname + ", schoollocation=" + schoollocation + ", major=" + major
-				+ ", daynight=" + daynight + ", score=" + score + ", skillcontent=" + skillcontent + ", bohun=" + bohun
-				+ ", army=" + army + ", armytype=" + armytype + ", armyclass=" + armyclass + ", armyreason="
-				+ armyreason + ", bohunreason=" + bohunreason + ", cdtsalary=" + cdtsalary + ", cdtlocation1="
-				+ cdtlocation1 + ", cdtlocation2=" + cdtlocation2 + ", cdtlocation3=" + cdtlocation3 + ", cdtjob1="
-				+ cdtjob1 + ", cdtjob2=" + cdtjob2 + ", cdtjob3=" + cdtjob3 + ", cdtjob4=" + cdtjob4 + ", cdtjob5="
-				+ cdtjob5 + ", date=" + date + ", activity=" + Arrays.toString(activity) + ", career="
-				+ Arrays.toString(career) + ", haveskill=" + Arrays.toString(haveskill) + ", ll=" + Arrays.toString(ll)
-				+ ", portfolio=" + Arrays.toString(portfolio) + ", resume=" + Arrays.toString(resume) + "]";
+				+ phone + ", addr=" + Arrays.toString(addr) + ", picture=" + picture + ", pictureUrl=" + pictureUrl
+				+ ", school=" + school + ", schoolname=" + schoolname + ", schoollocation=" + schoollocation
+				+ ", major=" + major + ", daynight=" + daynight + ", score=" + score + ", skillcontent=" + skillcontent
+				+ ", bohun=" + bohun + ", army=" + army + ", armytype=" + armytype + ", armyclass=" + armyclass
+				+ ", armyreason=" + armyreason + ", bohunreason=" + bohunreason + ", cdtsalary=" + cdtsalary
+				+ ", cdtlocation1=" + cdtlocation1 + ", cdtlocation2=" + cdtlocation2 + ", cdtlocation3=" + cdtlocation3
+				+ ", cdtjob1=" + cdtjob1 + ", cdtjob2=" + cdtjob2 + ", cdtjob3=" + cdtjob3 + ", cdtjob4=" + cdtjob4
+				+ ", cdtjob5=" + cdtjob5 + ", date=" + date + ", activity=" + activity + ", career=" + career
+				+ ", haveskill=" + haveskill + ", ll=" + ll + ", portfolio=" + portfolio + ", resume=" + resume + "]";
 	}
+
+
 }

@@ -1,17 +1,15 @@
 package logic;
 
-import java.util.Date;
-
 public class Career {
 	private Integer careerno;
-	private int cvno;
+	private Integer cvno;
 	private String cename;
-	private Date cworkstart;
-	private Date cworkend;
+	private String cworkstart;
+	private String cworkend;
 	private String creason;
 	private String cposition;
 	private Integer cpyear;
-	private String cworkttype;
+	private String cworktype;
 	private String cworklocation;
 	private String cdept;
 	private Integer csalary;
@@ -22,10 +20,10 @@ public class Career {
 	public void setCareerno(Integer careerno) {
 		this.careerno = careerno;
 	}
-	public int getCvno() {
+	public Integer getCvno() {
 		return cvno;
 	}
-	public void setCvno(int cvno) {
+	public void setCvno(Integer cvno) {
 		this.cvno = cvno;
 	}
 	public String getCename() {
@@ -34,16 +32,17 @@ public class Career {
 	public void setCename(String cename) {
 		this.cename = cename;
 	}
-	public Date getCworkstart() {
+	
+	public String getCworkstart() {
 		return cworkstart;
 	}
-	public void setCworkstart(Date cworkstart) {
+	public void setCworkstart(String cworkstart) {
 		this.cworkstart = cworkstart;
 	}
-	public Date getCworkend() {
+	public String getCworkend() {
 		return cworkend;
 	}
-	public void setCworkend(Date cworkend) {
+	public void setCworkend(String cworkend) {
 		this.cworkend = cworkend;
 	}
 	public String getCreason() {
@@ -65,10 +64,10 @@ public class Career {
 		this.cpyear = cpyear;
 	}
 	public String getCworkttype() {
-		return cworkttype;
+		return cworktype;
 	}
 	public void setCworkttype(String cworkttype) {
-		this.cworkttype = cworkttype;
+		this.cworktype = cworkttype;
 	}
 	public String getCworklocation() {
 		return cworklocation;
@@ -97,8 +96,8 @@ public class Career {
 	@Override
 	public String toString() {
 		return "Career [careerno=" + careerno + ", cvno=" + cvno + ", cename=" + cename + ", cworkstart=" + cworkstart
-				+ ", cworkend=" + cworkend + ", creason=" + creason + ", cposition=" + cposition + ", cpyear=" + cpyear
-				+ ", cworkttype=" + cworkttype + ", cworklocation=" + cworklocation + ", cdept=" + cdept + ", csalary="
-				+ csalary + ", ctask=" + ctask + "]";
+				+ ", cworkend=" + cworkend + ", creason=" + creason + ", cposition=" + cposition
+				+ ", cpyear=" + cpyear + ", cworktype=" + cworktype + ", cworklocation=" + cworklocation + ", cdept="
+				+ cdept + ", csalary=" + csalary + ", ctask=" + ctask + "]";
 	}
 }

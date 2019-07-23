@@ -42,4 +42,7 @@ public class UserDao {
 	public void likeCreate(Setting st) {
 		sqlSession.getMapper(UserMapper.class).likeCreate(st);
 	}
+	public int getCvno() {
+		return sqlSession.getMapper(UserMapper.class).getCvno();
+	}
 }

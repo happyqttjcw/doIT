@@ -27,4 +27,7 @@ public interface UserMapper {
 	@Insert("insert into culike (likeno, userno, skill, welfare, pluse, location, job, minpay, maxpay, education, workform)"
 			+ " values(#{likeno},#{userno},#{skill},#{welfare},#{pluse},#{location},#{job},#{minpay},#{maxpay},#{education},#{workform})")
 	void likeCreate(Setting st);
+
+	@Select("select ifnull(max(cvno),0) from cv")
+	int getCvno();
 }
