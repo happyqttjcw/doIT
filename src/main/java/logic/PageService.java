@@ -141,6 +141,30 @@ public class PageService {
 		userDao.passUpdate(user);
 	}
 
+	public void writeJob(Job job) {
+		jobDao.writejob(job);
+	}
+
+	public Job jobselect(Integer jobno, Integer comno) {
+		Job job = jobDao.jobselect(jobno, comno);
+		return job;
+	}
+
+	public Company comselect(Integer comno) {
+		Company com = companyDao.selectOneByNo(comno);
+		return com;
+	}
+
+	public void comUpdate(Company com, HttpServletRequest request) {
+		if (com.getCompicture() != null && com.getCompicture().isEmpty()) {
+			uploadFileCreate(com.getCompicture(), request, "com/img/");
+			com.setCompic(com.getCompicture().getOriginalFilename());
+		}
+		com.setManageremail(CipherUtil.encrypt(com.getManageremail(), com.getCompass()));
+		companyDao.comUpdate(com);
+
+	}
+
 	// End 유저 부분 - 기환//
 
 }

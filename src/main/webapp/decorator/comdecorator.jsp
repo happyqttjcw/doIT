@@ -39,10 +39,12 @@ body{
 <decorator:head/>
 </head>
 <body class="w3-theme-l5">
-<div class="w3-center w3-top" style="height: 100px; padding-top: 10px;"><a href="#" style="font-size:20px; color:#46556d; text-decoration: none;">IT에서 일하자<span style="font-size:40px; font-weight: bold;">doIT</span></a></div>
+<div class="w3-center w3-top" style="height: 100px; padding-top: 10px;">
+	<a href="commypage.shop?comid=${sessionScope.logincom.comid }" style="font-size:20px; color:#46556d; text-decoration: none;">IT에서 일하자<span style="font-size:40px; font-weight: bold;">doIT</span></a>
+</div>
 <div class="w3-top" id="deco1" style="background-color: #46556d; min-width:500px; margin-top:5%; height:80px; padding: 0 30px 0 30px; " >
   <div style="margin-top:20px;">
-	  <a href="writejobform.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
+	  <a href="writejobform.shop?comid=${sessionScope.logincom.comid }" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
 	  			style="text-decoration:none; font-size:20px;">공고 등록</a>
 	  <div class="w3-dropdown-hover w3-hide-small">
 			<a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
@@ -69,7 +71,7 @@ body{
 		  	<c:otherwise>
 				<a href="../user/logout.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
 								style="text-decoration: none; font-size: 20px;">로그아웃</a>
-  			    <a href="commypage.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
+  			    <a href="commypage.shop?comid=${sessionScope.logincom.comid }" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
 			  					style="text-decoration:none; font-size:20px;">마이페이지</a>
 			</c:otherwise>
 	  </c:choose>
@@ -83,7 +85,7 @@ body{
 		<a href="#" class="w3-bar-item w3-padding-large w3-margin-top" title="doIT"
 					style="font-size:28px; color:white; font-weight:bold; text-decoration: none; ">
 					<i class="fa fa-home"></i>&nbsp;doIT</a>
-		 <a href="writejobform.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
+		 <a href="writejobform.shop?comid=${sessionScope.logincom.comid }" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
 		  			style="text-decoration:none; font-size:20px;">공고 등록</a>
 		  <div class="w3-dropdown-hover w3-hide-small">
 				<a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
@@ -150,8 +152,8 @@ body{
 	<div class="w3-col m10 w3-container" style="padding-left:30px;">
 	    <div class="w3-card" style="min-width:500px; max-width:1800px;">
 			<decorator:body />
-		</div>
-	</div><br><br>
+		</div><br><br><br>
+	</div>
 	<!-- End Middle Column -->
   </div>
 </div>

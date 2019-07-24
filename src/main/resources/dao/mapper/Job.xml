@@ -5,7 +5,10 @@
 <mapper namespace="dao.mapper.JobMapper">
    <select id="list" parameterType="Job" resultType="Job">
       select * from job 
-        <if test="comno != null">
+        <if test="comno!=null and jobno!=null">
+        	 where comno=#{comno} and jobno=#{jobno}
+        </if>
+        <if test="comno != null and jobno==null">
            where comno = #{comno}
         </if>
    </select>

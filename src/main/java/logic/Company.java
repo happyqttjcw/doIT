@@ -2,9 +2,14 @@ package logic;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
+
 public class Company {
    private int comno;
    private String comid;
+   @NotEmpty(message="비밀번호를 입력하세요.2222")
    private String compass;
    private int bussno;
    private String comtype;
@@ -22,9 +27,10 @@ public class Company {
    private String comaddr;
    private String comphone;
    private int comstaffnum;
-   private Date combirth;
+   private String combirth;
    private int comsales;
-
+   private MultipartFile compicture;
+ 
    public int getComno() {
       return comno;
    }
@@ -94,6 +100,7 @@ public class Company {
    }
 
    public void setManageremail(String manageremail) {
+      System.out.println(manageremail);
       this.manageremail = manageremail;
    }
 
@@ -177,11 +184,11 @@ public class Company {
       this.comstaffnum = comstaffnum;
    }
 
-   public Date getCombirth() {
+   public String getCombirth() {
       return combirth;
    }
 
-   public void setCombirth(Date combirth) {
+   public void setCombirth(String combirth) {
       this.combirth = combirth;
    }
 
@@ -193,6 +200,14 @@ public class Company {
       this.comsales = comsales;
    }
 
+   public MultipartFile getCompicture() {
+      return compicture;
+   }
+
+   public void setCompicture(MultipartFile compicture) {
+      this.compicture = compicture;
+   }
+
    @Override
    public String toString() {
       return "Company [comno=" + comno + ", comid=" + comid + ", compass=" + compass + ", bussno=" + bussno
@@ -200,17 +215,8 @@ public class Company {
             + managerphone + ", manageremail=" + manageremail + ", comcontent=" + comcontent + ", compic=" + compic
             + ", comhomepage=" + comhomepage + ", comwelfare=" + comwelfare + ", comname=" + comname + ", combrand="
             + combrand + ", comboss=" + comboss + ", comaddr=" + comaddr + ", comphone=" + comphone
-            + ", comstaffnum=" + comstaffnum + ", combirth=" + combirth + ", comsales=" + comsales + ", getComno()="
-            + getComno() + ", getComid()=" + getComid() + ", getCompass()=" + getCompass() + ", getBussno()="
-            + getBussno() + ", getComtype()=" + getComtype() + ", getComsize()=" + getComsize()
-            + ", getManagername()=" + getManagername() + ", getManagerphone()=" + getManagerphone()
-            + ", getManageremail()=" + getManageremail() + ", getComcontent()=" + getComcontent() + ", getCompic()="
-            + getCompic() + ", getComhomepage()=" + getComhomepage() + ", getComwelfare()=" + getComwelfare()
-            + ", getComname()=" + getComname() + ", getCombrand()=" + getCombrand() + ", getComboss()="
-            + getComboss() + ", getComaddr()=" + getComaddr() + ", getComphone()=" + getComphone()
-            + ", getComstaffnum()=" + getComstaffnum() + ", getCombirth()=" + getCombirth() + ", getComsales()="
-            + getComsales() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-            + super.toString() + "]";
+            + ", comstaffnum=" + comstaffnum + ", combirth=" + combirth + ", comsales=" + comsales + ", compicture="
+            + compicture + "]";
    }
 
 }

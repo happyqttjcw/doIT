@@ -8,5 +8,8 @@
         <if test="comid != null">
            where comid = #{comid}
         </if>
+        <if test="comno != null">
+        	where comno=#{comno}
+        </if>
    </select>
 </mapper>

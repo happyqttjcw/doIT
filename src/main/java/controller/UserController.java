@@ -153,7 +153,7 @@ public class UserController {
 
 		if (compass.equals(dbCompany.getCompass())) {
 			session.setAttribute("logincom", dbCompany);
-			mav.setViewName("redirect:../com/commypage.shop");
+			mav.setViewName("redirect:../com/commypage.shop?comid=" + company.getComid());
 		} else {
 			bindResult.reject("error.login.compass");
 			mav.getModel().putAll(bindResult.getModel());

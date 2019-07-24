@@ -17,24 +17,25 @@ public class Job {
 	private String language;
 	private String skill;
 	private String gender;
-	private String age;
+	private String startage;
+	private String endage;
 	private String salary;
 	private String industry;
 	private String worklocation;
 	private String workday;
 	private String worktime;
-	private Date startdate;
-	private Date enddate;
+	private String startdate;
+	private String enddate;
 	private String receivetype;
 	private String name;
 	private String phone;
 	private String mobile;
 	private String email;
-	private String[] num;
-	private String[] field;
-	private String[] task;
-	private String[] dept;
-	private String[] position;
+	private String num;
+	private String field;
+	private String task;
+	private String dept;
+	private String position;
 
 	
 	public int getJobno() {
@@ -109,11 +110,18 @@ public class Job {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getAge() {
-		return age;
+	
+	public String getStartage() {
+		return startage;
 	}
-	public void setAge(String age) {
-		this.age = age;
+	public void setStartage(String startage) {
+		this.startage = startage;
+	}
+	public String getEndage() {
+		return endage;
+	}
+	public void setEndage(String endage) {
+		this.endage = endage;
 	}
 	public String getSalary() {
 		return salary;
@@ -145,16 +153,17 @@ public class Job {
 	public void setWorktime(String worktime) {
 		this.worktime = worktime;
 	}
-	public Date getStartdate() {
+	
+	public String getStartdate() {
 		return startdate;
 	}
-	public void setStartdate(Date startdate) {
+	public void setStartdate(String startdate) {
 		this.startdate = startdate;
 	}
-	public Date getEnddate() {
+	public String getEnddate() {
 		return enddate;
 	}
-	public void setEnddate(Date enddate) {
+	public void setEnddate(String enddate) {
 		this.enddate = enddate;
 	}
 	public String getReceivetype() {
@@ -187,50 +196,48 @@ public class Job {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String[] getField() {
-		return field;
+	public String getNum() {
+		return String.join(",", num);
 	}
-	public void setField(String[] field) {
+	public String getField() {
+		return String.join(",", field);
+	}
+	public String getTask() {
+		return String.join(",", task);
+	}
+	public String getDept() {
+		return String.join(",", dept);
+	}
+	public String getPosition() {
+		return String.join(",", position);
+	}
+	
+	public void setNum(String num) {
+		this.num = num;
+	}
+	public void setField(String field) {
 		this.field = field;
 	}
-	public String[] getTask() {
-		return task;
-	}
-	public void setTask(String[] task) {
+	public void setTask(String task) {
 		this.task = task;
 	}
-	public String[] getDept() {
-		return dept;
-	}
-	public void setDept(String[] dept) {
+	public void setDept(String dept) {
 		this.dept = dept;
 	}
-	public String[] getPosition() {
-		return position;
-	}
-	public void setPosition(String[] position) {
+	public void setPosition(String position) {
 		this.position = position;
-	}
-	public String[] getNum() {
-		return num;
-	}
-	public void setNum(String[] num) {
-		this.num = num;
 	}
 	@Override
 	public String toString() {
 		return "Job [jobno=" + jobno + ", comno=" + comno + ", subject=" + subject + ", duty=" + duty + ", career="
 				+ career + ", employ=" + employ + ", education=" + education + ", major=" + major + ", likecdt="
-				+ likecdt + ", language=" + language + ", skill=" + skill + ", gender=" + gender + ", age=" + age
-				+ ", salary=" + salary + ", industry=" + industry + ", worklocation=" + worklocation + ", workday="
-				+ workday + ", worktime=" + worktime + ", startdate=" + startdate + ", enddate=" + enddate
-				+ ", receivetype=" + receivetype + ", name=" + name + ", phone=" + phone + ", mobile=" + mobile
-				+ ", email=" + email + ", num=" + Arrays.toString(num) + ", field=" + Arrays.toString(field) + ", task="
-				+ Arrays.toString(task) + ", dept=" + Arrays.toString(dept) + ", position=" + Arrays.toString(position)
-				+ "]";
+				+ likecdt + ", language=" + language + ", skill=" + skill + ", gender=" + gender + ", startage="
+				+ startage + ", endage=" + endage + ", salary=" + salary + ", industry=" + industry + ", worklocation="
+				+ worklocation + ", workday=" + workday + ", worktime=" + worktime + ", startdate=" + startdate
+				+ ", enddate=" + enddate + ", receivetype=" + receivetype + ", name=" + name + ", phone=" + phone
+				+ ", mobile=" + mobile + ", email=" + email + ", num=" + num + ", field=" + field + ", task=" + task
+				+ ", dept=" + dept + ", position=" + position + "]";
 	}
-	
-	
 	
 	
 }

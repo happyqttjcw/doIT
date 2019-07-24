@@ -6,6 +6,10 @@
 <head>
 <meta charset="EUC-KR">
 <title>기업 공고 등록</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <style type="text/css">
 #title {
 	font-family:'Noto Sans KR', sans-serif;
@@ -31,6 +35,11 @@ table td{
 input,select{
 	margin:5px;
 }
+#condition tr{
+	border:0.1px solid #333c;
+		margin-left: 10%;
+	
+}
 </style>
 <script type="text/javascript">
 function addrecruit() {
@@ -47,6 +56,53 @@ function delrecruit(b) {
 		$(b).closest('table').remove();
 	}
 }
+
+$(function() {
+    //input을 datepicker로 선언
+    $("#datepicker").datepicker({
+        dateFormat: 'yy-mm-dd' //Input Display Format 변경
+        ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+        ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+        ,changeYear: true //콤보박스에서 년 선택 가능
+        ,changeMonth: true //콤보박스에서 월 선택 가능                
+        ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+        ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+        ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+        ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+        ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+        ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+        ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+        ,minDate: "0" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+        ,maxDate: "+2M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
+    });                    
+    
+    //초기값을 오늘 날짜로 설정
+    $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)     
+    
+    $("#datepicker2").datepicker({
+        dateFormat: 'yy-mm-dd' //Input Display Format 변경
+        ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+        ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+        ,changeYear: true //콤보박스에서 년 선택 가능
+        ,changeMonth: true //콤보박스에서 월 선택 가능                
+        ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+        ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+        ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+        ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+        ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+        ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+        ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+        ,minDate: "0" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+        ,maxDate: "+2M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
+    });                    
+    
+    //초기값을 오늘 날짜로 설정
+    $('#datepicker2').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
+});
 </script>
 </head>
 
@@ -55,7 +111,8 @@ function delrecruit(b) {
 <div class="w3-container w3-center" style="min-width: 1000px;"><br>
 <h1>어떤 인재를 뽑을 계획이세요?</h1>
 <br>
-<form:form modelAttribute="job" method="post" action="writejob.shop" onsubmit="">
+<form:form modelAttribute="job" method="post" action="writejob.shop?comid=${sessionScope.logincom.comid}" >
+	<form:hidden path="comno" value="${sessionScope.logincom.comno }"/>
 	<spring:hasBindErrors name="job">
 		<font color="red"> <c:forEach items="${errors.globalErrors}" var="error">
 				<spring:message code="${error.code}" />
@@ -68,7 +125,7 @@ function delrecruit(b) {
 	<br><br><br>
 	<div id="title">모집요강</div>
 	<hr>
-	<div class="w3-container  " id="rtable-container">
+	<div class="w3-container " id="rtable-container">
 		<table id="rtable" class="w3-center" >
 		<tr><td>직종/직무</td><td>
 			<select name="field" style="width:400px; height:40px;">
@@ -87,7 +144,10 @@ function delrecruit(b) {
 			<input type="text" name="dept" style="width:400px; height:40px;">
 			<font color="red"><form:errors path="dept" /></font></td></tr>
 		<tr><td>직급/직책</td><td>
-			<input type="text" name="position" style="width:400px; height:40px;">
+			<select name="position" style="width:400px; height:40px;">
+				<option value="신입">신입
+				<option value="경력">경력
+			</select>
 			<font color="red"><form:errors path="position" /></font></td></tr>
 		<tr><td colspan="2">
 			<a href="javascript:addrecruit()" class="w3-button w3-blue" id="abutton">+추가</a>
@@ -96,10 +156,10 @@ function delrecruit(b) {
  		</table><br>
 	</div><br>
 	
-	<div id="title">자격요건 및 우대조건</div>
+	<div id="title">자격요건 및 우대사항</div>
 	<hr>
 	<div class="w3-container w3-center w3-centered" id="condition-container">
-	<table id="condition" class="w3-center" >
+	<table id="condition" class="w3-center w3-table" >
 		<tr><td>학력</td><td>
 			<select name="education" style="width:400px; height:40px;">
 				<c:forEach items="${education}" var="edu" varStatus="stat">
@@ -110,13 +170,15 @@ function delrecruit(b) {
 		<tr><td>IT전공여부</td><td>
 			<input type="radio" checked="checked" value="전공" name="major">전공&nbsp;&nbsp;
 			<input type="radio" value="비전공" name="major">비전공
+			<input type="radio" value="전공무관" name="major">전공무관
 			<font color="red"><form:errors path="major" /></font></td></tr>
-		<tr><td>우대조건</td><td>
+		<tr><td>우대사항</td><td>
 			<div style="w3-center">
 			<input type="checkbox" value="해당직무 근무경험" name="likecdt">해당직무 근무경험&nbsp;&nbsp;	
 			<input type="checkbox" value="인근거주자" name="likecdt" >인근거주자&nbsp;&nbsp;<br>
 			<input type="checkbox" value="엑셀고급능력자" name="likecdt">엑셀고급능력자&nbsp;&nbsp;
-			<input type="checkbox" value="운전가능자" name="likecdt">운전가능자&nbsp;&nbsp;</div>
+			<input type="checkbox" value="운전가능자" name="likecdt">운전가능자&nbsp;&nbsp;
+			<input type="checkbox" value="정보처리기사" name="likecdt">정보처리기사&nbsp;&nbsp;</div>
 			<font color="red"><form:errors path="likecdt" /></font></td></tr>
 		<tr><td>외국어</td><td>
 			<c:forEach items="${language }" var="lang" varStatus="stat">
@@ -138,15 +200,18 @@ function delrecruit(b) {
 			</select>
 			<font color="red"><form:errors path="gender" /></font></td></tr>
 		<tr><td>우대 연령</td><td>
-			<input type="radio" checked="checked" value="연령무관" name="age-check">연령무관&nbsp;&nbsp;
+			<input type="radio" checked="checked" value="연령무관" name="age-check" id="b">연령무관&nbsp;&nbsp;
 			<input type="radio" value="제한" name="age-check" id="a">제한
 			<div id="ab"></div>
 			<script>
-				$(document).change(function(){
+				$('#a').on('click',function(){
 					var h = '<input type="text" name="startage" style="width:100px;"> ~ <input type="text" name="endage" style="width:100px;">세'
 					if($('#a').is(':checked')) {
 						$('#ab').html(h);
 					}
+				});
+				$('#b').on('click',function(){
+					$('#ab').html('');
 				});
 			</script>
 			<font color="red"><form:errors path="gender" /></font></td></tr>
@@ -180,14 +245,39 @@ function delrecruit(b) {
     			<option value="s">스케줄 근무
     		</select>
        	<tr><td>근무시간</td><td>
-    		<input type="text" name="worktime" >
-        	
-	</table></div>
+    		<input type="text" name="worktime" style="width: 400px;" >
+       	<tr><td>고용형태</td><td>
+    		<input type="radio" name="employ" checked="checked" value="정규직">정규직
+    		<input type="radio" name="employ" value="비정규직">비정규직
+	</table></div><br><br>
+	
 	<div id="title">접수기간 및 방법</div>
 	<hr>
+	<div class="w3-container w3-center w3-centered" id="receive-container">
+	<table id="receive" class="w3-center" >
+    	<tr><td>접수기간</td><td>
+			<input type="text" id="datepicker" name="startdate" style="width:100px;"> ~ <input type="text" name="enddate" id="datepicker2" style="width:100px;">
+    	<tr><td>접수방법</td><td>
+    		<input type="radio" name="receivetype" checked="checked" value="d">doIT 지원
+    		<input type="radio" name="receivetype" value="h">홈페이지 지원
+    		<input type="radio" name="receivetype" value="e">이메일 지원</td></tr>
+	</table></div><br><br>
+
 	<div id="title">담당자</div>
 	<hr>
-	<input type="submit" value="보내기" class="w3-button w3-blue"><br><br><br>
+	<div class="w3-container w3-center w3-centered" id="manager-container">
+	<table id="manager" class="w3-center" >
+   		<tr><td>담당자 이름</td><td>
+			<input type="text" name="name" style="width: 400px;"></td></tr>  
+   		<tr><td>담당자 전화</td><td>
+			<input type="text" name="phone" style="width: 400px;"></td></tr>  
+   		<tr><td>담당자 휴대전화</td><td>
+			<input type="text" name="mobile" style="width: 400px;"></td></tr>  
+   		<tr><td>담당자 이메일</td><td>
+			<input type="text" name="email" style="width: 400px;"></td></tr>  
+	</table></div>
+	<br><br>
+	<input type="submit" value="공고등록" class="w3-button w3-blue"><br><br><br>
 </form:form>
 </div>
 </body>
