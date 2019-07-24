@@ -12,6 +12,8 @@ import javax.sql.DataSource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import dao.mapper.CompanyMapper;
 import dao.mapper.UserMapper;
 import logic.User;
 
@@ -23,6 +25,7 @@ public class UserDao {
 	private Map<String, Object> param = new HashMap<String, Object>();
 
 	public void insert(User user) {
+		user.setUserno(sqlSession.getMapper(UserMapper.class).maxUserno() + 1);
 		sqlSession.getMapper(UserMapper.class).insert(user);
 	}
 

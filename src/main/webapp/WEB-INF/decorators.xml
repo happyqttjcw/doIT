@@ -9,5 +9,6 @@
 	<!-- layout 제외 설정 -->
 	<excludes>
 		<pattern>/user/pass*</pattern>
+		<pattern>/user/*login*</pattern>
 	</excludes>
 </decorators>

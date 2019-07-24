@@ -24,4 +24,7 @@ public interface UserMapper {
 
 	@Update("update user set pass=#{pass} where id=#{id}")
 	void passUpdate(User user);
+
+	@Select("select ifnull(max(userno),0) from user")
+	int maxUserno();
 }

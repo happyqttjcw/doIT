@@ -46,6 +46,7 @@ function addrecruit() {
 		$('#rtable').clone().appendTo('#rtable-container');
 		$('#rtable-container > #rtable:last-child').attr("id","rtable-add");
 		$('#rtable-add:last-child input').val('');
+		$('#rtable-add:last-child textarea').val('');
 		$('<br>').appendTo("#rtable-container")
 }
 function delrecruit(b) {
@@ -138,7 +139,7 @@ $(function() {
 			<input type="text" name="num" style="width:100px; height:40px;">
 			<font color="red"><form:errors path="num" /></font>명</td></tr>
 		<tr><td>담당업무</td><td>
-			<input type="text" name="task" style="width:400px; height:200px;">
+			<textarea name="task" style="width:400px; height:200px;"></textarea>
 			<font color="red"><form:errors path="task" /></font></td></tr>
 		<tr><td>근무부서</td><td>
 			<input type="text" name="dept" style="width:400px; height:40px;">
@@ -149,6 +150,9 @@ $(function() {
 				<option value="경력">경력
 			</select>
 			<font color="red"><form:errors path="position" /></font></td></tr>
+		<tr><td>자격요건</td><td>
+			<textarea name="cdt" style="width:400px; height:200px;"></textarea>
+			<font color="red"><form:errors path="cdt" /></font></td></tr>
 		<tr><td colspan="2">
 			<a href="javascript:addrecruit()" class="w3-button w3-blue" id="abutton">+추가</a>
 			<div class="w3-button w3-blue" id="dbutton" onclick="delrecruit(this)">-삭제</div>		  
@@ -239,10 +243,10 @@ $(function() {
 			<input type="text" name="worklocation"  style="width:400px;"></td></tr>   		
     	<tr><td>근무요일</td><td>
     		<select name="workday" style="width: 400px;">
-    			<option value="5">주 5일 근무
-    			<option value="6">주 6일 근무
-    			<option value="2">주말 근무
-    			<option value="s">스케줄 근무
+    			<option value="주 5일 근무">주 5일 근무
+    			<option value="주 6일 근무">주 6일 근무
+    			<option value="주말 근무">주말 근무
+    			<option value="스케줄 근무">스케줄 근무
     		</select>
        	<tr><td>근무시간</td><td>
     		<input type="text" name="worktime" style="width: 400px;" >
@@ -259,7 +263,7 @@ $(function() {
 			<input type="text" id="datepicker" name="startdate" style="width:100px;"> ~ <input type="text" name="enddate" id="datepicker2" style="width:100px;">
     	<tr><td>접수방법</td><td>
     		<input type="radio" name="receivetype" checked="checked" value="d">doIT 지원
-    		<input type="radio" name="receivetype" value="h">홈페이지 지원
+    		<input type="radio" name="receivetype" value="h">본사 홈페이지 지원
     		<input type="radio" name="receivetype" value="e">이메일 지원</td></tr>
 	</table></div><br><br>
 

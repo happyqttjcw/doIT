@@ -36,7 +36,7 @@ public class Job {
 	private String task;
 	private String dept;
 	private String position;
-
+	private String cdt;
 	
 	public int getJobno() {
 		return jobno;
@@ -197,21 +197,23 @@ public class Job {
 		this.email = email;
 	}
 	public String getNum() {
-		return String.join(",", num);
+		return String.join(", ", num);
 	}
 	public String getField() {
-		return String.join(",", field);
+		return String.join(", ", field);
 	}
 	public String getTask() {
-		return String.join(",", task);
+		return String.join(", ", task);
 	}
 	public String getDept() {
-		return String.join(",", dept);
+		return String.join(", ", dept);
 	}
 	public String getPosition() {
-		return String.join(",", position);
+		return String.join(", ", position);
 	}
-	
+	public String getCdt() {
+		return String.join(", ", cdt);
+	}
 	public void setNum(String num) {
 		this.num = num;
 	}
@@ -227,6 +229,9 @@ public class Job {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+	public void setCdt(String cdt) {
+		this.cdt = cdt;
+	}
 	@Override
 	public String toString() {
 		return "Job [jobno=" + jobno + ", comno=" + comno + ", subject=" + subject + ", duty=" + duty + ", career="
@@ -236,7 +241,7 @@ public class Job {
 				+ worklocation + ", workday=" + workday + ", worktime=" + worktime + ", startdate=" + startdate
 				+ ", enddate=" + enddate + ", receivetype=" + receivetype + ", name=" + name + ", phone=" + phone
 				+ ", mobile=" + mobile + ", email=" + email + ", num=" + num + ", field=" + field + ", task=" + task
-				+ ", dept=" + dept + ", position=" + position + "]";
+				+ ", dept=" + dept + ", position=" + position + ", cdt=" + cdt + "]";
 	}
 	
 	

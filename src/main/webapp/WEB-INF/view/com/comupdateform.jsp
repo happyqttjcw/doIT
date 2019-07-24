@@ -45,7 +45,7 @@ function salesavg(){
       var id = "#"+(i+1)
       tot += parseInt($(id).val())
    }
-   var avg= tot/parseInt($('#year').val());
+   var avg= parseInt(tot/parseInt($('#year').val()));
    $('#comsales').val(avg);
 };
 
