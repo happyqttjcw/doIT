@@ -29,7 +29,10 @@ html, body, h1, h2, h3, h4, h5 {font-family: 'Noto Sans KR', sans-serif;  }
         $('#deco2').css("display","none");
      }
    });
-   
+   function passchg() { 
+	      open("../com/compasschg.shop","passchg","width=700, height=450, left=100, top=50"); 
+	      }
+
 </script>
 <style type="text/css">
 body{
@@ -136,7 +139,7 @@ body{
         	<div class="w3-text-green">${sessionScope.logincom.comname } 님</div><br>
         	<a href="comdetail.shop?comid=${sessionScope.logincom.comid }">기업 정보 관리</a><br><br>
         	<a href="setting.shop">기업 맞춤 설정</a><br><br>
-        	<a href="#">비밀번호 변경</a><br><br>
+        	<a href="#"  onclick="passchg();">비밀번호 변경</a><br><br>
         	<a href="writejobform.shop" class="w3-center w3-button w3-round w3-blue w3-medium" >공고 등록</a>
         
         </div>

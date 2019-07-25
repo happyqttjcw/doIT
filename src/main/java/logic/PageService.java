@@ -165,6 +165,17 @@ public class PageService {
 
 	}
 
+	public void deletejob(Integer comno, Integer jobno) {
+		Job job = new Job();
+		job.setComno(comno);
+		job.setJobno(jobno);
+		jobDao.deletejob(job);
+	}
+
+	public void compasschg(Company com) {
+		companyDao.compasschg(com);
+	}
+
 	// End 유저 부분 - 기환//
 
 }

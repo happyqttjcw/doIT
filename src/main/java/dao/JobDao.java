@@ -36,4 +36,8 @@ public class JobDao {
 		param.put("jobno", jobno);
 		return sqlSession.selectOne(NS + "list", param);
 	}
+
+	public void deletejob(Job job) {
+		sqlSession.getMapper(JobMapper.class).deletejob(job);
+	}
 }

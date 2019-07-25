@@ -10,5 +10,6 @@
 	<excludes>
 		<pattern>/user/pass*</pattern>
 		<pattern>/user/*login*</pattern>
+		<pattern>/com/compasschg*</pattern>
 	</excludes>
 </decorators>

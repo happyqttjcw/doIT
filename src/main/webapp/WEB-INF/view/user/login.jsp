@@ -92,9 +92,9 @@ th, td {
 </head>
 
 <body style="padding-top:5%;">
-<header class="w3-container w3-center"> 
+<header class="w3-container w3-center" style="color:#46556d"> 
   <h1><b>Do IT</b></h1>
-  <p>IT傈巩 备牢备流 site <span class="w3-tag w3-#46556d" >DoIT</span></p>
+  <p>IT傈巩 备牢备流 site <span class="w3-tag" style="background-color:#46556d">DoIT</span></p>
 </header>
 <div class="w3-container w3-center w3-centered" style="margin-left:30%">
     <div class="w3-container w3-center w3-centered" style="margin-bottom: 100px;">

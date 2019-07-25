@@ -203,7 +203,7 @@ public class Job {
 		return String.join(", ", field);
 	}
 	public String getTask() {
-		return String.join(", ", task);
+		return String.join("@@ ", task);
 	}
 	public String getDept() {
 		return String.join(", ", dept);
@@ -212,7 +212,7 @@ public class Job {
 		return String.join(", ", position);
 	}
 	public String getCdt() {
-		return String.join(", ", cdt);
+		return String.join("@@ ", cdt);
 	}
 	public void setNum(String num) {
 		this.num = num;

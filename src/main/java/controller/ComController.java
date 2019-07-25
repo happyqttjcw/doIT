@@ -2,6 +2,7 @@ package controller;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class ComController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "setting", "writejobform" })
+	@RequestMapping(value = { "setting", "writejobform"})
 	public ModelAndView settingform(HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		String rootPath = request.getSession().getServletContext().getRealPath("/");
@@ -83,6 +84,8 @@ public class ComController {
 			fstr = str[1].split(",");
 			mav.addObject(str[0], fstr);
 		}
+		fr.close();
+		br.close();
 		mav.addObject("job", new Job());
 		return mav;
 	}
@@ -125,7 +128,6 @@ public class ComController {
 			HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
-		// System.out.println("com:" + com);
 		if (bindResult.hasErrors()) {
 			mav = comupdateform(request);
 			mav.addObject("company", com);
@@ -164,14 +166,16 @@ public class ComController {
 		}
 		try {
 			service.writeJob(job);
-			mav.setViewName("redirect:commypage.shop");
+			mav.addObject("msg", "공고등록이 완료되었습니다.");
+			mav.addObject("url", "commypage.shop?comid=" + comid);
+			mav.setViewName("alert");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new LogInException("공고 등록에 실패하였습니다.", "writejobform.shop");
 		}
-		//수정함!
+		// 수정함!
 		Company com = service.comselect(comid);
-		mav.addObject("com",com);
+		mav.addObject("com", com);
 		return mav;
 	}
 
@@ -188,6 +192,89 @@ public class ComController {
 		return mav;
 	}
 
+	@RequestMapping("deletejob")
+	public ModelAndView deletejob(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		String comid = request.getParameter("comid");
+		Integer comno = Integer.parseInt(request.getParameter("comno"));
+		Integer jobno = Integer.parseInt(request.getParameter("jobno"));
+		try {
+			service.deletejob(comno, jobno);
+			mav.addObject("msg", "삭제가 완료되었습니다.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new LogInException("삭제 실패. 전산실 문의.", "commypage.shop?comid=" + comid);
+		}
+		mav.addObject("url", "commypage.shop?comid=" + comid);
+		mav.setViewName("alert");
+		return mav;
+	}
+
+	@RequestMapping("updatejobform")
+	public ModelAndView updatejobform(HttpServletRequest request) throws IOException {
+		ModelAndView mav = new ModelAndView();
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String filePath = rootPath + "\\WEB-INF\\view\\com\\setting.txt";
+		File file = new File(filePath);
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
+		String line = "";
+		String[] str;
+		String[] fstr;
+		while ((line = br.readLine()) != null) {
+			str = line.split(":");
+			fstr = str[1].split(",");
+			mav.addObject(str[0], fstr);
+		}
+		fr.close();
+		br.close();
+		
+		Integer comno = Integer.parseInt(request.getParameter("comno"));
+		Integer jobno = Integer.parseInt(request.getParameter("jobno"));
+		Company com = service.comselect(comno);
+		Job job = service.jobselect(jobno, comno);
+		mav.addObject("company",com);
+		mav.addObject("job", job);
+		return mav;
+	}
+	
+	@GetMapping("compasschg")
+	public ModelAndView compasschg(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Company com = (Company) session.getAttribute("logincom");
+		mav.addObject("company", com);
+		return mav;
+	}
+
+	@PostMapping("compasschg")
+	public ModelAndView compasschg(String chgpass, String chgpass2, Company com, BindingResult bindResult,
+			HttpServletRequest request) throws IOException {
+		ModelAndView mav = new ModelAndView();
+		Company dbcom = service.comselect(com.getComid());
+		String password = CipherUtil.messageDigest(com.getCompass());
+
+		if (!dbcom.getCompass().equals(password)) {
+			mav.setViewName("com/close");
+			request.setAttribute("msg", "현재비밀번호를 확인하세요");
+			request.setAttribute("url", "compasschg.shop?comid=" + com.getComid());
+			request.setAttribute("closable", false);
+			mav.addObject("company", com);
+			return mav;
+		}
+		try {
+			String cpass = CipherUtil.messageDigest(chgpass);
+			com.setCompass(cpass);
+			service.compasschg(com);
+			mav.setViewName("com/close");
+			request.setAttribute("msg", "변경완료");
+			request.setAttribute("url", "commypage.shop?=" + com.getComid());
+			request.setAttribute("closable", true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			bindResult.reject("error.user.update");
+		}
+		return mav;
+	}
 	// End 해인, 찬웅 부분//
 
 	// 기환, 태민 부분//

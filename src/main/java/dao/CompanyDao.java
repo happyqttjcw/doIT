@@ -40,4 +40,12 @@ public class CompanyDao {
 		param.put("comid", com.getComid());
 		sqlSession.getMapper(CompanyMapper.class).comUpdate(com);
 	}
+
+	public void compasschg(Company com) {
+		param.clear();
+		param.put("compass", com.getCompass());
+		param.put("comid", com.getComid());
+		sqlSession.getMapper(CompanyMapper.class).compasschg(com);
+
+	}
 }

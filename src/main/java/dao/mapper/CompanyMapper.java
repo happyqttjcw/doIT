@@ -15,10 +15,14 @@ public interface CompanyMapper {
 	int maxComno();
 
 	@Update("update company set comname=#{comname}, bussno=#{bussno}, "
-			+ "managername=#{managername}, comtype=#{comtype},comsize=#{comsize},"
-			+ "managername=#{managername},managerphone=#{managerphone},manageremail=#{manageremail},"
-			+ "comcontent=#{comcontent},compic=#{compic},comhomepage=#{comhomepage},comwelfare=#{comwelfare},"
-			+ "comname=#{comname},combrand=#{combrand},comboss=#{comboss},comaddr=#{comaddr},"
-			+ "comphone=#{comphone},comstaffnum=#{comstaffnum},combirth=#{combirth},comsales=#{comsales} ")
+			+ " managername=#{managername}, comtype=#{comtype},comsize=#{comsize},"
+			+ " managername=#{managername},managerphone=#{managerphone},manageremail=#{manageremail},"
+			+ " comcontent=#{comcontent},compic=#{compic},comhomepage=#{comhomepage},comwelfare=#{comwelfare},"
+			+ " comname=#{comname},combrand=#{combrand},comboss=#{comboss},comaddr=#{comaddr},"
+			+ " comphone=#{comphone},comstaffnum=#{comstaffnum},combirth=#{combirth},comsales=#{comsales} "
+			+ " where comid=#{comid};")
 	void comUpdate(Company com);
+
+	@Update("update company set compass=#{compass} where comid=#{comid}")
+	void compasschg(Company com);
 }

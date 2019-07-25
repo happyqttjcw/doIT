@@ -36,7 +36,7 @@ th, td {
             style="border: 1px solid black; border-left: none; border-right: none;">
             <tr>
                <td style="background-color: #E5E5E5; width: 20%;">기업이름 :</td>
-               <td style="width: 80%;">${com.comid }</td>
+               <td style="width: 80%;">${com.comname }</td>
             </tr>
             <tr>
                <td style="background-color: #E5E5E5; width: 20%;">브랜드명칭 :</td>
