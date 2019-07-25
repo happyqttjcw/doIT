@@ -61,7 +61,7 @@ th, td {
    <br>
    <div class="w3-container">
       <div class="w3-panel w3-card">
-         <p style="font-size: 30px; color: green;">공고관리</p>
+         <a href="joblist.shop" style="text-decoration:none;font-size: 30px; color: green;">공고관리</a>
          <c:if test="${!empty job }">
             <c:forEach var="job1" items="${job }">
                <div class="w3-container">
@@ -92,7 +92,6 @@ th, td {
          <p style="font-size: 30px; color: green;">찜한 인재</p>
          <c:if test="${!empty pulist }">
             <c:forEach var="p" items="${pulist }">
-               
                   <div class="w3-container">
                      <div class="w3-panel w3-card">
                         <table>
@@ -118,7 +117,7 @@ th, td {
          </c:if>
          <c:if test="${empty pulist }">
             <hr>
-            찜한 인재가 없습니다.
+            	찜한 인재가 없습니다.
          </c:if>
          <br>
          <br>

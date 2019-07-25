@@ -37,6 +37,61 @@ public class ComController {
 	@Autowired
 	private PageService service;
 
+	@PostMapping("comEntry")
+	public ModelAndView userEntry(@Valid Company company, BindingResult bindResult, User user) {
+		ModelAndView mav = new ModelAndView();
+		if (bindResult.hasErrors()) {
+			mav.getModel().putAll(bindResult.getModel());
+			mav.addObject("company", company);
+			mav.setViewName("../user/userEntry.shop");
+			return mav;
+		}
+
+		try {
+			if (service.comselect(company.getComid()) != null) {
+				mav.addObject("msg", "이미 존재하는 아이디입니다.");
+				mav.addObject("url", "../user/userEntry.shop");
+				mav.setViewName("alert");
+				return mav;
+			} else {
+				service.companyCreate(company);
+				mav.setViewName("user/login");
+//				mav.addObject("user", new User());
+				mav.addObject("company", company);
+			}
+		} catch (DataIntegrityViolationException e) {
+			e.printStackTrace();
+			bindResult.reject("error.duplicate.user");
+		}
+		return mav;
+	}
+	
+	@PostMapping("comLogin")
+	public ModelAndView comLogin(Company company, HttpSession session, User user) {
+		ModelAndView mav = new ModelAndView();
+		Company dbCompany = service.comselect(company.getComid());
+		if (dbCompany == null) {
+			throw new LogInException("아이디 또는 비밀번호가 틀립니다.", "login.shop");
+		}
+		String compass = CipherUtil.messageDigest(company.getCompass());
+		if (compass.equals(dbCompany.getCompass())) {
+			session.setAttribute("logincom", dbCompany);
+			mav.setViewName("redirect:../com/commypage.shop?comid=" + company.getComid());
+		} else {
+
+			mav.addObject("user", new User());
+			mav.addObject("company", new Company());
+			return mav;
+		}
+		return mav;
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:comLogin.shop";
+	}
+	
 	// 해인, 찬웅 기업 부분//
 	@RequestMapping("commypage")
 	public ModelAndView commypage(Company company, HttpSession session) {
@@ -275,6 +330,19 @@ public class ComController {
 		}
 		return mav;
 	}
+	
+	@GetMapping("joblist")
+	public ModelAndView joblist(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Company scom = (Company) session.getAttribute("logincom");
+		Company com = service.comselect(scom.getComid());
+		List<Job> job = null;
+		job = service.jobselect(com.getComno());
+		mav.addObject("com", com);
+		mav.addObject("job", job);
+		return mav;
+	}
+
 	// End 해인, 찬웅 부분//
 
 	// 기환, 태민 부분//

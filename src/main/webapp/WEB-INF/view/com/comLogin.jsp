@@ -3,6 +3,7 @@
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,14 +17,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-   $(document).ready(function() {
+   /* $(document).ready(function() {
       $("#minfo").show();
       $("#oinfo").hide();
       $(".saleLine").each(function() { // 주문상품 목록 숨김.
          $(this).hide();
       })
       $("#tab1").addClass("select"); //class 속성에 select 값을 추가.
-   })
+   }) */
    function disp_div(id, tab) {
       $(".info").each(function() {
          $(this).hide();
@@ -92,56 +93,23 @@ th, td {
 </head>
 
 <body style="padding-top:5%;">
-<header class="w3-container w3-center" style="color:#46556d"> 
+<header class="w3-container w3-center"> 
   <h1><b>Do IT</b></h1>
-  <p>IT전문 구인구직 site <span class="w3-tag" style="background-color:#46556d">DoIT</span></p>
+  <p>IT전문 구인구직 site <span class="w3-tag w3-#46556d" >DoIT</span></p>
 </header>
-<div class="w3-container w3-center w3-centered" style="margin-left:30%">
+<div class="w3-container w3-center w3-centered" style="margin-left:30%;">
     <div class="w3-container w3-center w3-centered" style="margin-bottom: 100px;">
      <div class="w3-panel w3-card " style="width: 700px;">
     <p style="font-size: 30px; color: #46556d;">사용자로그인</p>
    <table>
       <tr>
          <td id="tab1" class="tab w3-center" style="width:50%;">
-         <a href="javascript:disp_div('minfo','tab1')" class="w3-block" style="width:50%; text-decoration:none; margin:auto;">일반 회원</a></td>      
-         <td id="tab2" class="tab w3-center" style="width:50%;">
-         <a href="javascript:disp_div('oinfo','tab2')" class="w3-block" style="width:50%; text-decoration:none; margin:auto;">기업 회원</a></td>
+         <a href="${path }/user/userLogin.shop" class="w3-block" style="width:50%; text-decoration:none; margin:auto;">일반 회원</a></td>      
+         <td id="tab2" class="tab w3-center" style="width:50%; background-color:#46556d; color:white;">
+         <a href="${path }/com/comLogin.shop" class="w3-block" style="width:50%;  text-decoration:none; margin:auto;">기업 회원</a></td>
       </tr>
    </table>   
-   
-   
-   <form:form modelAttribute="user" method="post" action="login.shop" onsubmit="return userlogincheck()">
-      <table id="minfo" class="info" border="1" style="border-collapse: collapse;">
-         <tr>
-            <td>일반 아이디</td>
-            <td><form:input path="id" style="width:500px;" id="userid"/> 
-            <font color="red"><form:errors path="id" /></font></td>
-         </tr>
-         <tr>
-            <td>비밀번호</td>
-            <td><form:password path="pass" style="width:500px;" id="userpass"/>
-            <font color="red"><form:errors path="pass" /></font></td>
-         </tr>
-      <tr>
-      <td colspan="2" style="padding-top:0px; padding-bottom:0px;">
-      <table>
-          <tr>
-         <td class="w3-center" style="border:1px;">
-            <input type="submit" class="w3-center w3-button" style="width: 200px;" value="로그인">
-         </td>
-         <td class="w3-center" style="border:0px;">
-            <input type="button" class="w3-center w3-button" style="width: 200px;" value="회원가입" onclick="location.href='../user/userEntry.shop'">      
-         </td>
-      </tr>
-      </table>
-      </td>
-      </tr>
-      </table>      
-   </form:form>
-   
-   
-   <form:form modelAttribute="company" method="post" action="comlogin.shop" onsubmit="return comlogincheck()">
-      
+   <form:form modelAttribute="company" method="post" action="comLogin.shop" onsubmit="return comlogincheck()">
       <table id="oinfo" class="info" border="1" style="border-collapse: collapse;">   
          <tr>
             <td>기업 아이디</td>

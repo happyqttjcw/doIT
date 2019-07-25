@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="euc-kr"?>
 <decorators defaultdir="/decorator">
-	<decorator name="company" page="comdecorator.jsp" >
+	<decorator name="company" page="comdecorator.jsp">
 		<pattern>/com/*.shop</pattern>
 	</decorator>
-	<decorator name="user" page="userdecorator.jsp" >
+	<decorator name="user" page="userdecorator.jsp">
 		<pattern>/user/*.shop</pattern>
 	</decorator>
 	<!-- layout 제외 설정 -->
 	<excludes>
 		<pattern>/user/pass*</pattern>
-		<pattern>/user/*login*</pattern>
+		<pattern>/user/userLogin*</pattern>
+		<pattern>/com/comLogin*</pattern>
 		<pattern>/com/compasschg*</pattern>
+		<pattern>/user/userEntry*</pattern>
+		<pattern>/com/comEntry*</pattern>
 	</excludes>
 </decorators>

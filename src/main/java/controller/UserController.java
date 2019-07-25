@@ -66,7 +66,7 @@ public class UserController {
 				return mav;
 			} else {
 				service.userCreate(user);
-				mav.setViewName("user/login");
+				mav.setViewName("userLogin");
 				mav.addObject("user", user);
 //				mav.addObject("company", new Company());
 			}
@@ -77,41 +77,14 @@ public class UserController {
 		return mav;
 	}
 
-	@PostMapping("companyEntry")
-	public ModelAndView userEntry(@Valid Company company, BindingResult bindResult, User user) {
-		ModelAndView mav = new ModelAndView();
-		if (bindResult.hasErrors()) {
-			mav.getModel().putAll(bindResult.getModel());
-			mav.addObject("company", company);
-			mav.setViewName("../user/userEntry.shop");
-			return mav;
-		}
+	
 
-		try {
-			if (service.comselect(company.getComid()) != null) {
-				mav.addObject("msg", "이미 존재하는 아이디입니다.");
-				mav.addObject("url", "../user/userEntry.shop");
-				mav.setViewName("alert");
-				return mav;
-			} else {
-				service.companyCreate(company);
-				mav.setViewName("user/login");
-//				mav.addObject("user", new User());
-				mav.addObject("company", company);
-			}
-		} catch (DataIntegrityViolationException e) {
-			e.printStackTrace();
-			bindResult.reject("error.duplicate.user");
-		}
-		return mav;
-	}
-
-	@PostMapping("login")
-	public ModelAndView login(User user, HttpSession session, Company company) {
+	@PostMapping("userLogin")
+	public ModelAndView userLogin(User user, HttpSession session, Company company) {
 		ModelAndView mav = new ModelAndView();
 		User dbUser = service.userSelect(user.getId());
 		if (dbUser == null) {
-			throw new LogInException("아이디 또는 비밀번호가 틀립니다.", "login.shop");
+			throw new LogInException("아이디 또는 비밀번호가 틀립니다.", "userLogin.shop");
 		}
 		String password = CipherUtil.messageDigest(user.getPass());
 		if (password.equals(dbUser.getPass())) {
@@ -123,30 +96,12 @@ public class UserController {
 		return mav;
 	}
 
-	@PostMapping("comlogin")
-	public ModelAndView login(Company company, HttpSession session, User user) {
-		ModelAndView mav = new ModelAndView();
-		Company dbCompany = service.comselect(company.getComid());
-		if (dbCompany == null) {
-			throw new LogInException("아이디 또는 비밀번호가 틀립니다.", "login.shop");
-		}
-		String compass = CipherUtil.messageDigest(company.getCompass());
-		if (compass.equals(dbCompany.getCompass())) {
-			session.setAttribute("logincom", dbCompany);
-			mav.setViewName("redirect:../com/commypage.shop?comid=" + company.getComid());
-		} else {
-
-			mav.addObject("user", new User());
-			mav.addObject("company", new Company());
-			return mav;
-		}
-		return mav;
-	}
+	
 
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:login.shop";
+		return "redirect:userLogin.shop";
 	}
 
 	@RequestMapping("main")
@@ -200,7 +155,7 @@ public class UserController {
 		if (!loginUser.getPass().equals(password)) {
 			throw new LogInException("비밀번호가 일치하지 않습니다.", "delete.shop?id=" + user.getId());
 		}
-
+		
 		try {
 			service.userdelete(user);
 			if (loginUser.getId().equals("admin")) {
