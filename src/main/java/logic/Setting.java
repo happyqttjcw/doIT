@@ -1,7 +1,7 @@
 package logic;
 
 public class Setting {
-	private int likeno;
+	private int setno;
 	private Integer comno;
 	private Integer userno;
 	private String skill;
@@ -14,11 +14,11 @@ public class Setting {
 	private String education;
 	private String workform;
 	
-	public int getLikeno() {
-		return likeno;
+	public int getSetno() {
+		return setno;
 	}
-	public void setLikeno(int likeno) {
-		this.likeno = likeno;
+	public void setSetno(int setno) {
+		this.setno = setno;
 	}
 	public Integer getComno() {
 		return comno;
@@ -88,9 +88,9 @@ public class Setting {
 	}
 	@Override
 	public String toString() {
-		return "Setting [likeno=" + likeno + ", comno=" + comno + ", userno=" + userno + ", skill=" + skill
-				+ ", welfare=" + welfare + ", pluse=" + pluse + ", location=" + location + ", job=" + job 
-				+  ", minpay=" + minpay + ", maxpay=" + maxpay + ", education=" + education + ", workform="
-				+ workform + "]";
+		return "Setting [setno=" + setno + ", comno=" + comno + ", userno=" + userno + ", skill=" + skill + ", welfare="
+				+ welfare + ", pluse=" + pluse + ", location=" + location + ", job=" + job + ", minpay=" + minpay
+				+ ", maxpay=" + maxpay + ", education=" + education + ", workform=" + workform + "]";
 	}
+
 }

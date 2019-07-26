@@ -1,7 +1,5 @@
 package logic;
 
-import java.util.Date;
-
 public class LL {
 	private Integer no;
 	private int cvno;
@@ -9,11 +7,12 @@ public class LL {
 	private String llname;
 	private String llplace;
 	private String lllang;
-	private String lltexttype;
+	private String lltesttype;
 	private Integer llscore;
 	private String lllevel;
 	private String llpass;
-	private Date llpassdate;
+	private String llpassdate;
+	
 	public Integer getNo() {
 		return no;
 	}
@@ -50,11 +49,11 @@ public class LL {
 	public void setLllang(String lllang) {
 		this.lllang = lllang;
 	}
-	public String getLltexttype() {
-		return lltexttype;
+	public String getLltesttype() {
+		return lltesttype;
 	}
-	public void setLltexttype(String lltexttype) {
-		this.lltexttype = lltexttype;
+	public void setLltesttype(String lltesttype) {
+		this.lltesttype = lltesttype;
 	}
 	public Integer getLlscore() {
 		return llscore;
@@ -74,17 +73,16 @@ public class LL {
 	public void setLlpass(String llpass) {
 		this.llpass = llpass;
 	}
-	public Date getLlpassdate() {
+	public String getLlpassdate() {
 		return llpassdate;
 	}
-	public void setLlpassdate(Date llpassdate) {
+	public void setLlpassdate(String llpassdate) {
 		this.llpassdate = llpassdate;
 	}
 	@Override
 	public String toString() {
 		return "LL [no=" + no + ", cvno=" + cvno + ", lltype=" + lltype + ", llname=" + llname + ", llplace=" + llplace
-				+ ", lllang=" + lllang + ", lltexttype=" + lltexttype + ", llscore=" + llscore + ", lllevel=" + lllevel
+				+ ", lllang=" + lllang + ", lltesttype=" + lltesttype + ", llscore=" + llscore + ", lllevel=" + lllevel
 				+ ", llpass=" + llpass + ", llpassdate=" + llpassdate + "]";
 	}
-	
 }

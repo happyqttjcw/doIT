@@ -44,21 +44,21 @@
 			<div style="font-family: 'Nanum Gothic Coding', monospace; display: inline-block; width: 90px; text-align: center;">공개여부</div>
 		</div>
 		<div style="font-size: 15px; width: 900px; margin: auto; min-height: 190px;">
-			<c:forEach var="#" items="#">
+			<c:forEach var="list" items="${cv }">
+			<div style="border-bottom: 1px #d6d6d6 solid;">
 				<div style="font-family: 'Nanum Gothic Coding', monospace; display: inline-block; width: 650px; text-align: center;">
-					
+				<a href="${path }/user/myCurriculumDetail.shop?cvno=${list.cvno }" >${list.subject }</a>
 				</div>
-				<div style="font-family: 'Nanum Gothic Coding', monospace; display: inline-block; width: 145px; text-align: center;">
-					<%-- <fmt:formatDate value="#" pattern="yyyy-MM-dd"></fmt:formatDate> --%>
-				</div>
+				<div style="font-family: 'Nanum Gothic Coding', monospace; display: inline-block; width: 145px; text-align: center;">${list.date }</div>
 				<div style="font-family: 'Nanum Gothic Coding', monospace; display: inline-block; width: 90px; text-align: center;">
-					<input type="checkbox" <c:if test="">checked</c:if> readonly>
+					<input type="checkbox" <c:if test="${list.publicornot == 1}">checked='checked'</c:if> disabled="disabled">
 				</div>
+			</div>
 			</c:forEach>
 		</div>
 		<div style="width: 900px; height:40px; margin: auto auto 30px auto;">
 		  <a href="${path }/user/myCurriculum.shop?userno=${dbUser.userno }" class="btn btn-primary" style=" color: black; background-color:#EBF7FF; text-decoration: none; border-radius: 50px; float: right;">작성하기</a>
-		_</div>
+		</div>
 	</div>
 	<div style="font-size: 30px;">자소서 현황</div>
 	<div style="width: 100%; min-height: 300px; padding: 5px 0 5px 0; margin-bottom: 50px;" class="w3-card">
@@ -69,11 +69,11 @@
 		</div>
 		<div style="font-size: 15px; width: 900px; margin: auto; min-height: 190px;">
 			<c:forEach var="#" items="#">
-				<div style="font-family: 'Nanum Gothic Coding', monospace; display: inline-block; width: 749px; text-align: center;">
+				<div style="font-family: 'Nanum Gothic Coding', monospace; display: inline-block; width: 749px; text-align: left;">
 					
 				</div>
 				<div style="font-family: 'Nanum Gothic Coding', monospace; display: inline-block; width: 145px; text-align: center;">
-					<%-- <fmt:formatDate value="#" pattern="yyyy-MM-dd"></fmt:formatDate> --%>
+					<%-- <fmt:formatDate var="date" value="${list.date }" pattern="yyyy-MM-dd"/> --%>
 				</div>
 			</c:forEach>
 		</div>

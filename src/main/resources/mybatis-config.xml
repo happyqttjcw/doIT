@@ -5,9 +5,19 @@
 	<typeAliases>
 		<typeAlias type="logic.User" alias="User"/>
 		<typeAlias type="logic.Company" alias="Company"/>
+		<typeAlias type="logic.CV" alias="CV"/>
+		<typeAlias type="logic.Career" alias="Career"/>
+		<typeAlias type="logic.Activity" alias="Activity"/>
+		<typeAlias type="logic.LL" alias="LL"/>
+		<typeAlias type="logic.Haveskill" alias="Haveskill"/>
+		<typeAlias type="logic.Portfolio" alias="Portfolio"/>
+		<typeAlias type="logic.Resume" alias="Resume"/>
+		<typeAlias type="logic.ResumeEdit" alias="ResumeEdit"/>
+		<typeAlias type="logic.Resumecomment" alias="Resumecomment"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="dao/mapper/User.xml"/>
 		<mapper resource="dao/mapper/Company.xml"/>
+		<mapper resource="dao/mapper/Board.xml"/>
 	</mappers>
 </configuration>

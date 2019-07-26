@@ -3,7 +3,7 @@ package logic;
 public class Haveskill {
 	private Integer haveno;
 	private int cvno;
-	private String hsablility;
+	private String hsability;
 	private String hslevel;
 	private String hscontent;
 	public Integer getHaveno() {
@@ -18,11 +18,11 @@ public class Haveskill {
 	public void setCvno(int cvno) {
 		this.cvno = cvno;
 	}
-	public String getHsablility() {
-		return hsablility;
+	public String getHsability() {
+		return hsability;
 	}
-	public void setHsablility(String hsablility) {
-		this.hsablility = hsablility;
+	public void setHsability(String hsability) {
+		this.hsability = hsability;
 	}
 	public String getHslevel() {
 		return hslevel;
@@ -38,8 +38,7 @@ public class Haveskill {
 	}
 	@Override
 	public String toString() {
-		return "Haveskill [haveno=" + haveno + ", cvno=" + cvno + ", hsablility=" + hsablility + ", hslevel=" + hslevel
+		return "Haveskill [haveno=" + haveno + ", cvno=" + cvno + ", hsability=" + hsability + ", hslevel=" + hslevel
 				+ ", hscontent=" + hscontent + "]";
 	}
-	
 }

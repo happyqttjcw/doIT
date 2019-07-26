@@ -1,17 +1,23 @@
 package logic;
 
-import java.util.Date;
-
 public class Resume {
-	private Integer resumeno;
+	private int resumeno;
+	private Integer cvno;
 	private Integer jemokno;
 	private String rsubject;
 	private String rcontent;
-	private Date rdate;
-	public Integer getResumeno() {
+	private String rdate;
+	
+	public Integer getCvno() {
+		return cvno;
+	}
+	public void setCvno(Integer cvno) {
+		this.cvno = cvno;
+	}
+	public int getResumeno() {
 		return resumeno;
 	}
-	public void setResumeno(Integer resumeno) {
+	public void setResumeno(int resumeno) {
 		this.resumeno = resumeno;
 	}
 	public Integer getJemokno() {
@@ -32,15 +38,15 @@ public class Resume {
 	public void setRcontent(String rcontent) {
 		this.rcontent = rcontent;
 	}
-	public Date getRdate() {
+	public String getRdate() {
 		return rdate;
 	}
-	public void setRdate(Date rdate) {
+	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
 	@Override
 	public String toString() {
-		return "Resume [resumeno=" + resumeno + ", jemokno=" + jemokno + ", rsubject=" + rsubject + ", rcontent="
-				+ rcontent + ", rdate=" + rdate + "]";
+		return "Resume [resumeno=" + resumeno + ", cvno=" + cvno + ", jemokno=" + jemokno + ", rsubject=" + rsubject
+				+ ", rcontent=" + rcontent + ", rdate=" + rdate + "]";
 	}
 }

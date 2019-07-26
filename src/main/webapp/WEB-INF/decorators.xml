@@ -5,9 +5,15 @@
 	</decorator>
 	<decorator name="user" page="userdecorator.jsp" >
 		<pattern>/user/*.shop</pattern>
+		<pattern>/board/*.shop</pattern>
 	</decorator>
 	<!-- layout 제외 설정 -->
 	<excludes>
 		<pattern>/user/pass*</pattern>
+		<pattern>/user/curriculumImg.shop</pattern>
+		<pattern>/user/userLogin*</pattern>
+		<pattern>/com/comLogin*</pattern>
+		<pattern>/user/userEntry*</pattern>
+		<pattern>/com/comEntry*</pattern>
 	</excludes>
 </decorators>

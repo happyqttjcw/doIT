@@ -3,7 +3,7 @@ package logic;
 import java.util.Arrays;
 
 public class SettingArray {
-	private int likeno;
+	private int setno;
 	private int comno;
 	private int userno;
 	private String[] skill;
@@ -15,12 +15,12 @@ public class SettingArray {
 	private Integer maxpay;
 	private String education;
 	private String[] workform;
-	
-	public int getLikeno() {
-		return likeno;
+
+	public int getSetno() {
+		return setno;
 	}
-	public void setLikeno(int likeno) {
-		this.likeno = likeno;
+	public void setSetno(int setno) {
+		this.setno = setno;
 	}
 	public int getComno() {
 		return comno;
@@ -90,10 +90,10 @@ public class SettingArray {
 	}
 	@Override
 	public String toString() {
-		return "SettingArray [likeno=" + likeno + ", comno=" + comno + ", userno=" + userno + ", skill="
+		return "SettingArray [setno=" + setno + ", comno=" + comno + ", userno=" + userno + ", skill="
 				+ Arrays.toString(skill) + ", welfare=" + Arrays.toString(welfare) + ", pluse=" + Arrays.toString(pluse)
-				+ ", location=" + Arrays.toString(location) + ", job=" + Arrays.toString(job)
-				+ ", minpay=" + minpay + ", maxpay=" + maxpay + ", education=" + education
-				+ ", workform=" + Arrays.toString(workform) + "]";
+				+ ", location=" + Arrays.toString(location) + ", job=" + Arrays.toString(job) + ", minpay=" + minpay
+				+ ", maxpay=" + maxpay + ", education=" + education + ", workform=" + Arrays.toString(workform) + "]";
 	}
+
 }

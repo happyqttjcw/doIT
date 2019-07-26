@@ -77,20 +77,14 @@ html, body, h1, h2, h3, h4, h5 {
 		<ul class="navbar-nav">
 			<li class="nav-item active"><a class="nav-link" href="#">doIT</a>
 			</li>
-			<li class="nav-item"><a class="nav-link" href="#" id="dropdown">기업
-					공고</a>
-				<div class="dropdown-menu">
-					<a class="nav-link dropdown-item" href="#">기업 공고</a> <a
-						class="nav-link dropdown-item" href="#">기업 공고</a> <a
-						class="nav-link dropdown-item" href="#">기업 공고</a>
-				</div></li>
+			<li class="nav-item"><a class="nav-link" href="#" id="dropdown">기업	공고</a>
 			<li class="nav-item"><a class="nav-link" href="#">맞춤 공고</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">인재 검색</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">자소서 첨삭</a></li>
+			<li class="nav-item"><a class="nav-link" href="${path }/board/resumeBoard.shop">자소서 첨삭</a></li>
 			<li class="nav-item" style="width: 688px;"></li>
 			<li class="nav-item"><c:if
 					test="${sessionScope.loginUser == null }">
-					<a class="nav-link" href="${path }/user/login.shop">로그인</a>
+					<a class="nav-link" href="${path }/user/userLogin.shop">로그인</a>
 				</c:if> <c:if test="${sessionScope.loginUser != null }">
 					<a class="nav-link" href="#">${sessionScope.loginUser.id }님</a>
 				</c:if></li>
@@ -99,7 +93,7 @@ html, body, h1, h2, h3, h4, h5 {
 					<a class="nav-link" href="${path }/user/userEntry.shop">회원가입</a>
 				</c:if> <c:if test="${sessionScope.loginUser != null }">
 					<a class="nav-link"
-						href="${path }/user/userMyPage.shop?id=${sessionScope.loginUser.id }">마이페이지</a>
+						href="${path }/user/userMyPage.shop?userno=${sessionScope.loginUser.userno }">마이페이지</a>
 				</c:if></li>
 		</ul>
 	</nav>
@@ -111,11 +105,11 @@ html, body, h1, h2, h3, h4, h5 {
 			<li class="nav-item"><a class="nav-link" href="#">기업 공고</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">맞춤 공고</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">인재 검색</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">자소서 첨삭</a></li>
+			<li class="nav-item"><a class="nav-link" href="${path }/board/resumeBoard.shop">자소서 첨삭</a></li>
 			<li class="nav-item" style="width: 1180px;"></li>
 			<li class="nav-item"><c:if
 					test="${sessionScope.loginUser == null }">
-					<a class="nav-link" href="${path }/user/login.shop">로그인</a>
+					<a class="nav-link" href="${path }/user/userLogin.shop">로그인</a>
 				</c:if> <c:if test="${sessionScope.loginUser != null }">
 					<a class="nav-link" href="#">${sessionScope.loginUser.id }님</a>
 				</c:if></li>
@@ -124,7 +118,7 @@ html, body, h1, h2, h3, h4, h5 {
 					<a class="nav-link" href="${path }/user/userEntry.shop">회원가입</a>
 				</c:if> <c:if test="${sessionScope.loginUser != null }">
 					<a class="nav-link"
-						href="${path }/user/userMyPage.shop?id=${sessionScope.loginUser.id }">마이페이지</a>
+						href="${path }/user/userMyPage.shop?id=${sessionScope.loginUser.userno }">마이페이지</a>
 				</c:if></li>
 		</ul>
 	</nav>
@@ -153,7 +147,7 @@ html, body, h1, h2, h3, h4, h5 {
 							style="font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #747474; margin: 5px 0 5px 0;">${sessionScope.loginUser.name }님</p>
 						<p style="margin: 5px 0 5px 0;">
 							<a
-								href="${path }/user/userInfo.shop?id=${sessionScope.loginUser.id }"
+								href="${path }/user/userInfo.shop?userno=${sessionScope.loginUser.userno }"
 								style="font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #747474; text-decoration: none;">회원정보관리</a>
 						</p>
 						<p style="margin: 5px 0 5px 0;">

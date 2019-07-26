@@ -5,28 +5,29 @@ public class Portfolio {
 	private int cvno;
 	private String porturl;
 	private String portcontent;
-	Integer getPortno() {
+	
+	public Integer getPortno() {
 		return portno;
 	}
-	void setPortno(Integer portno) {
+	public void setPortno(Integer portno) {
 		this.portno = portno;
 	}
-	int getCvno() {
+	public int getCvno() {
 		return cvno;
 	}
-	void setCvno(int cvno) {
+	public void setCvno(int cvno) {
 		this.cvno = cvno;
 	}
-	String getPorturl() {
+	public String getPorturl() {
 		return porturl;
 	}
-	void setPorturl(String porturl) {
+	public void setPorturl(String porturl) {
 		this.porturl = porturl;
 	}
-	String getPortcontent() {
+	public String getPortcontent() {
 		return portcontent;
 	}
-	void setPortcontent(String portcontent) {
+	public void setPortcontent(String portcontent) {
 		this.portcontent = portcontent;
 	}
 	@Override

@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.http.HttpRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -22,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,11 +34,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.LogInException;
+import logic.Activity;
 import logic.CV;
 import logic.Career;
 import logic.Company;
-import logic.PageService;
+import logic.Haveskill;
+import logic.LL;
 import logic.Setting;
+import logic.PageService;
+import logic.Portfolio;
+import logic.Resume;
+import logic.ResumeEdit;
 import logic.SettingArray;
 import logic.User;
 import security.CipherUtil;
@@ -50,16 +61,17 @@ public class UserController {
 		model.addAttribute(new User());
 		model.addAttribute(new Company());
 		model.addAttribute(new CV());
+		model.addAttribute(new ResumeEdit());
 		return null;
 	}
 
 	@PostMapping("userEntry")
-	public ModelAndView userEntry(@Valid User user, BindingResult bindResult) {
+	public ModelAndView userEntry(@Valid User user, BindingResult bindResult, Company company) {
 		ModelAndView mav = new ModelAndView();
 		if (bindResult.hasErrors()) {
 			mav.getModel().putAll(bindResult.getModel());
 			mav.addObject("user", user);
-			mav.setViewName("../user/userEntry.shop");
+			mav.setViewName("user/userEntry.shop");
 			return mav;
 		}
 		try {
@@ -70,9 +82,8 @@ public class UserController {
 				return mav;
 			} else {
 				service.userCreate(user);
-				mav.setViewName("user/login");
+				mav.setViewName("user/userLogin");
 				mav.addObject("user", user);
-				mav.addObject("company", new Company());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,41 +93,39 @@ public class UserController {
 	}
 
 	@PostMapping("login")
-	public ModelAndView login(@Valid User user, BindingResult bindResult, HttpSession session) {
+	public ModelAndView login(User user, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		if (bindResult.hasErrors()) {
-			bindResult.reject("error.input.user");
-			mav.getModel().putAll(bindResult.getModel());
-			return mav;
-		}
 		User dbUser = service.userSelect(user.getId());
 		if (dbUser == null) {
-			bindResult.reject("error.login.id");
-			return mav;
+			throw new LogInException("아이디 또는 비밀번호가 틀립니다.", "userLogin.shop");
 		}
-		String password = CipherUtil.decrypt(dbUser.getPass(), dbUser.getId());
-		if (password.equals(user.getPass())) {
+		String password = CipherUtil.encrypt(user.getPass(), user.getId());
+		if (password.equals(dbUser.getPass())) {
 			session.setAttribute("loginUser", dbUser);
 			mav.setViewName("redirect:userMain.shop");
 		} else {
-			bindResult.reject("error.login.password");
-			mav.getModel().putAll(bindResult.getModel());
 			return mav;
 		}
 		return mav;
 	}
-
+	
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:login.shop";
 	}
-	
+
 	@RequestMapping("userMyPage")
-	public ModelAndView userMyPage(String id) {
+	public ModelAndView userMyPage(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		User dbUser = service.userSelect(id);
-		mav.addObject("user",dbUser);
+		int userno = Integer.parseInt(request.getParameter("userno"));
+		User dbUser = service.selectOne(userno);
+		List<CV> cv = new ArrayList<CV>();
+		cv = service.getCVlist(dbUser.getUserno());
+		
+		
+		mav.addObject("cv", cv);
+		mav.addObject("user", dbUser);
 		return mav;
 	}
 
@@ -124,7 +133,7 @@ public class UserController {
 	public ModelAndView settingForm(HttpSession session, HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		String path = request.getRealPath("/");
-		File file = new File(path+"/WEB-INF/view/user/setting.txt");
+		File file = new File(path + "/WEB-INF/view/user/setting.txt");
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
 		String line = "";
@@ -140,7 +149,7 @@ public class UserController {
 
 	@PostMapping("setting")
 	public ModelAndView setting(SettingArray setting, HttpSession session) {
-		ModelAndView mav = new ModelAndView("user/userMypage"); // 맞춤 공고 페이지 아직 없어서 마이페이지로 일단 보냄.
+		ModelAndView mav = new ModelAndView(); // 맞춤 공고 페이지 아직 없어서 마이페이지로 일단 보냄.
 		Setting st = new Setting();
 
 		String skill = "";
@@ -154,7 +163,7 @@ public class UserController {
 		int i;
 
 		int maxNo = service.likeMaxNo();
-		st.setLikeno(maxNo + 1);
+		st.setSetno(maxNo + 1);
 		st.setUserno(setting.getUserno());
 		st.setComno(null);
 
@@ -170,8 +179,9 @@ public class UserController {
 				} else
 					skill += ",";
 			}
-		} else st.setSkill(null);
-		
+		} else
+			st.setSkill(null);
+
 		if (setting.getWelfare() != null) {
 			length = setting.getWelfare().length;
 			i = 1;
@@ -184,8 +194,9 @@ public class UserController {
 				} else
 					welfare += ",";
 			}
-		} else st.setWelfare(null);
-		
+		} else
+			st.setWelfare(null);
+
 		if (setting.getPluse() != null) {
 			length = setting.getPluse().length;
 			i = 1;
@@ -198,8 +209,9 @@ public class UserController {
 				} else
 					pluse += ",";
 			}
-		} else st.setPluse(null);
-		
+		} else
+			st.setPluse(null);
+
 		if (setting.getLocation() != null) {
 			length = setting.getLocation().length;
 			i = 1;
@@ -212,8 +224,9 @@ public class UserController {
 				} else
 					location += ",";
 			}
-		} else st.setLocation(null);
-		
+		} else
+			st.setLocation(null);
+
 		if (setting.getJob() != null) {
 			length = setting.getJob().length;
 			i = 1;
@@ -226,8 +239,9 @@ public class UserController {
 				} else
 					job += ",";
 			}
-		} else st.setJob(null);
-		
+		} else
+			st.setJob(null);
+
 		if (setting.getWorkform() != null) {
 			length = setting.getWorkform().length;
 			i = 1;
@@ -240,19 +254,24 @@ public class UserController {
 				} else
 					workform += ",";
 			}
-		} else st.setWorkform(null);
-		
-		if(setting.getMinpay() != null) st.setMinpay(setting.getMinpay());
-		else st.setMinpay(null);
-		
-		if(setting.getMaxpay() != null) st.setMaxpay(setting.getMaxpay());
-		else st.setMaxpay(null);
-		
+		} else
+			st.setWorkform(null);
+
+		if (setting.getMinpay() != null)
+			st.setMinpay(setting.getMinpay());
+		else
+			st.setMinpay(null);
+
+		if (setting.getMaxpay() != null)
+			st.setMaxpay(setting.getMaxpay());
+		else
+			st.setMaxpay(null);
+
 		st.setEducation(setting.getEducation());
 
 		service.likeCreat(st);
 
-		mav.setViewName("redirect:userMyPage.shop");
+		mav.setViewName("redirect:userMyPage.shop?userno="+setting.getUserno());
 		return mav;
 	}
 
@@ -292,18 +311,18 @@ public class UserController {
 		service.userUpdate(user, request);
 		return mav;
 	}
-	
+
 	/////////////////////
-	///////cv////////////
+	/////// cv////////////
 	/////////////////////
-	
+
 	@RequestMapping("myCurriculum")
 	public ModelAndView myCurriculum(HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		String path = request.getRealPath("/");
-		File file = new File(path+"/WEB-INF/view/user/");
-		
-		FileReader fr = new FileReader(file+"/setting.txt");
+		File file = new File(path + "/WEB-INF/view/user/");
+
+		FileReader fr = new FileReader(file + "/setting.txt");
 		BufferedReader br = new BufferedReader(fr);
 		String line = "";
 		String[] str = null;
@@ -312,122 +331,203 @@ public class UserController {
 			str = line.split(":");
 			fstr = str[1].split(",");
 			mav.addObject(str[0], fstr);
-			mav.addObject(str[0]+"2", fstr);
+			mav.addObject(str[0] + "2", fstr);
 		}
-		
+
 		line = "";
 		str = null;
 		fstr = null;
-		fr = new FileReader(file+"/level.txt");
+		fr = new FileReader(file + "/level.txt");
 		br = new BufferedReader(fr);
-		while((line = br.readLine()) != null) {
+		while ((line = br.readLine()) != null) {
 			str = line.split(":");
 			fstr = str[1].split(",");
 			mav.addObject(str[0], fstr);
 		}
-		
+
 		line = "";
 		str = null;
 		fstr = null;
-		fr = new FileReader(file+"/curriculumJob.txt");
+		fr = new FileReader(file + "/curriculumJob.txt");
 		br = new BufferedReader(fr);
-		while((line = br.readLine()) != null) {
+		while ((line = br.readLine()) != null) {
 			str = line.split(":");
 			fstr = str[1].split(",");
-			mav.addObject(str[0],fstr);
+			mav.addObject(str[0], fstr);
 		}
 		return mav;
 	}
-	
+
 	@PostMapping("curriculum")
-	public ModelAndView curriculum(CV cv) {
+	public ModelAndView curriculum(CV cv, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		cv.setCvno(service.getCvno());
-		
-		
-		
+
+		service.cvImg(cv, request); // 사진저장
+
+		System.out.println(cv.toString());
+
+		if (cv.getCareer() != null)
+			for (Career cr : cv.getCareer()) {
+				cr.setCareerno(service.getCareerno());
+				cr.setCvno(cv.getCvno());
+				System.out.println(cr.toString());
+				System.out.println("career 데이터베이스에 저장!");
+				try {
+					service.insertCareer(cr);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		if (cv.getActivity() != null)
+			for (Activity ac : cv.getActivity()) {
+				ac.setAcno(service.getAcno());
+				ac.setCvno(cv.getCvno());
+				System.out.println(ac.toString());
+				System.out.println("activity 데이터베이스에 저장!");
+				try {
+					service.insertActivity(ac);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		if (cv.getLl() != null)
+			for (LL ll : cv.getLl()) {
+				ll.setNo(service.getNo());
+				ll.setCvno(cv.getCvno());
+				System.out.println(ll.toString());
+				System.out.println("ll 데이터베이스에 저장!");
+				try {
+					service.insertLL(ll);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		if (cv.getHaveskill() != null)
+			for (Haveskill hs : cv.getHaveskill()) {
+				hs.setHaveno(service.getHaveno());
+				hs.setCvno(cv.getCvno());
+				System.out.println(hs.toString());
+				System.out.println("haveskill 데이터베이스에 저장!");
+				try {
+					service.insertHaveskill(hs);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		if (cv.getPortfolio() != null)
+			for (Portfolio pf : cv.getPortfolio()) {
+				pf.setPortno(service.getPortno());
+				pf.setCvno(cv.getCvno());
+				System.out.println(pf.toString());
+				System.out.println("portfolio 데이터베이스에 저장!");
+				try {
+					service.insertPortfolio(pf);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		if (cv.getResume() != null)
+			for (Resume rs : cv.getResume()) {
+				rs.setResumeno(service.getResumeno());
+				rs.setCvno(cv.getCvno());
+				System.out.println(rs.toString());
+				System.out.println("resume 데이터베이스에 저장!");
+				try {
+					service.insertResume(rs);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+		service.insertCV(cv);
+
 		mav.setViewName("redirect:userMyPage.shop");
 		return mav;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@RequestMapping("myCurriculumDetail")
+	public ModelAndView myCurriculumDetail(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		int cvno = Integer.parseInt(request.getParameter("cvno"));
+		CV cv = service.getCV(cvno);
+		cv.setCareer(service.getCareer(cvno));
+		cv.setActivity(service.getActivity(cvno));
+		cv.setLl(service.getLL(cvno));
+		cv.setHaveskill(service.getHaveskill(cvno));
+		cv.setPortfolio(service.getPortfolio(cvno));
+		cv.setResume(service.getResume(cvno));
+
+		System.out.println(cv);
+
+		mav.addObject("cv", cv);
+		return mav;
+	}
+
 	//////////////////////
-	/////email////////////
+	///// email////////////
 	//////////////////////
-	
+
 	@RequestMapping("emailAuth")
 	public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) {
 		String email = request.getParameter("email");
-		String authNum=RandomNum();
-		
-		sendEmail(email,authNum);
-		
+		String authNum = RandomNum();
+
+		sendEmail(email, authNum);
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("user/emailAuth");
-		mav.addObject("email",email);
-		mav.addObject("authNum",authNum);
-		
+		mav.addObject("email", email);
+		mav.addObject("authNum", authNum);
+
 		return mav;
 	}
-	
+
 	private void sendEmail(String email, String authNum) {
-		String host= "smtp.gmail.com";
+		String host = "smtp.gmail.com";
 		String subject = "인증번호";
 		String fromName = "doIT 관리자";
 		String from = "xoalas55@gmail.com";
-		String pass="rlaxo7080!";
+		String pass = "rlaxo7080!";
 		String to1 = email;
 		System.out.println(email);
-		String content ="인증번호 [ " +authNum +"]";
+		String content = "인증번호 [ " + authNum + "]";
 		try {
 			Properties props = new Properties();
-			props.put("mail.smtp.starttls.enable","true");
-			props.put("mail.transport.protocol","smtp");
-			props.put("mail.smtp.host",host);
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.transport.protocol", "smtp");
+			props.put("mail.smtp.host", host);
 			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-			props.put("mail.smtp.port","465");
-			props.put("mail.smtp.user",from);
-			props.put("mail.smtp.auth","true");
-			
-			Session mailSession = Session.getInstance(props,new javax.mail.Authenticator() {
+			props.put("mail.smtp.port", "465");
+			props.put("mail.smtp.user", from);
+			props.put("mail.smtp.auth", "true");
+
+			Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(from,pass);
+					return new PasswordAuthentication(from, pass);
 				}
 			});
 			Message msg = new MimeMessage(mailSession);
-			msg.setFrom(new InternetAddress(from,MimeUtility.encodeText(fromName,"euc-kr","B")));
-			
-			InternetAddress[] address1 = {new InternetAddress(to1)};
+			msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "euc-kr", "B")));
+
+			InternetAddress[] address1 = { new InternetAddress(to1) };
 			msg.setRecipients(Message.RecipientType.TO, address1);
 			msg.setSubject(subject);
 			msg.setSentDate(new java.util.Date());
-			msg.setContent(content,"text/html; charst=euc-kr");
+			msg.setContent(content, "text/html; charst=euc-kr");
 			Transport.send(msg);
-		}catch(MessagingException e) {
+		} catch (MessagingException e) {
 			e.printStackTrace();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private String RandomNum() {
 		StringBuffer buffer = new StringBuffer();
-		for(int i=0; i<=6; i++) {
-			int n = (int)(Math.random()*10);
+		for (int i = 0; i <= 6; i++) {
+			int n = (int) (Math.random() * 10);
 			buffer.append(n);
 		}
 		return buffer.toString();

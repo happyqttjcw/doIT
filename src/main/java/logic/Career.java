@@ -1,13 +1,14 @@
 package logic;
 
 public class Career {
-	private Integer careerno;
+	private Integer careerno; //�⺻Ű
 	private Integer cvno;
 	private String cename;
 	private String cworkstart;
 	private String cworkend;
 	private String creason;
-	private String cposition;
+	private String cposition1;
+	private String cposition2;
 	private Integer cpyear;
 	private String cworktype;
 	private String cworklocation;
@@ -32,7 +33,6 @@ public class Career {
 	public void setCename(String cename) {
 		this.cename = cename;
 	}
-	
 	public String getCworkstart() {
 		return cworkstart;
 	}
@@ -51,11 +51,17 @@ public class Career {
 	public void setCreason(String creason) {
 		this.creason = creason;
 	}
-	public String getCposition() {
-		return cposition;
+	public String getCposition1() {
+		return cposition1;
 	}
-	public void setCposition(String cposition) {
-		this.cposition = cposition;
+	public void setCposition1(String cposition1) {
+		this.cposition1 = cposition1;
+	}
+	public String getCposition2() {
+		return cposition2;
+	}
+	public void setCposition2(String cposition2) {
+		this.cposition2 = cposition2;
 	}
 	public Integer getCpyear() {
 		return cpyear;
@@ -63,11 +69,11 @@ public class Career {
 	public void setCpyear(Integer cpyear) {
 		this.cpyear = cpyear;
 	}
-	public String getCworkttype() {
+	public String getCworktype() {
 		return cworktype;
 	}
-	public void setCworkttype(String cworkttype) {
-		this.cworktype = cworkttype;
+	public void setCworktype(String cworktype) {
+		this.cworktype = cworktype;
 	}
 	public String getCworklocation() {
 		return cworklocation;
@@ -96,8 +102,8 @@ public class Career {
 	@Override
 	public String toString() {
 		return "Career [careerno=" + careerno + ", cvno=" + cvno + ", cename=" + cename + ", cworkstart=" + cworkstart
-				+ ", cworkend=" + cworkend + ", creason=" + creason + ", cposition=" + cposition
-				+ ", cpyear=" + cpyear + ", cworktype=" + cworktype + ", cworklocation=" + cworklocation + ", cdept="
-				+ cdept + ", csalary=" + csalary + ", ctask=" + ctask + "]";
+				+ ", cworkend=" + cworkend + ", creason=" + creason + ", cposition1=" + cposition1 + ", cposition2="
+				+ cposition2 + ", cpyear=" + cpyear + ", cworktype=" + cworktype + ", cworklocation=" + cworklocation
+				+ ", cdept=" + cdept + ", csalary=" + csalary + ", ctask=" + ctask + "]";
 	}
 }

@@ -116,14 +116,14 @@
 		<div style="display: inline-block; margin-right: 200px;">
 		<div style="padding-left: 10px; font-size: 30px; font-family:'Do Hyeon', sans-serif; color: #333c;">±Þ¿©</div>
 		<div style="height: 100%; padding-left: 50px; margin-bottom: 30px;">
-		<select name="min_pay" class="w3-button">
+		<select name="minpay" class="w3-button">
 			<option>----</option>
 			<c:forEach var="min_pay" begin="1800" end="5000" step="100">
 				<option value="${min_pay }">${min_pay }</option>				
 			</c:forEach>
 		</select>
 		<span>~</span> 
-		<select name="max_pay" class="w3-button">
+		<select name="maxpay" class="w3-button">
 			<option>----</option> 
 			<c:forEach var="max_pay" begin="1800" end="5000" step="100">
 				<option value="${max_pay }">${max_pay }</option>				

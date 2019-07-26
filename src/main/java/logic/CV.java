@@ -1,7 +1,5 @@
 package logic;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -10,13 +8,12 @@ public class CV {
 	private int cvno;
 	private int userno;
 	private int publicornot;
-	private Integer resumeno;
 	private String subject;
 	private String name;
 	private String birth;
 	private String email;
 	private String phone;
-	private String[] addr;
+	private String addr;
 	private String picture;
 	private MultipartFile pictureUrl;
 	private String school;
@@ -41,7 +38,7 @@ public class CV {
 	private String cdtjob3;
 	private String cdtjob4;
 	private String cdtjob5;
-	private Date date;
+	private String date;
 	private List<Activity> activity;
 	private List<Career> career;
 	private List<Haveskill> haveskill;
@@ -65,12 +62,6 @@ public class CV {
 	}
 	public void setPublicornot(int publicornot) {
 		this.publicornot = publicornot;
-	}
-	public Integer getResumeno() {
-		return resumeno;
-	}
-	public void setResumeno(Integer resumeno) {
-		this.resumeno = resumeno;
 	}
 	public String getSubject() {
 		return subject;
@@ -102,10 +93,10 @@ public class CV {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String[] getAddr() {
+	public String getAddr() {
 		return addr;
 	}
-	public void setAddr(String[] addr) {
+	public void setAddr(String addr) {
 		this.addr = addr;
 	}
 	public String getPicture() {
@@ -252,10 +243,10 @@ public class CV {
 	public void setCdtjob5(String cdtjob5) {
 		this.cdtjob5 = cdtjob5;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public List<Activity> getActivity() {
@@ -296,18 +287,16 @@ public class CV {
 	}
 	@Override
 	public String toString() {
-		return "CV [cvno=" + cvno + ", userno=" + userno + ", publicornot=" + publicornot + ", resumeno=" + resumeno
-				+ ", subject=" + subject + ", name=" + name + ", birth=" + birth + ", email=" + email + ", phone="
-				+ phone + ", addr=" + Arrays.toString(addr) + ", picture=" + picture + ", pictureUrl=" + pictureUrl
-				+ ", school=" + school + ", schoolname=" + schoolname + ", schoollocation=" + schoollocation
-				+ ", major=" + major + ", daynight=" + daynight + ", score=" + score + ", skillcontent=" + skillcontent
-				+ ", bohun=" + bohun + ", army=" + army + ", armytype=" + armytype + ", armyclass=" + armyclass
-				+ ", armyreason=" + armyreason + ", bohunreason=" + bohunreason + ", cdtsalary=" + cdtsalary
-				+ ", cdtlocation1=" + cdtlocation1 + ", cdtlocation2=" + cdtlocation2 + ", cdtlocation3=" + cdtlocation3
-				+ ", cdtjob1=" + cdtjob1 + ", cdtjob2=" + cdtjob2 + ", cdtjob3=" + cdtjob3 + ", cdtjob4=" + cdtjob4
-				+ ", cdtjob5=" + cdtjob5 + ", date=" + date + ", activity=" + activity + ", career=" + career
-				+ ", haveskill=" + haveskill + ", ll=" + ll + ", portfolio=" + portfolio + ", resume=" + resume + "]";
+		return "CV [cvno=" + cvno + ", userno=" + userno + ", publicornot=" + publicornot + ", subject=" + subject
+				+ ", name=" + name + ", birth=" + birth + ", email=" + email + ", phone=" + phone + ", addr=" + addr
+				+ ", picture=" + picture + ", pictureUrl=" + pictureUrl + ", school=" + school + ", schoolname="
+				+ schoolname + ", schoollocation=" + schoollocation + ", major=" + major + ", daynight=" + daynight
+				+ ", score=" + score + ", skillcontent=" + skillcontent + ", bohun=" + bohun + ", army=" + army
+				+ ", armytype=" + armytype + ", armyclass=" + armyclass + ", armyreason=" + armyreason
+				+ ", bohunreason=" + bohunreason + ", cdtsalary=" + cdtsalary + ", cdtlocation1=" + cdtlocation1
+				+ ", cdtlocation2=" + cdtlocation2 + ", cdtlocation3=" + cdtlocation3 + ", cdtjob1=" + cdtjob1
+				+ ", cdtjob2=" + cdtjob2 + ", cdtjob3=" + cdtjob3 + ", cdtjob4=" + cdtjob4 + ", cdtjob5=" + cdtjob5
+				+ ", date=" + date + ", activity=" + activity + ", career=" + career + ", haveskill=" + haveskill
+				+ ", ll=" + ll + ", portfolio=" + portfolio + ", resume=" + resume + "]";
 	}
-
-
 }
