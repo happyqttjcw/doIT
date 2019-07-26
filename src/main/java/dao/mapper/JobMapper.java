@@ -24,5 +24,8 @@ public interface JobMapper {
 
 	@Delete("delete from job where jobno=#{jobno} and comno=#{comno}")
 	void deletejob(Job job);
+
+	@Delete("delete from job where jobno=#{jobno}")
+	void deletejobbyjobno(Job job);
 	
 }

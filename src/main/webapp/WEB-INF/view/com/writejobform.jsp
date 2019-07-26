@@ -172,8 +172,8 @@ $(function() {
 			</select>
 			<font color="red"><form:errors path="education" /></font></td></tr>
 		<tr><td>IT전공여부</td><td>
-			<input type="radio" checked="checked" value="전공" name="major">전공&nbsp;&nbsp;
-			<input type="radio" value="비전공" name="major">비전공
+			<input type="radio" checked="checked" value="전공" name="major">전공자&nbsp;&nbsp;
+			<input type="radio" value="비전공" name="major">비전공자
 			<input type="radio" value="전공무관" name="major">전공무관
 			<font color="red"><form:errors path="major" /></font></td></tr>
 		<tr><td>우대사항</td><td>

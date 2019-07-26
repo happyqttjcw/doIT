@@ -28,6 +28,7 @@ import logic.Company;
 import logic.Job;
 import logic.PageService;
 import logic.Pickuser;
+import logic.Setting;
 import logic.User;
 import security.CipherUtil;
 
@@ -43,19 +44,19 @@ public class ComController {
 		if (bindResult.hasErrors()) {
 			mav.getModel().putAll(bindResult.getModel());
 			mav.addObject("company", company);
-			mav.setViewName("../user/userEntry.shop");
+			mav.setViewName("comEntry.shop");
 			return mav;
 		}
 
 		try {
 			if (service.comselect(company.getComid()) != null) {
 				mav.addObject("msg", "이미 존재하는 아이디입니다.");
-				mav.addObject("url", "../user/userEntry.shop");
+				mav.addObject("url", "comEntry.shop");
 				mav.setViewName("alert");
 				return mav;
 			} else {
 				service.companyCreate(company);
-				mav.setViewName("user/login");
+				mav.setViewName("userLogin");
 //				mav.addObject("user", new User());
 				mav.addObject("company", company);
 			}
@@ -71,12 +72,12 @@ public class ComController {
 		ModelAndView mav = new ModelAndView();
 		Company dbCompany = service.comselect(company.getComid());
 		if (dbCompany == null) {
-			throw new LogInException("아이디 또는 비밀번호가 틀립니다.", "login.shop");
+			throw new LogInException("아이디 또는 비밀번호가 틀립니다.", "comLogin.shop");
 		}
 		String compass = CipherUtil.messageDigest(company.getCompass());
 		if (compass.equals(dbCompany.getCompass())) {
 			session.setAttribute("logincom", dbCompany);
-			mav.setViewName("redirect:../com/commypage.shop?comid=" + company.getComid());
+			mav.setViewName("redirect:commypage.shop?comid=" + company.getComid());
 		} else {
 
 			mav.addObject("user", new User());
@@ -141,7 +142,43 @@ public class ComController {
 		}
 		fr.close();
 		br.close();
+		int comno = Integer.parseInt(request.getParameter("comno"));
+		Setting s = service.getcomset(comno);
+		mav.addObject("setting", s);
 		mav.addObject("job", new Job());
+		return mav;
+	}
+
+	@PostMapping("comsetting")
+	public ModelAndView comsetting(Setting s) {
+		ModelAndView mav = new ModelAndView();
+		if(s.getComno()==null) s.setComno(0);
+		if(s.getUserno()==null) s.setUserno(0);
+		service.addcomset(s);
+		mav.setViewName("redirect:recommenduser.shop?comno="+s.getComno());
+		return mav;
+	}
+
+	@RequestMapping("recommenduser")
+	public ModelAndView recommenduser(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		int comno = Integer.parseInt(request.getParameter("comno"));
+		Company com = service.comselect(comno);
+		Setting comset = service.getcomset(comno);
+		mav.addObject("comset", comset);
+		mav.addObject("com",com);
+		mav.addObject("user", new User());
+		mav.setViewName("com/recommenduser");
+		return mav;
+	}
+
+	@PostMapping("updateset")
+	public ModelAndView updateset(Setting s) {
+		ModelAndView mav = new ModelAndView();
+		if(s.getComno()==null) s.setComno(0);
+		if(s.getUserno()==null) s.setUserno(0);
+		service.updatecomset(s);
+		mav.setViewName("redirect:recommenduser.shop?comno="+s.getComno());
 		return mav;
 	}
 
@@ -340,6 +377,16 @@ public class ComController {
 		job = service.jobselect(com.getComno());
 		mav.addObject("com", com);
 		mav.addObject("job", job);
+		return mav;
+	}
+	
+	@PostMapping("deletejobs")
+	public ModelAndView deletejobs(String[] jobcheck) {
+		ModelAndView mav = new ModelAndView();
+		for(String n : jobcheck) {
+			service.deletejob(Integer.parseInt(n));
+ 		}
+		mav.setViewName("redirect:joblist.shop");
 		return mav;
 	}
 

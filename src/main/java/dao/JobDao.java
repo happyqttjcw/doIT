@@ -40,4 +40,8 @@ public class JobDao {
 	public void deletejob(Job job) {
 		sqlSession.getMapper(JobMapper.class).deletejob(job);
 	}
+
+	public void deletejobbyjobno(Job job) {
+		sqlSession.getMapper(JobMapper.class).deletejobbyjobno(job);
+	}
 }

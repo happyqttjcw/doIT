@@ -71,7 +71,7 @@ th, td {
                            <td><a href="jobdetail.shop?jobno=${job1.jobno }&comno=${job1.comno}">제목 : ${job1.subject }</a></td>
                         </tr>
                         <tr>
-                           <td><a href="jobdetail.shop?jobno=${job1.jobno }&comno=${job1.comno}">공고일 : ${job1.startdate } ~ ${job1.enddate }</a></td>
+                           <td><a href="jobdetail.shop?jobno=${job1.jobno }&comno=${job1.comno}">공고기한 : ${job1.startdate } ~ ${job1.enddate }</a></td>
                         </tr>
                      </table>
                   </div>

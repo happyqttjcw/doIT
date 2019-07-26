@@ -23,6 +23,7 @@ import dao.CVDao;
 import dao.CompanyDao;
 import dao.JobDao;
 import dao.PickuserDao;
+import dao.SettingDao;
 import dao.UserDao;
 import security.CipherUtil;
 
@@ -38,6 +39,8 @@ public class PageService {
 	private PickuserDao pickuserDao;
 	@Autowired
 	private CVDao cvDao;
+	@Autowired
+	private SettingDao settingDao;
 
 	// 기업 부분//
 	public Company comselect(String comid) {
@@ -172,8 +175,27 @@ public class PageService {
 		jobDao.deletejob(job);
 	}
 
+	public void deletejob(Integer jobno) {
+		Job job = new Job();
+		job.setJobno(jobno);
+		jobDao.deletejobbyjobno(job);
+	}
+
 	public void compasschg(Company com) {
 		companyDao.compasschg(com);
+	}
+
+	public void addcomset(Setting s) {
+		settingDao.addcomset(s);
+	}
+
+	public Setting getcomset(Integer comno) {
+		Setting s = settingDao.getcomset(comno);
+		return s;
+	}
+
+	public void updatecomset(Setting s) {
+		settingDao.updateset(s);
 	}
 
 	// End 유저 부분 - 기환//

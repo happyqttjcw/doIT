@@ -10,6 +10,7 @@
 		<typeAlias type="logic.Company" alias="Company"/>
 		<typeAlias type="logic.Pickuser" alias="Pickuser"/>
 		<typeAlias type="logic.CV" alias="CV"/>
+		<typeAlias type="logic.Setting" alias="Setting"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="dao/mapper/Board.xml"/>
@@ -18,5 +19,6 @@
 		<mapper resource="dao/mapper/Job.xml"/>
 		<mapper resource="dao/mapper/Pickuser.xml"/>
 		<mapper resource="dao/mapper/CV.xml"/>
+		<mapper resource="dao/mapper/Setting.xml"/>
 	</mappers>
 </configuration>

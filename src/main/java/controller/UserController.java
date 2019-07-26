@@ -31,7 +31,6 @@ import exception.LogInException;
 import logic.CV;
 import logic.Company;
 import logic.PageService;
-import logic.SettingArray;
 import logic.User;
 import security.CipherUtil;
 
@@ -226,14 +225,133 @@ public class UserController {
 		return mav;
 	}
 
-	@PostMapping("setting")
-	public ModelAndView setting(SettingArray setting, HttpSession session) {
-		ModelAndView mav = new ModelAndView("user/userMyPage"); // 맞춤 공고 페이지 아직 없어서 마이페이지로 일단 보냄.
-
-//		User loginUser = (User)session.getAttribute("loginUser");
-//		service.userSetting(loginUser.getUserno(), setting);
-		return mav;
-	}
+//	@PostMapping("setting")
+//	   public ModelAndView setting(SettingArray setting, HttpSession session) {
+//	      ModelAndView mav = new ModelAndView(); // 맞춤 공고 페이지 아직 없어서 마이페이지로 일단 보냄.
+//	      Setting st = new Setting();
+//
+//	      String skill = "";
+//	      String welfare = "";
+//	      String pluse = "";
+//	      String location = "";
+//	      String job = "";
+//	      String workform = "";
+//
+//	      int length;
+//	      int i;
+//
+//	      int maxNo = service.likeMaxNo();
+//	      st.setSetno(maxNo + 1);
+//	      st.setUserno(setting.getUserno());
+//	      st.setComno(null);
+//
+//	      if (setting.getSkill() != null) {
+//	         length = setting.getSkill().length;
+//	         i = 1;
+//	         for (String str : setting.getSkill()) {
+//	            skill += str;
+//	            i++;
+//	            if (i == length) {
+//	               st.setSkill(skill);
+//	               break;
+//	            } else
+//	               skill += ",";
+//	         }
+//	      } else
+//	         st.setSkill(null);
+//
+//	      if (setting.getWelfare() != null) {
+//	         length = setting.getWelfare().length;
+//	         i = 1;
+//	         for (String str : setting.getWelfare()) {
+//	            welfare += str;
+//	            i++;
+//	            if (i == length) {
+//	               st.setWelfare(welfare);
+//	               break;
+//	            } else
+//	               welfare += ",";
+//	         }
+//	      } else
+//	         st.setWelfare(null);
+//
+//	      if (setting.getPluse() != null) {
+//	         length = setting.getPluse().length;
+//	         i = 1;
+//	         for (String str : setting.getPluse()) {
+//	            pluse += str;
+//	            i++;
+//	            if (i == length) {
+//	               st.setPluse(pluse);
+//	               break;
+//	            } else
+//	               pluse += ",";
+//	         }
+//	      } else
+//	         st.setPluse(null);
+//
+//	      if (setting.getLocation() != null) {
+//	         length = setting.getLocation().length;
+//	         i = 1;
+//	         for (String str : setting.getLocation()) {
+//	            location += str;
+//	            i++;
+//	            if (i == length) {
+//	               st.setLocation(location);
+//	               break;
+//	            } else
+//	               location += ",";
+//	         }
+//	      } else
+//	         st.setLocation(null);
+//
+//	      if (setting.getJob() != null) {
+//	         length = setting.getJob().length;
+//	         i = 1;
+//	         for (String str : setting.getJob()) {
+//	            job += str;
+//	            i++;
+//	            if (i == length) {
+//	               st.setJob(job);
+//	               break;
+//	            } else
+//	               job += ",";
+//	         }
+//	      } else
+//	         st.setJob(null);
+//
+//	      if (setting.getWorkform() != null) {
+//	         length = setting.getWorkform().length;
+//	         i = 1;
+//	         for (String str : setting.getWorkform()) {
+//	            workform += str;
+//	            i++;
+//	            if (i == length) {
+//	               st.setJob(workform);
+//	               break;
+//	            } else
+//	               workform += ",";
+//	         }
+//	      } else
+//	         st.setWorkform(null);
+//
+//	      if (setting.getMinpay() != null)
+//	         st.setMinpay(setting.getMinpay());
+//	      else
+//	         st.setMinpay(null);
+//
+//	      if (setting.getMaxpay() != null)
+//	         st.setMaxpay(setting.getMaxpay());
+//	      else
+//	         st.setMaxpay(null);
+//
+//	      st.setEducation(setting.getEducation());
+//
+//	      service.likeCreat(st);
+//
+//	      mav.setViewName("redirect:userMyPage.shop?userno="+setting.getUserno());
+//	      return mav;
+//	   }
 
 	@PostMapping("passChg")
 	public ModelAndView passChg(User user) {
