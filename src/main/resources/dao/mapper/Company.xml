@@ -9,7 +9,14 @@
            where comid = #{comid}
         </if>
         <if test="comno != null">
+<<<<<<< HEAD
         	where comno=#{comno}
         </if>
    </select>
 </mapper>
+=======
+        	where comno = ${comno}
+        </if>
+   </select>
+</mapper>
+>>>>>>> refs/remotes/CGH/CGH

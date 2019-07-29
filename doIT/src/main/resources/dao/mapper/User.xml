@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.UserMapper">
+	<select id="select" resultType="User" parameterType="map">
+		select * from user
+		<if test="id != null">
+			where id = #{id}
+		</if>
+		<if test="userno != null">
+			where userno = ${userno}
+		</if>
+	</select>
+	<select id="selectCV" resultType="CV" parameterType="map">
+		select * from cv cv 
+		<if test="cvno != null">
+			where cv.cvno = ${cvno}
+		</if>
+		<if test="userno != null">
+			where cv.userno = ${userno}
+		</if>
+	</select>
+	<select id="selectCareer" resultType="Career" parameterType="map">
+		select * from career cr where cr.cvno = ${cvno}
+	</select>
+	<select id="selectActivity" resultType="Activity" parameterType="map">
+		select * from activity ac where ac.cvno = ${cvno}
+	</select>
+	<select id="selectLL" resultType="LL" parameterType="map">
+		select * from LL ll where ll.cvno = ${cvno}
+	</select>
+	<select id="selectHaveskill" resultType="Haveskill" parameterType="map">
+		select * from haveskill hs where hs.cvno = ${cvno}
+	</select>
+	<select id="selectPortfolio" resultType="Portfolio" parameterType="map">
+		select * from portfolio pf where pf.cvno = ${cvno}
+	</select>
+	<select id="selectResume" resultType="Resume" parameterType="map">
+		select * from resume rs where rs.cvno = ${cvno}
+	</select>
+	<select id="selectSetting" resultType="setting" parameterType="map">
+		select * from setting where userno = ${userno}
+	</select>
+</mapper>

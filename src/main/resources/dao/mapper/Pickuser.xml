@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<<<<<<< HEAD
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.PickuserMapper">
 	<select id="list" resultType="Pickuser" parameterType="Pickuser">
@@ -9,4 +10,14 @@
 			where comno=#{comno}
 		</if>
 	</select>
+=======
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.PickuserMapper">
+   <select id="list" resultType="Pickuser" parameterType="Pickuser">
+      select * from pickuser 
+      <if test="comno!=null">
+         where comno=#{comno}
+      </if>
+   </select>
+>>>>>>> refs/remotes/CGH/CGH
 </mapper>

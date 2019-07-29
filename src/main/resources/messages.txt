@@ -20,5 +20,9 @@ error.board.password=비밀번호가 틀림니다
 
 error.input.company=회사 입력정보에 문제가 있습니다.
 error.login.comid=회사 ID를 입력해주세요.
+<<<<<<< HEAD
 error.login.compass=회사 비밀번호를 입력해주세요.
  
+=======
+error.login.compass=회사 비밀번호를 입력해주세요.
+>>>>>>> refs/remotes/CGH/CGH

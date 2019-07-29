@@ -14,6 +14,7 @@ import logic.Job;
 
 @Repository
 public class JobDao {
+<<<<<<< HEAD
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	private final String NS = "dao.mapper.JobMapper.";
@@ -44,4 +45,36 @@ public class JobDao {
 	public void deletejobbyjobno(Job job) {
 		sqlSession.getMapper(JobMapper.class).deletejobbyjobno(job);
 	}
+=======
+   @Autowired
+   private SqlSessionTemplate sqlSession;
+   private final String NS = "dao.mapper.JobMapper.";
+   private Map<String, Object> param = new HashMap<>();
+
+   public List<Job> list(int comno) {
+      param.clear();
+      param.put("comno", comno);
+      return sqlSession.selectList(NS + "list", param);
+   }
+
+   public void writejob(Job job) {
+      job.setJobno(sqlSession.getMapper(JobMapper.class).maxComno()+1);
+      sqlSession.getMapper(JobMapper.class).insert(job);
+   }
+
+   public Job jobselect(Integer jobno, Integer comno) {
+      param.clear();
+      param.put("comno", comno);
+      param.put("jobno", jobno);
+      return sqlSession.selectOne(NS + "list", param);
+   }
+
+   public void deletejob(Job job) {
+      sqlSession.getMapper(JobMapper.class).deletejob(job);
+   }
+
+   public void deletejobbyjobno(Job job) {
+      sqlSession.getMapper(JobMapper.class).deletejobbyjobno(job);
+   }
+>>>>>>> refs/remotes/CGH/CGH
 }

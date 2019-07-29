@@ -4,8 +4,13 @@ public class Pickuser {
    private int pickuserno;
    private int comno;
    private int userno; //회원번호
+<<<<<<< HEAD
    private int cvno;  //이력서번호
    private int calluser;
+=======
+   private int calluser;
+   private int cvno;  //이력서번호
+>>>>>>> refs/remotes/CGH/CGH
    private User user; // user 와 cv 객체를 한번에 받기위해
    private CV cv;
    

@@ -6,7 +6,11 @@
    <select id="list" parameterType="Job" resultType="Job">
       select * from job 
         <if test="comno!=null and jobno!=null">
+<<<<<<< HEAD
         	 where comno=#{comno} and jobno=#{jobno}
+=======
+            where comno=#{comno} and jobno=#{jobno}
+>>>>>>> refs/remotes/CGH/CGH
         </if>
         <if test="comno != null and jobno==null">
            where comno = #{comno}

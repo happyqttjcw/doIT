@@ -5,13 +5,20 @@
 	</decorator>
 	<decorator name="user" page="userdecorator.jsp">
 		<pattern>/user/*.shop</pattern>
+		<pattern>/board/*.shop</pattern>
 	</decorator>
 	<!-- layout 제외 설정 -->
 	<excludes>
 		<pattern>/user/pass*</pattern>
+<<<<<<< HEAD
 		<pattern>/user/userLogin*</pattern>
 		<pattern>/com/comLogin*</pattern>
 		<pattern>/com/compasschg*</pattern>
+=======
+		<pattern>/user/curriculumImg.shop</pattern>
+		<pattern>/user/userLogin*</pattern>
+		<pattern>/com/comLogin*</pattern>
+>>>>>>> refs/remotes/CGH/CGH
 		<pattern>/user/userEntry*</pattern>
 		<pattern>/com/comEntry*</pattern>
 	</excludes>

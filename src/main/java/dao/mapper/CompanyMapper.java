@@ -25,4 +25,8 @@ public interface CompanyMapper {
 
 	@Update("update company set compass=#{compass} where comid=#{comid}")
 	void compasschg(Company com);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/remotes/CGH/CGH

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="logic.User" alias="User"/>
+		<typeAlias type="logic.Company" alias="Company"/>
+		<typeAlias type="logic.CV" alias="CV"/>
+		<typeAlias type="logic.Career" alias="Career"/>
+		<typeAlias type="logic.Activity" alias="Activity"/>
+		<typeAlias type="logic.LL" alias="LL"/>
+		<typeAlias type="logic.Haveskill" alias="Haveskill"/>
+		<typeAlias type="logic.Portfolio" alias="Portfolio"/>
+		<typeAlias type="logic.Resume" alias="Resume"/>
+		<typeAlias type="logic.ResumeEdit" alias="ResumeEdit"/>
+		<typeAlias type="logic.Resumecomment" alias="Resumecomment"/>
+		<typeAlias type="logic.Setting" alias="Setting"/>
+		<typeAlias type="logic.Pickuser" alias="Pickuser"/>
+		<typeAlias type="logic.Job" alias="Job"/>
+		<typeAlias type="logic.Setting" alias="Setting"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="dao/mapper/User.xml"/>
+		<mapper resource="dao/mapper/Company.xml"/>
+		<mapper resource="dao/mapper/Board.xml"/>
+		<mapper resource="dao/mapper/Pickuser.xml"/>
+		<mapper resource="dao/mapper/CV.xml"/>
+		<mapper resource="dao/mapper/Job.xml"/>
+		<mapper resource="dao/mapper/Setting.xml"/>
+	</mappers>
+</configuration>

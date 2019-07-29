@@ -20,7 +20,11 @@
 		<property name="driverClass">
 			<value>org.mariadb.jdbc.Driver</value>
 		</property>
+<<<<<<< HEAD
 		<property name="jdbcUrl"><value>jdbc:mariadb://localhost:3306/doit</value></property>
+=======
+		<property name="jdbcUrl"><value>jdbc:mariadb://localhost:3306/doIT</value></property>
+>>>>>>> refs/remotes/CGH/CGH
 		<property name="user"><value>haein</value></property>
 		<property name="password"><value>1234</value></property>
 		<!-- 최대 connection 객체 수 설정 -->

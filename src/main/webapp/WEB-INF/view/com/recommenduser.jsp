@@ -27,6 +27,7 @@
    <div style="border:1px solid #778899; border-radius: 10px;" id="setlike">
       <div style="margin:25px;">
          <c:forEach var="s" items="${skills }" varStatus="stat">
+<<<<<<< HEAD
             #${s }&nbsp;&nbsp;
          </c:forEach>
          <c:forEach var="w" items="${welfares }" varStatus="stat">
@@ -40,6 +41,31 @@
          </c:forEach>
          <c:forEach var="j" items="${jobs }" varStatus="stat">
             #${j }&nbsp;&nbsp;
+=======
+	      <c:if test="${s != '' }">
+            #${s }&nbsp;&nbsp;
+	      </c:if>
+         </c:forEach>
+         <c:forEach var="w" items="${welfares }" varStatus="stat">
+     	  <c:if test="${w != '' }">
+            #${w }&nbsp;&nbsp;
+          </c:if>
+         </c:forEach>
+         <c:forEach var="p" items="${pluses }" varStatus="stat">
+      	  <c:if test="${p != '' }">     
+            #${p }&nbsp;&nbsp;
+          </c:if>  
+         </c:forEach>
+         <c:forEach var="l" items="${locations }" varStatus="stat">
+	      <c:if test="${l != '' }">
+            #${l }&nbsp;&nbsp;
+    	  </c:if>
+         </c:forEach>
+         <c:forEach var="j" items="${jobs }" varStatus="stat">
+     	  <c:if test="${j != '' }">
+            #${j }&nbsp;&nbsp;
+     	  </c:if>
+>>>>>>> refs/remotes/CGH/CGH
          </c:forEach>
       </div>
    </div><br><br>

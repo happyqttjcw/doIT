@@ -1,0 +1,4 @@
+language:한국어,영어,일본어,중국아,독일어,불어,스페일어,러시아어,이탈이아어,기타
+position1:인턴/수습,사원,주임,계장,대리,과장,차장,부장,감사,이사,상무,전무,부사장,사장,임원,연구원,주임연구원,선임연구원,책임연구원,수석연구원,연구소장
+position2:팀원,팀장,실장,총무,지점장,지사장,파트장,그룹장,센터장,매니저,본부장,사업부장,원장,국장
+level:▼숫자등급,1,1+,2,2-,2+,2.5,3,3-,3+,3.5,3Ⅱ,4,4-,4+,4.5,4Ⅱ,5,5+,5.5,5Ⅱ,6,6.5,6Ⅱ,7,7.5,7Ⅱ,8,8.5,9,10,11,12,13,14,15,▼한글등급,초,중,고,상,하,특,특Ⅱ,준1,준2,준3,준4,준5,기초,대사범,사범,▼알파벳등급,A,B,C,D,E,F,A1,A2,B1,B2,C1,C2,N1,N2,N3,N4,N5,1A,1B,1C,2A,2B,2C,3A,3B,3C,GradeA,GradeB,GradeC,▼OPIC,Superior,AdvancedHigh,AdvancedMid,AdvancedLow,IntermediateHight,IntermediateMid,IntermediateLow,NoviceHigh,NoviceMid,NoviceLow,IntermediateMid1,IntermediateMid2,IntermediateMid3

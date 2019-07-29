@@ -130,7 +130,11 @@ th, td {
             <input type="submit" class="w3-center w3-button" style="width: 200px;" value="로그인">
          </td>
          <td class="w3-center" style="border:0px;">
+<<<<<<< HEAD
             <input type="button" class="w3-center w3-button" style="width: 200px;" value="회원가입" onclick="location.href='../user/userEntry.shop'">      
+=======
+            <input type="button" class="w3-center w3-button" style="width: 200px;" value="회원가입" onclick="location.href='${path}/user/userEntry.shop'">      
+>>>>>>> refs/remotes/CGH/CGH
          </td>
       </tr>
       </table>

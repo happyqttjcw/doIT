@@ -1,0 +1,17 @@
+웹개발:ASP,Java·JSP,PHP,XML,HTML,.NET,APM,Ajax,PERL,Ruby,Python,포론트엔드,백엔드
+응용프로그램개발:IOS앱개발,Android앱개발,Windows,Unix,Linux,VisualC·C++,VisaulBasic,C·C++,NFC,PowerBuilder,Java,Delphi,OpenGL,Oracle,Python,.NET,Pro-C,C#,액션스크립트SAP·ABAP,Embedded,API,MySQL,MS·SQL,FLEX,증강현실(AR),가상현실(VR),C++Builder,RFID,Win32,Labview,micom,objective c
+시스템개발:어셈블리,embedded,펌웨어,HMI·PLC,CTI
+서버·네트워크·보안:서버관리,네트워크관리,방화벽,서버구축,가상화구축,시스템·네트워크 컨설팅,보안컨설팅,Apache,IIS,RTOS,NGINX,POS,DWH·ATM,AWS,Cisco,정보보안,Router·Switch,ISP·IDC운영,TCP·IP·IPX,바이러스·백신,보안관제,보안기술,시스템운영,Windows,Unix,Linux
+ERP·시스템분석·설계:모델링,ERP컨설턴트,SAP·ABAP,MES,PLM,SEM·SCM,시스템엔지니어(SE)
+데이터베이스·DBA:Oracle,MS·SQL,MySQL,ETL,OLAP,데이터마이닝,DW,PostgresSQL,MoSQL,튜닝,DBA,DB2
+퍼블리싱·UI개발:HTML코딩,단순웹작업,퍼블리셔,웹표준·웹접근성,자바스크립트,액션스크립트
+웹디자인:포토샵,플래쉬,Sketch,드림위버,자바스크립트,XML,UI·UX디자인,일러스트레이터,프로토타이핑,GUI,CSS,웹UI,모바일UI,HTML,FELX
+하드웨어·소프트웨어:HW(하드웨어),SW(소프트웨어),유지보수(AS),DSP,FPGA
+통신·모바일:위성·GPS,GIS,광통신,이동통신,통신망가설,정보통신,무선통신,사물인터넷(IoT)
+웹기획·PM:PM,정보설계·IA,스토리보드,컨텐츠기획,로그분석,UI기획,제안컨설팅,쇼핑몰기획,모바일기획,웹서비스기획
+웹마스터·QA·테스터:웹마스터,Unix,Linux,Windows,QA·테스트
+컨텐츠·사이트운영:사이트운영,컨텐츠운영,e-러닝운영,카페블로그관리,게시판관리,쇼핑몰·오픈마켓,컨텐츠제장
+게임·Game:게임기획,게임시나리오,GM·게임운영,QA·베타테스터,게임마케팅,온라인게임,게임디자인,2D·도트·맵,3D·모델링·모션,캐릭터·아이템,모바일게임,게임개발,캐주얼·보드게임,CS·고객지원,클라이언트개발,서버·네트워크개발,원화·일러스트,MMORPG,DirectX
+IT·디자인·컴퓨터교육:QA·컴퓨터,인터넷·네트워크,웹디자인강의,프로그래밍,시스템·DB보안,3D·영상·플래시,IT강의
+동영상·편집·코덱:프리미어,파이널컷,영상·편집,3DMAX,멀티미디어,코덱·인코딩
+인공지능(AI)·빅데이터:인공지능(AI),빅데이터,머신런닝,클라우드,사물인터넷(IoT),DataAnalysis,Hadoop,Spark,자연어처리(NLP),R,Python,TensorFlow

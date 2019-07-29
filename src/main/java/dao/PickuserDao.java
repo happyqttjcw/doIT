@@ -12,6 +12,7 @@ import logic.Pickuser;
 
 @Repository
 public class PickuserDao {
+<<<<<<< HEAD
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	private final String NS = "dao.mapper.PickuserMapper.";
@@ -25,3 +26,18 @@ public class PickuserDao {
 	}	
 
 }
+=======
+   @Autowired
+   private SqlSessionTemplate sqlSession;
+   private final String NS = "dao.mapper.PickuserMapper.";
+   private Map<String, Object> param = new HashMap<>();
+   
+   
+   public List<Pickuser> list(Integer comno) {
+      param.clear();
+      param.put("comno", comno);
+      return sqlSession.selectList(NS + "list", param);
+   }   
+
+}
+>>>>>>> refs/remotes/CGH/CGH

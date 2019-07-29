@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD config 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
 		<typeAlias type="logic.User" alias="User"/>
+<<<<<<< HEAD
 		<typeAlias type="logic.Board" alias="Board"/>
 		<typeAlias type="logic.Job" alias="Job"/>
 		<typeAlias type="logic.Company" alias="Company"/>
 		<typeAlias type="logic.Pickuser" alias="Pickuser"/>
 		<typeAlias type="logic.CV" alias="CV"/>
+=======
+		<typeAlias type="logic.Company" alias="Company"/>
+		<typeAlias type="logic.CV" alias="CV"/>
+		<typeAlias type="logic.Career" alias="Career"/>
+		<typeAlias type="logic.Activity" alias="Activity"/>
+		<typeAlias type="logic.LL" alias="LL"/>
+		<typeAlias type="logic.Haveskill" alias="Haveskill"/>
+		<typeAlias type="logic.Portfolio" alias="Portfolio"/>
+		<typeAlias type="logic.Resume" alias="Resume"/>
+		<typeAlias type="logic.ResumeEdit" alias="ResumeEdit"/>
+		<typeAlias type="logic.Resumecomment" alias="Resumecomment"/>
+		<typeAlias type="logic.Setting" alias="Setting"/>
+		<typeAlias type="logic.Pickuser" alias="Pickuser"/>
+		<typeAlias type="logic.Job" alias="Job"/>
+>>>>>>> refs/remotes/CGH/CGH
 		<typeAlias type="logic.Setting" alias="Setting"/>
 	</typeAliases>
 	<mappers>
+<<<<<<< HEAD
+=======
+		<mapper resource="dao/mapper/User.xml"/>
+		<mapper resource="dao/mapper/Company.xml"/>
+>>>>>>> refs/remotes/CGH/CGH
 		<mapper resource="dao/mapper/Board.xml"/>
+<<<<<<< HEAD
 		<mapper resource="dao/mapper/User.xml"/>
 		<mapper resource="dao/mapper/Company.xml"/>
 		<mapper resource="dao/mapper/Job.xml"/>
 		<mapper resource="dao/mapper/Pickuser.xml"/>
 		<mapper resource="dao/mapper/CV.xml"/>
+=======
+		<mapper resource="dao/mapper/Pickuser.xml"/>
+		<mapper resource="dao/mapper/CV.xml"/>
+		<mapper resource="dao/mapper/Job.xml"/>
+>>>>>>> refs/remotes/CGH/CGH
 		<mapper resource="dao/mapper/Setting.xml"/>
 	</mappers>
 </configuration>

@@ -35,6 +35,7 @@ function updateset(){
       <div style="height: 100%; padding-left: 50px; margin-bottom: 30px;"> 
          <c:forEach items="${skill }" var="s_name">
             <div style="font-family: 'Noto Sans KR', sans-serif; width: 200px; display: inline-block; margin-bottom: 5px;">
+<<<<<<< HEAD
             <input type="checkbox" name="skill" value="${s_name }"/>${s_name }</div>
          </c:forEach>
       <script>
@@ -154,5 +155,194 @@ function updateset(){
    <div style="height: 100px;"></div>
 </div> 
 </form:form>
+=======
+            <input type="checkbox" name="skill" value="${s_name }" id="${s_name }"/>${s_name }</div>
+         </c:forEach>
+      <script>
+         $("input:checkbox[name=skill]").click(function(){
+            var count = $("input:checkbox[name=skill]:checked").length;
+            if(count > 5) {
+            	alert("최대 5개 항목만 선택할 수 있습니다.");
+               $(this).prop('checked',false);
+            }
+         });
+      </script>
+      </div>
+      <div style="padding-left: 10px; font-size: 30px; font-family:'Do Hyeon', sans-serif; color: #333c;">복리후생</div>
+      <div style="height: 100%; padding-left: 50px; margin-bottom: 30px;"> 
+         <c:forEach items="${welfare }" var="w_name">
+            <div style="font-family: 'Noto Sans KR', sans-serif; width: 200px; display: inline-block;  margin-bottom: 5px;">
+            <input type="checkbox" name="welfare" value="${w_name }" id="${w_name }">${w_name }</div>
+         </c:forEach>
+      <script>
+         $("input:checkbox[name=welfare]").click(function(){
+            var count = $("input:checkbox[name=welfare]:checked").length;
+            if(count > 5) {
+            	alert("최대 5개 항목만 선택할 수 있습니다.");
+               $(this).prop('checked',false);
+            }
+         });
+      </script>
+      </div>
+      <div style="padding-left: 10px; font-size: 30px; font-family:'Do Hyeon', sans-serif; color: #333c;">우대조건</div>
+      <div style="height: 100%; padding-left: 50px; margin-bottom: 30px;"> 
+         <c:forEach items="${pluse }" var="p_name">
+            <div style="font-family: 'Noto Sans KR', sans-serif; width: 200px; display: inline-block;  margin-bottom: 5px;">
+            <input type="checkbox" name="pluse" value="${p_name }" id="${p_name }">${p_name }</div>
+         </c:forEach>
+      <script>
+         $("input:checkbox[name=pluse]").click(function(){
+            var count = $("input:checkbox[name=pluse]:checked").length;
+            if(count > 5) {
+            	alert("최대 5개 항목만 선택할 수 있습니다.");
+               $(this).prop('checked',false);
+            }
+         });
+      </script>
+      </div>
+      <div style="padding-left: 10px; font-size: 30px; font-family:'Do Hyeon', sans-serif; color: #333c;">지역</div>
+      <div style="height: 100%; padding-left: 50px; margin-bottom: 30px;"> 
+         <c:forEach items="${location }" var="l_name">
+            <div style="font-family: 'Noto Sans KR', sans-serif; width: 200px; display: inline-block;  margin-bottom: 5px;">
+            <input type="checkbox" name="location" value="${l_name }" id="${l_name }">${l_name }</div>
+         </c:forEach>
+      <script>
+         $("input:checkbox[name=location]").click(function(){
+            var count = $("input:checkbox[name=location]:checked").length;
+            if(count > 5) {
+            	alert("최대 5개 항목만 선택할 수 있습니다.");
+               $(this).prop('checked',false);
+            }
+         });
+      </script>
+      </div>
+      <div style="padding-left: 10px; font-size: 30px; font-family:'Do Hyeon', sans-serif; color: #333c;">직종</div>
+      <div style="height: 100%; padding-left: 50px; margin-bottom: 30px;"> 
+         <c:forEach items="${joblist }" var="j_name">
+            <div style="font-family: 'Noto Sans KR', sans-serif; width: 200px; display: inline-block;  margin-bottom: 5px;">
+            <input type="checkbox" name="job" value="${j_name }" id="${j_name }">${j_name }</div>
+         </c:forEach>
+      <script>
+         $("input:checkbox[name=job]").click(function(){
+            var count = $("input:checkbox[name=job]:checked").length;
+            if(count > 5) {
+            	alert("최대 5개 항목만 선택할 수 있습니다.");
+               $(this).prop('checked',false);
+            }
+         });
+      </script>
+      </div>
+      <div style="display: inline-block; margin-right: 200px;">
+      <div style="padding-left: 10px; font-size: 30px; font-family:'Do Hyeon', sans-serif; color: #333c;">급여</div>
+      <div style="height: 100%; padding-left: 50px; margin-bottom: 30px;">
+      <select name="minpay" class="w3-button"> 
+         <c:forEach var="min_pay" begin="1800" end="5000" step="100">
+            <option value="${min_pay }" id="${min_pay }">${min_pay }</option>            
+         </c:forEach>
+      </select>
+      <span>~</span> 
+      <select name="maxpay" class="w3-button"> 
+         <c:forEach var="max_pay" begin="1800" end="5000" step="100">
+            <option value="${max_pay }" id="${max_pay }">${max_pay }</option>            
+         </c:forEach>
+      </select>
+      </div>
+      </div>
+      <div style="display: inline-block;"> 
+      <div style="padding-left: 10px; font-size: 30px; font-family:'Do Hyeon', sans-serif; color: #333c;">학력</div>
+      <div style="height: 100%; padding-left: 50px; margin-bottom: 30px;">
+      <select name="education" class="w3-button">
+         <c:forEach items="${education }" var="e_name">
+            <option value="${e_name }" id="${e_name }">${e_name }</option>
+         </c:forEach>
+      </select>
+      </div>
+      </div>
+      <div style="padding-left: 10px; font-size: 30px; font-family:'Do Hyeon', sans-serif; color: #333c;">근무형태</div>
+      <div style="height: 100%; padding-left: 50px; margin-bottom: 30px;"> 
+         <div style="font-family: 'Noto Sans KR', sans-serif; width: 200px; display: inline-block;  margin-bottom: 5px;">
+         <input type="checkbox" name="workform" value="정규직" id="정규직">정규직</div>
+         <div style="font-family: 'Noto Sans KR', sans-serif; width: 200px; display: inline-block;  margin-bottom: 5px;">
+         <input type="checkbox" name="workform" value="계약직" id="계약직">계약직</div>
+      </div>
+   </div>
+  	<c:if test="${empty setting  }"> 
+   		<input type="submit" class="w3-button w3-round w3-blue" style="float: right;" value="설정하기">
+    </c:if>
+   	<c:if test="${!empty setting  }">
+   		<input type="submit" class="w3-button w3-round w3-blue" style="float: right;" value="수정하기" onclick="javascript:updateset();">
+ 	</c:if> 
+   <div style="height: 100px;"></div>
+</div> 
+</form:form>
+
+
+<c:if test="${!empty setting }">
+<c:forTokens items="${setting.skill }" delims="," var="skill">
+   <script>
+      $(document).ready(function(){
+         $('#${skill }').attr('checked','checked');
+      });
+   </script>
+</c:forTokens>
+<c:forTokens items="${setting.welfare }" delims="," var="welfare">
+   <script>
+      $(document).ready(function(){
+         $('#${welfare }').attr('checked','checked');
+      });
+   </script>
+</c:forTokens>
+<c:forTokens items="${setting.pluse }" delims="," var="pluse">
+   <script>
+      $(document).ready(function(){
+         $('#${pluse }').attr('checked','checked');
+      });
+   </script>
+</c:forTokens>
+<c:forTokens items="${setting.location }" delims="," var="location">
+   <script>
+      $(document).ready(function(){
+         $('#${location }').attr('checked','checked');
+      });
+   </script>
+</c:forTokens>
+<c:forTokens items="${setting.job }" delims="," var="job">
+   <script>
+      $(document).ready(function(){
+         $('#${job }').attr('checked','checked');
+      });
+   </script>
+</c:forTokens>
+<c:forTokens items="${setting.education }" delims="," var="education">
+   <script>
+      $(document).ready(function(){
+         $('#${education }').attr('selected','selected');
+      });
+   </script>
+</c:forTokens>
+<c:forTokens items="${setting.minpay }" delims="," var="minpay">
+   <script>
+      $(document).ready(function(){
+         $('#${minpay }').attr('selected','selected');
+      });
+   </script>
+</c:forTokens>
+<c:forTokens items="${setting.maxpay }" delims="," var="maxpay">
+   <script>
+      $(document).ready(function(){
+         $('#${maxpay }').attr('selected','selected');
+      });
+   </script>
+</c:forTokens>
+<c:forTokens items="${setting.workform }" delims="," var="workform">
+   <script>
+      $(document).ready(function(){
+         $('#${workform }').attr('checked','checked');
+      });
+   </script>
+</c:forTokens>
+</c:if>
+
+>>>>>>> refs/remotes/CGH/CGH
 </body>
 </html>
