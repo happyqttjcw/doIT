@@ -78,7 +78,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: sans-serif, "Open Sans"}
 </div>
 <div class="w3-top" id="deco" style="height: 50px; background-color:#46556d; display: none;">
 		 <div style="width:158px; display: inline-block; padding-left: 30px;"><a href="#" style="font-size:30px; font-weight:bold; color:#ffff; text-decoration: none;">doIT</a></div>
-		 <div style="width:158px; display: inline-block; text-align: center;"><a href="#" style="font-family: 'Noto Sans KR', sans-serif; font-size: 25px; text-decoration: none; color: white;">기업공고</a></div>
+		 <div style="width:158px; display: inline-block; text-align: center;"><a href="recommendcom.shop?userno=${sessionScope.loginUser.userno }" style="font-family: 'Noto Sans KR', sans-serif; font-size: 25px; text-decoration: none; color: white;">기업공고</a></div>
 		 <div style="width:158px; display: inline-block; text-align: center;"><a href="#" style="font-family: 'Noto Sans KR', sans-serif; font-size: 25px; text-decoration: none; color: white;">맞춤 기업</a></div>
 		 <div style="width:158px; display: inline-block; text-align: center;"><a href="#" style="font-family: 'Noto Sans KR', sans-serif; font-size: 25px; text-decoration: none; color: white;">인재 검색</a></div>
 		 <div style="width:158px; display: inline-block; text-align: center;"><a href="#" style="font-family: 'Noto Sans KR', sans-serif; font-size: 25px; text-decoration: none; color: white;">자소서 첨삭</a></div>
@@ -103,16 +103,17 @@ html, body, h1, h2, h3, h4, h5 {font-family: sans-serif, "Open Sans"}
 		 </c:if>
 		 <c:if test="${sessionScope.loginUser != null }">
 		 	<a href="${path }/user/userMyPage.shop?id=${sessionScope.loginUser.id}" style="font-family: 'Noto Sans KR', sans-serif; font-size: 25px; text-decoration: none; color: white; text-align: center;">마이페이지</a>
+		 	<a href="logout.shop" style="font-family: 'Noto Sans KR', sans-serif; font-size: 25px; text-decoration: none; color: white; text-align: center;">로그아웃</a>
 		 </c:if>
 		 </div>
 </div>
-<!-- Page Container -->
 
-<div class="w3-left w3-container w3-content" style="display: inline-block; margin-left: 310px;">
+<!-- Page Container -->
+<div class="w3-container w3-content w3-main" style="max-width:1350px;margin-top:200px;">
   <!-- The Grid -->
   <div class="w3-row" style="" id="leftdeco">
     <!-- Left Column -->
-    <div class="w3-col m3 w3-hide-small">    
+    <div class="w3-col m2 w3-hide-small">    
       <!-- Profile -->
       <div class="w3-card w3-round w3-white" style="width: 300px; padding: 15px 10px 15px 10px;">
         <div style="margin-bottom: 15px; padding-left: 88px;">
@@ -133,10 +134,9 @@ html, body, h1, h2, h3, h4, h5 {font-family: sans-serif, "Open Sans"}
    <br>
   </div>
 </div>
+ <div class="w3-col m10 w3-container" style="padding-left:30px;">
+       <div class="w3-card" style="min-width:500px; max-width:1800px;">
+<decorator:body /></div><br><br><br></div>
 
-<decorator:body />
-<div class="" style="height: 200px; background-color:#EAEAEA; padding: 30px 300px 20px 300px;">
-	<a href="#" style="font-size: 20px; text-decoration: none; color: #8C8C8C;">고객센터 <span style="font-size: 15px; color: #8C8C8C;">(QnA 게시판 및 관리자 채팅)</span></a>
-</div>
 </body>
 </html>

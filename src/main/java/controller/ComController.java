@@ -142,9 +142,11 @@ public class ComController {
 		}
 		fr.close();
 		br.close();
-		int comno = Integer.parseInt(request.getParameter("comno"));
-		Setting s = service.getcomset(comno);
-		mav.addObject("setting", s);
+		if(request.getRequestURI().contains("setting")) {
+			int comno = Integer.parseInt(request.getParameter("comno"));
+			Setting s = service.getcomset(comno);
+			mav.addObject("setting", s);
+		}
 		mav.addObject("job", new Job());
 		return mav;
 	}
@@ -154,7 +156,7 @@ public class ComController {
 		ModelAndView mav = new ModelAndView();
 		if(s.getComno()==null) s.setComno(0);
 		if(s.getUserno()==null) s.setUserno(0);
-		service.addcomset(s);
+		service.addset(s);
 		mav.setViewName("redirect:recommenduser.shop?comno="+s.getComno());
 		return mav;
 	}
@@ -165,7 +167,9 @@ public class ComController {
 		int comno = Integer.parseInt(request.getParameter("comno"));
 		Company com = service.comselect(comno);
 		Setting comset = service.getcomset(comno);
+		List<Setting> recomUser = service.getsameuser(comno);
 		mav.addObject("comset", comset);
+		mav.addObject("recomUser", recomUser);
 		mav.addObject("com",com);
 		mav.addObject("user", new User());
 		mav.setViewName("com/recommenduser");
@@ -399,6 +403,14 @@ public class ComController {
 		model.addAttribute(new Company());
 		return null;
 	}
+
+//	@RequestMapping("searchuser")
+//	public ModelAndView searchuser() {
+//		ModelAndView mav = new ModelAndView();
+//		CV cv = service.getallCV();
+//		mav.addObject("cv",cv);
+//		return null;
+//	}
 
 	// End 기환, 태민 부분//
 }

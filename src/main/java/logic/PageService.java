@@ -5,6 +5,7 @@ import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.AlgorithmParameterSpec;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -185,8 +186,8 @@ public class PageService {
 		companyDao.compasschg(com);
 	}
 
-	public void addcomset(Setting s) {
-		settingDao.addcomset(s);
+	public void addset(Setting s) {
+		settingDao.addset(s);
 	}
 
 	public Setting getcomset(Integer comno) {
@@ -195,8 +196,98 @@ public class PageService {
 	}
 
 	public void updatecomset(Setting s) {
-		settingDao.updateset(s);
+		settingDao.updatecomset(s);
 	}
+	
+	public void updateuserset(Setting s) {
+		settingDao.updateuserset(s);
+	}
+
+	public List<Setting> getsameuser(int comno) {
+		Setting comset = settingDao.getcomset(comno);
+		String[] comskills = comset.getSkill().split(",");
+		String[] comwelfares = comset.getWelfare().split(",");
+		String[] compluses = comset.getPluse().split(",");
+		String[] comlocs = comset.getLocation().split(",");
+		String[] comjobs = comset.getJob().split(",");
+
+		List<Setting> allUserSet = new ArrayList<Setting>();
+		List<Setting> sameUserSet = new ArrayList<Setting>();
+		allUserSet = settingDao.getalluser();
+
+		for (int i = 0; i < allUserSet.size(); i++) {
+			String[] userskills = allUserSet.get(i).getSkill().split(",");
+			String[] userwelfares = allUserSet.get(i).getWelfare().split(",");
+			String[] userpluses = allUserSet.get(i).getPluse().split(",");
+			String[] userlocs = allUserSet.get(i).getLocation().split(",");
+			String[] userjobs = allUserSet.get(i).getJob().split(",");
+
+			for (int j = 0; j < comskills.length; j++) {
+				for (int k = 0; k < userskills.length; k++) {
+					if (comskills[j].equals(userskills[k])) {
+						if (sameUserSet.contains(allUserSet.get(i)))
+							continue;
+						else {
+							sameUserSet.add(allUserSet.get(i));
+							continue;
+						}
+					}
+				}
+			}
+			for (int j = 0; j < comwelfares.length; j++) {
+				for (int k = 0; k < userwelfares.length; k++) {
+					if (comwelfares[j].equals(userwelfares[k])) {
+						if (sameUserSet.contains(allUserSet.get(i)))
+							continue;
+						else {
+							sameUserSet.add(allUserSet.get(i));
+							continue;
+						}
+					}
+				}
+			}
+			for (int j = 0; j < compluses.length; j++) {
+				for (int k = 0; k < userpluses.length; k++) {
+					if (compluses[j].equals(userpluses[k])) {
+						if (sameUserSet.contains(allUserSet.get(i)))
+							continue;
+						else {
+							sameUserSet.add(allUserSet.get(i));
+							continue;
+						}
+					}
+				}
+			}
+			for (int j = 0; j < comlocs.length; j++) {
+				for (int k = 0; k < userlocs.length; k++) {
+					if (comlocs[j].equals(userlocs[k])) {
+						if (sameUserSet.contains(allUserSet.get(i)))
+							continue;
+						else {
+							sameUserSet.add(allUserSet.get(i));
+							continue;
+						}
+					}
+				}
+			}
+			for (int j = 0; j < comjobs.length; j++) {
+				for (int k = 0; k < userjobs.length; k++) {
+					if (comjobs[j].equals(userjobs[k])) {
+						if (sameUserSet.contains(allUserSet.get(i)))
+							continue;
+						else {
+							sameUserSet.add(allUserSet.get(i));
+							continue;
+						}
+					}
+				}
+			}
+		}
+
+		return sameUserSet;
+	}
+
+	
 
 	// End 유저 부분 - 기환//
 

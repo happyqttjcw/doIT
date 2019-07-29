@@ -31,6 +31,7 @@ import exception.LogInException;
 import logic.CV;
 import logic.Company;
 import logic.PageService;
+import logic.Setting;
 import logic.User;
 import security.CipherUtil;
 
@@ -65,7 +66,7 @@ public class UserController {
 				return mav;
 			} else {
 				service.userCreate(user);
-				mav.setViewName("userLogin");
+				mav.setViewName("user/userLogin");
 				mav.addObject("user", user);
 //				mav.addObject("company", new Company());
 			}
@@ -357,6 +358,26 @@ public class UserController {
 	public ModelAndView passChg(User user) {
 		ModelAndView mav = new ModelAndView("user/userMyPage");
 		service.passUpdate(user);
+		return mav;
+	}
+	
+	@PostMapping("usersetting")
+	public ModelAndView comsetting(Setting s) {
+		ModelAndView mav = new ModelAndView();
+		if(s.getComno()==null) s.setComno(0);
+		if(s.getUserno()==null) s.setUserno(0);
+		service.addset(s);
+		mav.setViewName("redirect:recommendcom.shop?userno="+s.getUserno());
+		return mav;
+	}
+	
+	@PostMapping("updateset")
+	public ModelAndView updateset(Setting s) {
+		ModelAndView mav = new ModelAndView();
+		if(s.getComno()==null) s.setComno(0);
+		if(s.getUserno()==null) s.setUserno(0);
+		service.updateuserset(s);
+		mav.setViewName("redirect:recommendcom.shop?userno="+s.getUserno());
 		return mav;
 	}
 }

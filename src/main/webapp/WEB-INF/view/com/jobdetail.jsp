@@ -3,10 +3,10 @@
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
 <c:set var="fields" value="${fn:split(job.field,',')}" />
 <c:set var="nums" value="${fn:split(job.num,',')}" />
-<c:set var="tasks" value="${fn:split(job.task,'@@')}" />
+<c:set var="tasks" value="${fn:split(job.task,',')}" />
 <c:set var="depts" value="${fn:split(job.dept,',')}" />
 <c:set var="positions" value="${fn:split(job.position,',')}" />
-<c:set var="cdts" value="${fn:split(job.cdt,'@@')}" />
+<c:set var="cdts" value="${fn:split(job.cdt,',')}" />
 <% pageContext.setAttribute("newline", "\n"); %>
 <!DOCTYPE html>
 <html>

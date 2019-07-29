@@ -20,7 +20,7 @@ public class SettingDao {
 	private final String NS = "dao.mapper.SettingMapper.";
 	private Map<String, Object> param = new HashMap<>();
 	
-	public void addcomset(Setting s) {
+	public void addset(Setting s) {
 		s.setSetno(sqlSession.getMapper(SettingMapper.class).maxSetno()+1);
 		sqlSession.getMapper(SettingMapper.class).insert(s);
 	}
@@ -31,7 +31,16 @@ public class SettingDao {
 		return sqlSession.selectOne(NS + "list", param);
 	}
 
-	public void updateset(Setting s) {
-		sqlSession.getMapper(SettingMapper.class).update(s);
-	}	
+	public void updatecomset(Setting s) {
+		sqlSession.getMapper(SettingMapper.class).updatecomset(s);
+	}
+
+	public List<Setting> getalluser() {
+		return sqlSession.getMapper(SettingMapper.class).getalluser();
+	}
+
+	public void updateuserset(Setting s) {
+		sqlSession.getMapper(SettingMapper.class).updateuserset(s);
+	}
+
 }
