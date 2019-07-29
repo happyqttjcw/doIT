@@ -21,7 +21,7 @@
 			<value>org.mariadb.jdbc.Driver</value>
 		</property>
 		<property name="jdbcUrl"><value>jdbc:mariadb://localhost:3306/doIT</value></property>
-		<property name="user"><value>doIT</value></property>
+		<property name="user"><value>haein</value></property>
 		<property name="password"><value>1234</value></property>
 		<!-- 최대 connection 객체 수 설정 -->
 		<property name="maxPoolSize"><value>20</value></property>

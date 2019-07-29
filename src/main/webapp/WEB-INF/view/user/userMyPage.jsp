@@ -43,11 +43,10 @@
   <div class="row content">
     <div class="col-sm-3">
     	<!-- Page Container -->
-		<div class="w3-container w3-content w3-main" style="max-width:1350px;margin-top:200px;">    
 		  <!-- The Grid -->
 		  <div class="w3-row">
 		    <!-- Left Column -->
-		    <div class="w3-col m2 w3-hide-small" style="min-width: 420px">
+		    <div class="w3-col m2 w3-hide-small" style="min-width: 220px; float: right;">
 		      <!-- Profile -->
 		      <div class="w3-card w3-round w3-white" style="margin-top:25px;">
 		         <br>
@@ -75,7 +74,6 @@
 		   </div>
 		   <!-- End Middle Column -->
 		  </div>
-		</div>
     </div>
     <div class="col-sm-6">
 		<div style="font-size: 30px;">이력서 현황</div>

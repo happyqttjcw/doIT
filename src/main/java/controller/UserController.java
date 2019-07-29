@@ -284,6 +284,7 @@ public class UserController {
 	public ModelAndView userInfo(String id) {
 		ModelAndView mav = new ModelAndView();
 		User user = service.userSelect(id);
+		user.setEmail(CipherUtil.decrypt(user.getEmail(), user.getPass()));
 		mav.addObject("user", user);
 		return mav;
 	}
