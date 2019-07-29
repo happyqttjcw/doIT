@@ -100,7 +100,7 @@ public class PageService {
 	}
 
 	public void companyCreate(Company company) {
-		String compass = CipherUtil.messageDigest(company.getCompass());
+		String compass = CipherUtil.encrypt(company.getCompass(),company.getComid());
 		company.setCompass(compass);
 		company.setManageremail(CipherUtil.encrypt(company.getManageremail(), company.getCompass()));
 		companyDao.insert(company);
@@ -166,7 +166,6 @@ public class PageService {
 		}
 		com.setManageremail(CipherUtil.encrypt(com.getManageremail(), com.getCompass()));
 		companyDao.comUpdate(com);
-
 	}
 
 	public void deletejob(Integer comno, Integer jobno) {

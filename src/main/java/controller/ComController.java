@@ -56,7 +56,7 @@ public class ComController {
 				return mav;
 			} else {
 				service.companyCreate(company);
-				mav.setViewName("userLogin");
+				mav.setViewName("com/comLogin");
 //				mav.addObject("user", new User());
 				mav.addObject("company", company);
 			}
@@ -74,12 +74,11 @@ public class ComController {
 		if (dbCompany == null) {
 			throw new LogInException("아이디 또는 비밀번호가 틀립니다.", "comLogin.shop");
 		}
-		String compass = CipherUtil.messageDigest(company.getCompass());
+		String compass = CipherUtil.encrypt(company.getCompass(),company.getComid());
 		if (compass.equals(dbCompany.getCompass())) {
 			session.setAttribute("logincom", dbCompany);
 			mav.setViewName("redirect:commypage.shop?comid=" + company.getComid());
 		} else {
-
 			mav.addObject("user", new User());
 			mav.addObject("company", new Company());
 			return mav;
@@ -231,7 +230,7 @@ public class ComController {
 			return mav;
 		}
 		Company dbcom = service.comselect(com.getComid());
-		String password = CipherUtil.messageDigest(com.getCompass());
+		String password = CipherUtil.encrypt(com.getCompass(),com.getComid());
 		if (!dbcom.getCompass().equals(password)) {
 			bindResult.reject("error.login.password");
 			mav = comupdateform(request);
@@ -347,7 +346,7 @@ public class ComController {
 			HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		Company dbcom = service.comselect(com.getComid());
-		String password = CipherUtil.messageDigest(com.getCompass());
+		String password = CipherUtil.encrypt(com.getCompass(),com.getComid());
 
 		if (!dbcom.getCompass().equals(password)) {
 			mav.setViewName("com/close");
@@ -358,7 +357,7 @@ public class ComController {
 			return mav;
 		}
 		try {
-			String cpass = CipherUtil.messageDigest(chgpass);
+			String cpass = CipherUtil.encrypt(chgpass,com.getComid());
 			com.setCompass(cpass);
 			service.compasschg(com);
 			mav.setViewName("com/close");

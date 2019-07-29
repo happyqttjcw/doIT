@@ -80,8 +80,7 @@ body{
                           style="text-decoration:none; font-size:20px;">마이페이지</a>
          </c:otherwise>
      </c:choose>
-     <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
-                 style="text-decoration:none; font-size:20px;">기업 회원 서비스</a>
+     <span style="font-size:20px;" class="w3-bar-item w3-hide-small w3-padding-small w3-text-lime w3-right">기업 회원 서비스</span>
    </div>
 </div>
 
