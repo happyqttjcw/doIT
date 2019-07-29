@@ -155,4 +155,9 @@ public class UserDao {
 		param.put("userno", userno);
 		return sqlSession.selectList(NS+"selectCV",param);
 	}
+	public Setting getSetting(int userno) {
+		param.clear();
+		param.put("userno", userno);
+		return sqlSession.selectOne(NS+"selectSetting",param);
+	}
 }

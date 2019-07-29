@@ -144,6 +144,11 @@ public class UserController {
 			fstr = str[1].split(",");
 			mav.addObject(str[0], fstr);
 		}
+		
+		int userno = Integer.parseInt(request.getParameter("userno"));
+		Setting st = service.getSetting(userno);
+		mav.addObject("setting", st);
+		
 		return mav;
 	}
 

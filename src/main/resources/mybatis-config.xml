@@ -14,6 +14,7 @@
 		<typeAlias type="logic.Resume" alias="Resume"/>
 		<typeAlias type="logic.ResumeEdit" alias="ResumeEdit"/>
 		<typeAlias type="logic.Resumecomment" alias="Resumecomment"/>
+		<typeAlias type="logic.Setting" alias="Setting"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="dao/mapper/User.xml"/>

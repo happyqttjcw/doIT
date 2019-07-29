@@ -122,51 +122,7 @@ html, body, h1, h2, h3, h4, h5 {
 				</c:if></li>
 		</ul>
 	</nav>
-	<!-- Page Container -->
-	<div class="w3-left w3-container w3-content"
-		style="display: inline-block; margin-left: 310px; display: none;">
-		<!-- The Grid -->
-		<div class="w3-row" style="" id="leftdeco">
-			<!-- Left Column -->
-			<div class="w3-col m3 w3-hide-small">
-				<!-- Profile -->
-				<div class="w3-card w3-round w3-white"
-					style="width: 300px; padding: 15px 10px 15px 10px;">
-					<div style="margin-bottom: 15px; padding-left: 88px;">
-						<c:if test="${sessionScope.loginUser.picture == null}">
-							<i class="fas fa-user-circle fa-7x" style="color: #D5D5D5;"></i>
-						</c:if>
-						<c:if test="${sessionScope.loginUser.picture != null}">
-							<img src="img/${sessionScope.loginUser.picture }"
-								style="border-radius: 50%;">
-						</c:if>
-					</div>
-					<!-- 사진 -->
-					<div class="w3-center">
-						<p
-							style="font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #747474; margin: 5px 0 5px 0;">${sessionScope.loginUser.name }님</p>
-						<p style="margin: 5px 0 5px 0;">
-							<a
-								href="${path }/user/userInfo.shop?userno=${sessionScope.loginUser.userno }"
-								style="font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #747474; text-decoration: none;">회원정보관리</a>
-						</p>
-						<p style="margin: 5px 0 5px 0;">
-							<a href="javascript:pass_chg()"
-								style="font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #747474; text-decoration: none;">비밀번호 변경</a>
-						</p>
-					</div>
-					<!-- 회원 간략 정보 -->
-					<div class="w3-center" style="margin-top: 10px;">
-						<a class="w3-button w3-grey"
-							href="${path }/user/settingForm.shop?userno=${sessionScope.loginUser.userno}"
-							style="height: 50px; width: 120px; border-radius: 30px; font-family: 'Noto Sans KR', sans-serif; font-size: 20px; font-weight: bold;">맞춤 설정</a>
-					</div>
-				</div>
-				<br>
-			</div>
-			<br>
-		</div>
-	</div>
+	
 
 	<decorator:body />
 	<div class=""

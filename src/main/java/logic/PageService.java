@@ -229,5 +229,9 @@ public class PageService {
 	}
 	/////////
 
-
+	//¸ÂÃã¼³Á¤//
+	public Setting getSetting(int userno) {
+		return userDao.getSetting(userno);
+	}
+	///////////
 }

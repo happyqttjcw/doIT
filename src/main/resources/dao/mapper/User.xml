@@ -39,4 +39,7 @@
 	<select id="selectResume" resultType="Resume" parameterType="map">
 		select * from resume rs where rs.cvno = ${cvno}
 	</select>
+	<select id="selectSetting" resultType="setting" parameterType="map">
+		select * from setting where userno = ${userno}
+	</select>
 </mapper>

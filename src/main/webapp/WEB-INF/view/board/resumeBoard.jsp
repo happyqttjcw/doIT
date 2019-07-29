@@ -2,6 +2,8 @@
     pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp" %>
 <c:set var="path" value="${pageContext.request.contextPath }" />
+<c:set var="today" value="<%=new java.util.Date() %>"/>
+<<fmt:formatDate value="${today }" var="now" pattern="yyyy-MM-dd"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +84,12 @@
 					        <td class="rb bb">${num }</td>
 					        <td class="rb bb" style="text-align: left;">
 					        <a href="${path }/board/boardDetail.shop?editno=${list.editno }">${list.subject }</a>
-					        <span class="badge text-danger">New</span></td>
+					        <fmt:parseDate value="${list.date }" var="date" pattern="yyyy-MM-dd"/>
+					        <fmt:formatDate value="${date }" var="date" pattern="yyyy-MM-dd"/>
+					        <c:if test="${now == date }">
+					       	  <span class="badge text-danger">New</span>
+					        </c:if>
+					        </td>
 					        <td class="rb bb">${list.name }</td>
 					        <td class="rb bb">${list.date }</td>
 					        <td class="bb">${list.count }</td>
@@ -98,7 +105,6 @@
 				<ul class="pagination justify-content-center">
 			    	<li class="page-item"><a class="page-link text-secondary" href="javascript:void(0);"><</a></li>
 			    	<li class="page-item"><a class="page-link text-secondary" href="javascript:void(0);">1</a></li>
-			    	<li class="page-item"><a class="page-link text-secondary" href="javascript:void(0);">2</a></li>
 			    	<li class="page-item"><a class="page-link text-secondary" href="javascript:void(0);">></a></li>
 			    </ul>
 			</div>
