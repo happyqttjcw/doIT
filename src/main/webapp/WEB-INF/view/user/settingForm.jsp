@@ -193,6 +193,9 @@
 </div>
 </div> 
 </form:form>
+
+
+<c:if test="${!empty setting }">
 <c:forTokens items="${setting.skill }" delims="," var="skill">
 	<script>
 		$(document).ready(function(){
@@ -256,5 +259,8 @@
 		});
 	</script>
 </c:forTokens>
+</c:if>
+
+
 </body>
 </html>

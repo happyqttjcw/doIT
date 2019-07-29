@@ -97,20 +97,20 @@ th, td {
   <h1><b>Do IT</b></h1>
   <p>IT전문 구인구직 site <span class="w3-tag w3-#46556d" >DoIT</span></p>
 </header>
-<div class="w3-container w3-center w3-centered" style="margin-left:30%">
+<div class="w3-container w3-center w3-centered" style="margin-left:30%;">
     <div class="w3-container w3-center w3-centered" style="margin-bottom: 100px;">
      <div class="w3-panel w3-card " style="width: 700px;">
     <p style="font-size: 30px; color: #46556d;">사용자로그인</p>
    <table>
       <tr>
-         <td id="tab1" class="tab w3-center" style="width:50%;">
+         <td id="tab1" class="tab w3-center" style="width:50%; background-color:#46556d; color:white;">
          <a href="${path }/user/userLogin.shop" class="w3-block" style="width:50%; text-decoration:none; margin:auto;">일반 회원</a></td>      
          <td id="tab2" class="tab w3-center" style="width:50%;">
          <a href="${path }/com/comLogin.shop" class="w3-block" style="width:50%; text-decoration:none; margin:auto;">기업 회원</a></td>
       </tr>
    </table>   
 
-   <form:form modelAttribute="user" method="post" action="login.shop" onsubmit="return userlogincheck()">
+   <form:form modelAttribute="user" method="post" action="userLogin.shop" onsubmit="return userlogincheck()">
       <table id="minfo" class="info" border="1" style="border-collapse: collapse;">
          <tr>
             <td>일반 아이디</td>
@@ -130,7 +130,7 @@ th, td {
             <input type="submit" class="w3-center w3-button" style="width: 200px;" value="로그인">
          </td>
          <td class="w3-center" style="border:0px;">
-            <input type="button" class="w3-center w3-button" style="width: 200px;" value="회원가입" onclick="location.href='../user/userEntry.shop'">      
+            <input type="button" class="w3-center w3-button" style="width: 200px;" value="회원가입" onclick="location.href='${path}/user/userEntry.shop'">      
          </td>
       </tr>
       </table>

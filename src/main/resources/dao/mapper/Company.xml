@@ -9,7 +9,7 @@
            where comid = #{comid}
         </if>
         <if test="comno != null">
-        	where comno=#{comno}
+        	where comno = ${comno}
         </if>
    </select>
 </mapper>

@@ -38,6 +38,11 @@ public class UserDao {
 		param.put("id", id);
 		return sqlSession.selectOne(NS+"select",param);
 	}
+	public User selectOneByNo(Integer userno) {
+		param.clear();
+		param.put("userno", userno);
+		return sqlSession.selectOne(NS + "select", param);
+	}
 	public User selectOne(int userno) {
 		param.clear();
 		param.put("userno", userno);

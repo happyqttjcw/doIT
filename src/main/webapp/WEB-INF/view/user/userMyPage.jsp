@@ -25,6 +25,11 @@
 		});
 		calendar.render();
 	});
+
+	function pass_chg() {
+		var op = "width=500px, height=300px, top=150px, left=700";
+		open("passChgForm.shop", "", op);
+	}
 </script>
 <style>
 #calendar {
@@ -47,12 +52,12 @@
 		      <div class="w3-card w3-round w3-white" style="margin-top:25px;">
 		         <br>
 		         <p class="w3-center">
-		            <img src="../img/bonobono.jpg" class="w3-circle" style="height:106px;width:106px">
+		            <img src="${path }/userImg/${picture }" class="w3-circle" style="height:106px;width:106px">
 		        </p>
 		        <div class="w3-center">
 		           <div class="w3-text-green">${sessionScope.loginUser.name } 님</div><br>
-		           <a href="comdetail.shop?comid=${sessionScope.loginUser.id }">회원 정보 관리</a><br><br>
-		           <a href="#"  onclick="passchg();">비밀번호 변경</a><br><br>
+		           <a href="userInfo.shop?id=${sessionScope.loginUser.id }">회원 정보 관리</a><br><br>
+		           <a href="passChgForm.shop"  onclick="passchg();">비밀번호 변경</a><br><br>
 		           <a href="settingForm.shop?userno=${sessionScope.loginUser.userno }" class="w3-center w3-button w3-round w3-blue w3-medium" >맞춤 설정</a>
 		        </div>
 		        <br>
@@ -95,7 +100,7 @@
 				</c:forEach>
 			</div>
 			<div style="width: 900px; height:40px; margin: auto auto 30px auto;">
-			  <a href="${path }/user/myCurriculum.shop?userno=${dbUser.userno }" class="btn btn-primary" style=" color: black; background-color:#EBF7FF; text-decoration: none; border-radius: 50px; float: right;">작성하기</a>
+			  <a href="${path }/user/myCurriculum.shop?userno=${sessionScope.loginUser.userno }" class="btn btn-primary" style=" color: black; background-color:#EBF7FF; text-decoration: none; border-radius: 50px; float: right;">작성하기</a>
 			</div>
 		</div>
 		<div style="font-size: 30px;">자소서 현황</div>

@@ -59,9 +59,9 @@ body{
             <span class="w3-bar-item w3-button">지원자 관리</span>
          </div>
      </div>
-     <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
+     <a href="searchuser.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
                  style="text-decoration:none; font-size:20px;">인재검색</a>
-     <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
+     <a href="recommenduser.shop?comno=${sessionScope.logincom.comno }" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
                  style="text-decoration:none; font-size:20px;">인재추천</a>
      <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
                  style="text-decoration:none; font-size:20px;">찜한 인재</a>
@@ -70,7 +70,7 @@ body{
              <c:when test="${empty logincom }">
               <a href="comEntry.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
                           style="text-decoration:none; font-size:20px;">회원가입</a>
-            <a href="comlogin.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
+            <a href="comLogin.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right"
                           style="text-decoration:none; font-size:20px;">로그인</a>
            </c:when>
            <c:otherwise>
@@ -100,9 +100,9 @@ body{
                <span class="w3-bar-item w3-button">지원자 관리</span>
             </div>
         </div>
-        <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
+        <a href="searchuser.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
                     style="text-decoration:none; font-size:20px;">인재검색</a>
-        <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
+        <a href="recommenduser.shop?comno=${sessionScope.logincom.comno }" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
                     style="text-decoration:none; font-size:20px;">인재추천</a>
         <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime"
                     style="text-decoration:none; font-size:20px;">찜한 인재</a>
@@ -140,7 +140,7 @@ body{
         <div class="w3-center">
            <div class="w3-text-green">${sessionScope.logincom.comname } 님</div><br>
            <a href="comdetail.shop?comid=${sessionScope.logincom.comid }">기업 정보 관리</a><br><br>
-           <a href="setting.shop">기업 맞춤 설정</a><br><br>
+           <a href="setting.shop?comno=${sessionScope.logincom.comno }">기업 맞춤 설정</a><br><br>
            <a href="#"  onclick="passchg();">비밀번호 변경</a><br><br>
            <a href="writejobform.shop" class="w3-center w3-button w3-round w3-blue w3-medium" >공고 등록</a>
         

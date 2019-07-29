@@ -66,7 +66,7 @@ h1>a {
 </head>
 <body>
 	<form:form action="curriculum.shop" modelAttribute="cv" enctype="multipart/form-data" name="f">
-	<input type="hidden" value="${param.userno }">
+	<input type="hidden" value="${param.userno }" name="userno">
 		<div class="container-fluid text-center" style="padding: 5rem 0; background-color: #F6F6F6;">
 			<div class="row content">
 				<div class="col-sm-3"></div>
@@ -161,7 +161,7 @@ h1>a {
 									<div class="col-sm-8">
 										<h3>
 											<select name="school" class="form-control" style="width: 350px;">
-												<option>학력 선택</option>
+												<option value="">학력 선택</option>
 												<c:forEach var="school" items="${education }">
 													<option value="${school }">${school }</option>
 												</c:forEach>
@@ -180,9 +180,8 @@ h1>a {
 												style="padding: 5px 10px;" name="major" value="" placeholder="전공 및 전공계열">
 										</h3>
 										<h3>
-											<select name="daynight" class="form-control"
-												style="width: 350px;">
-												<option>선택</option>
+											<select name="daynight" class="form-control" style="width: 350px;">
+												<option value="">선택</option>
 												<option value="day">주간</option>
 												<option value="night">야간</option>
 											</select>
@@ -225,7 +224,7 @@ h1>a {
 										<h3>
 											<select class="form-control" style="width: 350px;"
 												name="bohun" id="bohun">
-												<option value="none">비대상</option>
+												<option value="">비대상</option>
 												<option value="보훈">대상</option>
 											</select>
 										</h3>
@@ -236,7 +235,7 @@ h1>a {
 										</h3>
 										<h3>
 											<select class="form-control" name="army" style="width: 350px;" id="army">
-												<option>병역대상 선택</option>
+												<option value="">병역대상 선택</option>
 												<option value="군필">군필</option>
 												<option value="미필">미필</option>
 												<option value="면제">면제</option>
@@ -245,7 +244,7 @@ h1>a {
 										</h3>
 										<h3 id="gunbok" style="display: none;">
 											<select class="form-control" name="armytype" style="display: inline-block; width: 111px;" id="armytype">
-												<option>군별 선택</option>
+												<option value="">군별 선택</option>
 												<option value="육군">육군</option>
 												<option value="해군">해군</option>
 												<option value="공군">공군</option>
@@ -257,7 +256,7 @@ h1>a {
 											</select> 
 											<select class="form-control" name="armyclass"
 												style="display: inline-block; width: 111px;" id="armyclass">
-												<option>계급 선택</option>
+												<option value="">계급 선택</option>
 												<option value="이병">이병</option>
 												<option value="일병">일병</option>
 												<option value="상병">상병</option>
@@ -281,7 +280,7 @@ h1>a {
 											</select> 
 											<select class="form-control" name="armyreason"
 												style="display: none; width: 150px;" id="armyreason1">
-												<option>전역 사유 선택</option>
+												<option value="">전역 사유 선택</option>
 												<option value="만기제대">만기제대</option>
 												<option value="의가사제대">의가사제대</option>
 												<option value="의병제대">의병제대</option>
@@ -430,13 +429,13 @@ h1>a {
 										</h3>
 										<div style="margin-bottom: 10px; height: 42px;">
 											<select name="career[0].cposition1" class="form-control" style="display: inline; width: 133px;" id="cposition1">
-												<option>직급 선택</option>
+												<option value="">직급 선택</option>
 												<c:forEach var="position1" items="${position1 }">
 													<option value="${position1 }">${position1 }</option>
 												</c:forEach>
 											</select>
 											<select name="career[0].cposition2" class="form-control" style="display: inline; width: 133px;" id="cposition2">
-												<option>직책 선택</option>
+												<option value="">직책 선택</option>
 												<c:forEach var="position2" items="${position2 }">
 													<option value="${position2 }">${position2 }</option>
 												</c:forEach>
@@ -446,7 +445,7 @@ h1>a {
 										</div>
 										<div style="margin-bottom: 10px; height: 42px; width: 100px;">
 											<select name="career[0].cworktype" class="form-control" style="width: 350px;" id="cworktype">
-												<option>직종 선택</option>
+												<option value="">직종 선택</option>
 												<c:forEach var="job" items="${job }">
 													<option value="${job }">${job }</option>
 												</c:forEach>
@@ -454,7 +453,7 @@ h1>a {
 										</div>
 										<div style="margin-bottom: 10px; height: 42px;">
 											<select name="career[0].cworklocation" class="form-control" style="width: 350px;" id="cworklocation">
-												<option>지역 선택</option>
+												<option value="">지역 선택</option>
 												<c:forEach var="location" items="${location }">
 													<option value="${location }">${location }</option>
 												</c:forEach>
@@ -573,7 +572,7 @@ h1>a {
 										<div class="col-sm-6" id="activity-smallParent">
 											<h3>
 												<select name="activity[0].actype" class="form-control" style="width: 350px;" id="actype">
-													<option>활동구분 선택</option>
+													<option value="">활동구분 선택</option>
 													<option value="교내활동">교내활동</option>
 													<option value="인턴">인턴</option>
 													<option value="자원봉사">자원봉사</option>
@@ -686,7 +685,7 @@ h1>a {
 										</h3>
 										<h3 style="display: none;" class="lang">
 											<select name="ll[0].lllang" class="form-control" style="width: 350px;" id="lllang">
-												<option>언어 선택</option>
+												<option value="">언어 선택</option>
 												<c:forEach var="lang" items="${language }">
 													<option value="${lang }">${lang }</option>
 												</c:forEach>
@@ -704,7 +703,7 @@ h1>a {
 										</h3>
 										<h3 style="display: none;" class="lang">
 											<select name="ll[0].lllevel" class="form-control" style="width: 350px;" id="lllevel">
-												<option>급수 선택</option>
+												<option value="">급수 선택</option>
 												<c:forEach var="lv" items="${level }">
 													<option value="${lv }">${lv }</option>    
 												</c:forEach>
@@ -712,13 +711,13 @@ h1>a {
 										</h3>
 										<h3 style="display: none;" class="lang">
 											<select name="ll[0].llpass" class="form-control" style="width: 350px;" id="llpass">
-												<option>취득여부 선택</option>
+												<option value="">취득여부 선택</option>
 												<option value="pass">취득(pass)</option>
 											</select>
 										</h3>
 										<h3 class="li">
 											<select name="ll[0].llpass" class="form-control" style="width: 350px;" id="llpass">
-												<option>합격구분 선택</option>
+												<option value="">합격구분 선택</option>
 												<option value="1cha">1차합격</option>
 												<option value="2cha">2차합격</option>
 												<option value="filgi">필기합격</option>
@@ -995,7 +994,7 @@ h1>a {
 									<div class="col-sm-8">
 										<h3>
 											<select name="cdtsalary" class="form-control" style="width: 350px;">
-												<option value="rule~rule">회사내규에 따름</option>
+												<option value="회사내규에 따름">회사내규에 따름</option>
 												<option value="0~1400">1400만원 이하</option>
 												<c:forEach var="salary" begin="1400" end="3800" step="200">
 													<option value="${salary }~${salary+200 }">${salary }만원~${salary+200 }만원</option>

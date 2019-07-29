@@ -92,7 +92,7 @@ public class UserController {
 		return mav;
 	}
 
-	@PostMapping("login")
+	@PostMapping("userLogin")
 	public ModelAndView login(User user, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		User dbUser = service.userSelect(user.getId());
@@ -447,7 +447,7 @@ public class UserController {
 
 		service.insertCV(cv);
 
-		mav.setViewName("redirect:userMyPage.shop");
+		mav.setViewName("redirect:userMyPage.shop?userno="+cv.getUserno());
 		return mav;
 	}
 

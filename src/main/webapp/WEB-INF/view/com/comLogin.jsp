@@ -97,7 +97,7 @@ th, td {
   <h1><b>Do IT</b></h1>
   <p>IT전문 구인구직 site <span class="w3-tag w3-#46556d" >DoIT</span></p>
 </header>
-<div class="w3-container w3-center w3-centered" style="margin-left:30%">
+<div class="w3-container w3-center w3-centered" style="margin-left:30%;">
     <div class="w3-container w3-center w3-centered" style="margin-bottom: 100px;">
      <div class="w3-panel w3-card " style="width: 700px;">
     <p style="font-size: 30px; color: #46556d;">사용자로그인</p>
@@ -105,11 +105,11 @@ th, td {
       <tr>
          <td id="tab1" class="tab w3-center" style="width:50%;">
          <a href="${path }/user/userLogin.shop" class="w3-block" style="width:50%; text-decoration:none; margin:auto;">일반 회원</a></td>      
-         <td id="tab2" class="tab w3-center" style="width:50%;">
-         <a href="${path }/com/comLogin.shop" class="w3-block" style="width:50%; text-decoration:none; margin:auto;">기업 회원</a></td>
+         <td id="tab2" class="tab w3-center" style="width:50%; background-color:#46556d; color:white;">
+         <a href="${path }/com/comLogin.shop" class="w3-block" style="width:50%;  text-decoration:none; margin:auto;">기업 회원</a></td>
       </tr>
    </table>   
-   <form:form modelAttribute="company" method="post" action="comlogin.shop" onsubmit="return comlogincheck()">
+   <form:form modelAttribute="company" method="post" action="comLogin.shop" onsubmit="return comlogincheck()">
       <table id="oinfo" class="info" border="1" style="border-collapse: collapse;">   
          <tr>
             <td>기업 아이디</td>

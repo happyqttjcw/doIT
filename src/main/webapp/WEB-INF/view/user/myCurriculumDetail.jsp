@@ -165,7 +165,14 @@
 								<div class="ib" style="width: 50%;">희망직업</div>
 							</div>
 							<div style="height: 20%; width: 100%;">
-							    <div class="ib rs" style="width: 24%;">${cv.cdtsalary } 만원</div>
+							    <div class="ib rs" style="width: 24%;">
+							    <c:choose>
+							    	<c:when test="${cv.cdtsalary == '회사내규에 따름' }">회사내규에 따름</c:when>
+							    	<c:when test="${cv.cdtsalary == '0~1400' }">1400만원 이하</c:when>
+							    	<c:when test="${cv.cdtsalary == '10000~' }">1억이상</c:when>
+							    	<c:otherwise>${cv.cdtsalary }</c:otherwise>
+							    </c:choose>
+							    </div>
 								<div class="ib rs" style="width: 25%;">
 									<c:if test="${empty cv.cdtlocation1 }">-</c:if>
 									<c:if test="${!empty cv.cdtlocation1 }">${cv.cdtlocation1 }</c:if>
@@ -226,7 +233,7 @@
 								<div class="ib rs" style="width: 19%;">${cr2.cworktype }</div>
 								<div class="ib rs" style="width: 19%;">${cr2.cworklocation }</div>
 								<div class="ib rs" style="width: 20%;">${cr2.cdept }</div>
-								<div class="ib rs" style="width: 20%;">${cr2.csalary }만원</div>
+								<div class="ib rs" style="width: 20%;">${cr2.csalary }<c:if test="${!empty cr2.csalary }">만원</c:if></div>
 								<div class="ib" style="width: 20%;">${cr2.ctask }</div>
 							</div>
 							</c:forEach>
