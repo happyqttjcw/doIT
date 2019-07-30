@@ -45,6 +45,14 @@ public class CV {
 	private List<LL> ll;
 	private List<Portfolio> portfolio;
 	private List<Resume> resume;
+	private User user;
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	public int getCvno() {
 		return cvno;
 	}

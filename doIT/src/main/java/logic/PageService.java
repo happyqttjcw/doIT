@@ -2,6 +2,7 @@ package logic;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,8 +58,13 @@ public class PageService {
 	}
 	
 	public List<CV> getCVlist(int userno) {
-		return userDao.getCVlist(userno);
+		 List<CV> list = userDao.getCVlist(userno);
+		 for(CV c : list) {
+			 c.setUser(selectOne(userno));
+		 }
+		 return list;
 	}
+	
 	
 	public void userUpdate(User user, HttpServletRequest request) {
 		if (user.getPictureUrl() != null && !user.getPictureUrl().isEmpty()) {
@@ -70,7 +76,6 @@ public class PageService {
 
 	public void cvImg(CV cv, HttpServletRequest request) {
 		if (cv.getPictureUrl() != null && !cv.getPictureUrl().isEmpty()) {
-			String path = request.getRealPath("/");
 			uploadFileCreate(cv.getPictureUrl(), request, "curriImg/");
 			cv.setPicture(cv.getPictureUrl().getOriginalFilename());
 		}
@@ -79,6 +84,7 @@ public class PageService {
 	private void uploadFileCreate(MultipartFile picture, HttpServletRequest request, String path) {
 		// 업로드된 실제 파일의 이름
 		String orgFile = picture.getOriginalFilename();
+		System.out.println("orgFile : "+orgFile);
 		String uploadPath = request.getServletContext().getRealPath("/") + path;
 		File fpath = new File(uploadPath);
 		if (!fpath.exists())
@@ -261,11 +267,9 @@ public class PageService {
 	      return pickuserDao.list(comno);
 	}
 	public CV getCV(Integer userno, Integer cvno) {
-	      System.out.println("userno" + userno);
 	      return cvDao.selectOne(userno, cvno);
 	}
 	public List<Job> jobselect(Integer comno) {
-	      System.out.println("comno:" + comno);
 	      return jobDao.list(comno);
 	}
 	public Setting getcomset(Integer comno) {
@@ -277,17 +281,31 @@ public class PageService {
 	}
 	public List<Setting> getsameuser(int comno) {
 	      Setting comset = settingDao.getcomset(comno);
-	      
+	      System.out.println("컴셋:"+ comset);
+	      if (comset != null)	
+	          System.out.println("스킬: " +comset.getSkill());
+	      else {
+	    	  return new ArrayList<Setting>();//만약에 해당 기업의 맞춤설정이 없으면 return 함.
+	      }
+	      //comset 이 null이 아닌 경우
 	      String[] comskills = null;
-	      if(comset.getSkill() != null) comskills = comset.getSkill().split(",");
+	      if (comset.getSkill() != null)
+	          comskills = comset.getSkill().split(",");
 	      String[] comwelfares = null;
-	      if(comset.getWelfare() != null) comwelfares = comset.getWelfare().split(",");
+	      if(comset.getWelfare() != null) 
+	    	  comwelfares = comset.getWelfare().split(",");
+	      
 	      String[] compluses = null;
-	      if(comset.getPluse() != null) compluses = comset.getPluse().split(",");
+	      if(comset.getPluse() != null)
+	    	  compluses = comset.getPluse().split(",");
+	      
 	      String[] comlocs = null;
-	      if(comset.getLocation() != null) comlocs = comset.getLocation().split(",");
+	      if(comset.getLocation() != null) 
+	    	  comlocs = comset.getLocation().split(",");
+	      
 	      String[] comjobs = null;
-	      if(comset.getJob() != null) comjobs = comset.getJob().split(",");
+	      if(comset.getJob() != null)  
+	    	  comjobs = comset.getJob().split(",");
 
 	      List<Setting> allUserSet = new ArrayList<Setting>();
 	      List<Setting> sameUserSet = new ArrayList<Setting>();
@@ -295,77 +313,87 @@ public class PageService {
 	      
 	      
 	      for (int i = 0; i < allUserSet.size(); i++) {
-	         String[] userskills = allUserSet.get(i).getSkill().split(",");
-	         String[] userwelfares = allUserSet.get(i).getWelfare().split(",");
-	         String[] userpluses = allUserSet.get(i).getPluse().split(",");
-	         String[] userlocs = allUserSet.get(i).getLocation().split(",");
-	         String[] userjobs = allUserSet.get(i).getJob().split(",");
+	         String[] userskills = null;
+	         if(allUserSet.get(i).getSkill() != null) userskills = allUserSet.get(i).getSkill().split(",") ;
+	         String[] userwelfares = null;
+	         if(allUserSet.get(i).getWelfare() != null) userwelfares = allUserSet.get(i).getWelfare().split(",");
+	         String[] userpluses = null;
+	         if(allUserSet.get(i).getPluse() != null) userpluses = allUserSet.get(i).getPluse().split(",");
+	         String[] userlocs = null;
+	         if(allUserSet.get(i).getLocation() != null) userlocs = allUserSet.get(i).getLocation().split(",");
+	         String[] userjobs = null;
+	         if(allUserSet.get(i).getJob() != null) userjobs = allUserSet.get(i).getJob().split(",");
 
-	         for (int j = 0; j < comskills.length; j++) {
-	            for (int k = 0; k < userskills.length; k++) {
-	               if (comskills[j].equals(userskills[k])) {
-	                  if (sameUserSet.contains(allUserSet.get(i)))
-	                     continue;
-	                  else {
-	                     sameUserSet.add(allUserSet.get(i));
-	                     continue;
-	                  }
-	               }
-	            }
+	         if(comskills != null && userskills != null) {
+		         for (int j = 0; j < comskills.length; j++) {
+		            for (int k = 0; k < userskills.length; k++) {
+		               if (comskills[j].equals(userskills[k])) {
+		                  if (sameUserSet.contains(allUserSet.get(i)))
+		                     continue;
+		                  else {
+		                     sameUserSet.add(allUserSet.get(i));
+		                     continue;
+		                  }
+		               }
+		            }
+		         }
 	         }
-	         if(comset.getSkill() != null)
-	         if(comset.getWelfare() != null)
-	         for (int j = 0; j < comwelfares.length; j++) {
-	            for (int k = 0; k < userwelfares.length; k++) {
-	               if (comwelfares[j].equals(userwelfares[k])) {
-	                  if (sameUserSet.contains(allUserSet.get(i)))
-	                     continue;
-	                  else {
-	                     sameUserSet.add(allUserSet.get(i));
-	                     continue;
-	                  }
-	               }
-	            }
+	         if(comwelfares != null && userwelfares != null) {
+		         for (int j = 0; j < comwelfares.length; j++) {
+		            for (int k = 0; k < userwelfares.length; k++) {
+		               if (comwelfares[j].equals(userwelfares[k])) {
+		                  if (sameUserSet.contains(allUserSet.get(i)))
+		                     continue;
+		                  else {
+		                     sameUserSet.add(allUserSet.get(i));
+		                     continue;
+		                  }
+		               }
+		            }
+		         }
 	         }
-	         if(comset.getPluse() != null)
-	         for (int j = 0; j < compluses.length; j++) {
-	            for (int k = 0; k < userpluses.length; k++) {
-	               if (compluses[j].equals(userpluses[k])) {
-	                  if (sameUserSet.contains(allUserSet.get(i)))
-	                     continue;
-	                  else {
-	                     sameUserSet.add(allUserSet.get(i));
-	                     continue;
-	                  }
-	               }
-	            }
+	         if(compluses != null && userpluses != null) {
+		         for (int j = 0; j < compluses.length; j++) {
+		            for (int k = 0; k < userpluses.length; k++) {
+		               if (compluses[j].equals(userpluses[k])) {
+		                  if (sameUserSet.contains(allUserSet.get(i)))
+		                     continue;
+		                  else {
+		                     sameUserSet.add(allUserSet.get(i));
+		                     continue;
+		                  }
+		               }
+		            }
+		         }
 	         }
-	         if(comset.getLocation() != null)
-	         for (int j = 0; j < comlocs.length; j++) {
-	            for (int k = 0; k < userlocs.length; k++) {
-	               if (comlocs[j].equals(userlocs[k])) {
-	                  if (sameUserSet.contains(allUserSet.get(i)))
-	                     continue;
-	                  else {
-	                     sameUserSet.add(allUserSet.get(i));
-	                     continue;
-	                  }
-	               }
-	            }
+	         if(comlocs != null && userlocs != null) {
+		         for (int j = 0; j < comlocs.length; j++) {
+		            for (int k = 0; k < userlocs.length; k++) {
+		               if (comlocs[j].equals(userlocs[k])) {
+		                  if (sameUserSet.contains(allUserSet.get(i)))
+		                     continue;
+		                  else {
+		                     sameUserSet.add(allUserSet.get(i));
+		                     continue;
+		                  }
+		               }
+		            }
+		         }
 	         }
-	         if(comset.getJob() != null)
-	         for (int j = 0; j < comjobs.length; j++) {
-	            for (int k = 0; k < userjobs.length; k++) {
-	               if (comjobs[j].equals(userjobs[k])) {
-	                  if (sameUserSet.contains(allUserSet.get(i)))
-	                     continue;
-	                  else {
-	                     sameUserSet.add(allUserSet.get(i));
-	                     continue;
-	                  }
-	               }
-	            }
-	         }
+	         if(comjobs != null && userjobs != null) {
+		         for (int j = 0; j < comjobs.length; j++) {
+		            for (int k = 0; k < userjobs.length; k++) {
+		               if (comjobs[j].equals(userjobs[k])) {
+		                  if (sameUserSet.contains(allUserSet.get(i)))
+		                     continue;
+		                  else {
+		                     sameUserSet.add(allUserSet.get(i));
+		                     continue;
+		                  }
+		               }
+		            }
+		         }
+		      }
 	      }
 	      return sameUserSet;
 	}
@@ -373,8 +401,8 @@ public class PageService {
 	      settingDao.updatecomset(s);
 	}
 	public void comUpdate(Company com, HttpServletRequest request) {
-		  if (com.getCompicture() != null && com.getCompicture().isEmpty()) {
-		     uploadFileCreate(com.getCompicture(), request, "com/img/");
+		  if(com.getCompicture() != null && !com.getCompicture().isEmpty()) {
+		     uploadFileCreate(com.getCompicture(), request, "comImg/");
 		     com.setCompic(com.getCompicture().getOriginalFilename());
 		  }
 		  com.setManageremail(CipherUtil.encrypt(com.getManageremail(), com.getCompass()));

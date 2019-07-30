@@ -53,14 +53,16 @@ function deljob(){
 					</c:forEach>
 					</table>
 			</div>
+    <br>
+    <input type="submit" class="w3-button w3-round w3-blue" value="선택공고삭제">
+    <a href="writejobform.shop?comid=${sessionScope.logincom.comid }" class="w3-button w3-round w3-blue">공고 등록</a>
 	</c:if>
 	<c:if test="${empty job }">
 	<hr>
           등록된 공고가 없습니다.
-    </c:if>
-    <br>
-    <input type="submit" class="w3-button w3-round w3-blue" value="선택공고삭제">
+    <br><br>
     <a href="writejobform.shop?comid=${sessionScope.logincom.comid }" class="w3-button w3-round w3-blue">공고 등록</a>
+    </c:if>
 </form>
     <br><br>
 </div>

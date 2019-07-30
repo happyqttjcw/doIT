@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.SettingMapper">
-   <select id="list" resultType="setting" parameterType="map">
-      select * from setting 
-      <if test="userno!=null">
-         where userno=#{userno}
-      </if>
-      <if test="comno!=null">
-         where comno=#{comno}
-      </if>
+   <select id="list" parameterType="Setting" resultType="Setting">
+      select * from setting  
+        <if test="userno != null">
+           where userno = ${userno}
+        </if>
+        <if test="comno != null">
+        	where comno = ${comno}
+        </if>
    </select>
 </mapper>

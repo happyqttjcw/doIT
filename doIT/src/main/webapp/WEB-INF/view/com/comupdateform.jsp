@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
    pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <title>기업정보수정</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <style type="text/css">
 body, tr, td, th {
    font-family: 'Noto Sans KR', sans-serif;
@@ -54,21 +57,40 @@ function salesreset(){
    $('#comsales').val('');
 }
 
-
 </script>
 </head>
 <body>
    <div class="w3-container" style="margin-bottom: 100px;">
       <div class="w3-panel w3-card">
          <p style="font-size: 30px; color: green;">기업정보수정</p>
-         <form:form modelAttribute="company" action="comupdateform.shop" method="post">
+         <form:form modelAttribute="company" action="comupdateform.shop" enctype="multipart/form-data">
             <spring:hasBindErrors name="company">
                <font color="red"> <c:forEach items="${errors.globalErrors}"
                      var="error">
                      <spring:message code="${error.code}" />
                   </c:forEach></font>
             </spring:hasBindErrors>
-            
+            <div class="col-sm-3 sidenav" style="margin-top: 64px;">
+				<input type="hidden" name="compic" id="picture">
+				<img class="img-thumbnail" src="${path }/comImg/${company.compic }" style="width: 190px; height: 220px;" id="pic">
+				<input type="file" name="compicture" id="file">
+			</div>
+			<script>
+				function readURL(input) {
+				    if (input.files && input.files[0]) {
+				        var reader = new FileReader();
+				        reader.onload = function(e) {
+				            $('#pic').attr('src', e.target.result);
+				            $('#picture').attr('value',e.target.result);
+				        }
+				        reader.readAsDataURL(input.files[0]);
+				    }
+				}
+				
+				$("#file").change(function() {
+				    readURL(this);
+				});
+			</script>
             <table>
                <tr>
                   <td style="width: 25%">기업 ID</td>

@@ -47,15 +47,15 @@
 </style>
 </head>
 <body>
-<div class="container-fluid">
+<div class="w3-container">
 	<div class="row content">
 		<div class="col-sm-2 h100"></div>
-		<div class="col-sm-8 h100 m-h1000 p1015" style="min-width: 1266px; padding-top: 30px;">
+		<div class="col-sm-8 h100 m-h1000 p1015" style="min-width: 1000px; padding-top: 30px;">
 			<div class="w3-card" style="background-color: #eee1;">
 				<div class="p015" style="font-size: 25px; margin-bottom: 35px; padding: 19px 25px; height: 75px;">${cv.subject }<hr></div>
-				<div class="p1025 row content" style="min-height: 120px; height: 100%; min-width: 1266px;">
+				<div class="p1025 row content" style="min-height: 120px; height: 100%; min-width: 1000px;">
 					<div class="col-sm-3" style="text-align: center; min-width: 265px; width: 290px;"><img src="${path }/curriImg/${cv.picture }" style="height: 200px; width: 160px;"></div>
-					<div class="col-sm-9" style="padding: 0 78px 0 0; min-width: 800px;">
+					<div class="col-sm-9" style="padding: 0 78px 0 72px; min-width: 800px;">
 						<div style="border: 1px #d6d6d6 solid; min-height: 200px;"><!-- inner div -->
 							<div class="blue bs" style="height: 20%; width: 100%;">      
 								<div class="ib rs" style="width: 23%;">이름</div>
@@ -301,7 +301,14 @@
 								</div>
 								<div class="ib rs" style="width: 25%;">
 									<c:if test="${empty li.llpass }">-</c:if>
-									<c:if test="${!empty li.llpass }">${li.llpass }</c:if>
+									<c:if test="${!empty li.llpass }">
+											${(li.llpass==',final')?"최종합격":
+									 			(li.llpass==',1cha')?"1차 합격":
+									 			(li.llpass==',2cha')?"2차 합격":
+									 			(li.llpass==',filgi')?"필기 합격":
+									 			(li.llpass==',silgi')?"실기 합격":"최종합격"
+									 		}
+										</c:if>
 								</div>
 								<div class="ib" style="width: 25%;">
 									<c:if test="${empty li.llpassdate }">-</c:if>
@@ -407,13 +414,13 @@
 							</div>
 							</c:forEach>
 						</div>
-					</div>
+					</div><br><br>
+					<div class="w3-center">
+						<a href="recommenduser.shop?comno=${sessionScope.logincom.comno }" class="w3-button w3-blue w3-round">목록으로</a>
+						<a href="#" class="w3-button w3-blue w3-round">인재 찜하기</a>
+					</div><br><br>
 				</div>
 			</div>
-		</div>
-		<div class="col-sm-2 h100" style="width: 100%; min-height: 500px; padding: 30px 15px;">
-			<a href="${path }/user/userMyPage.shop?userno=${cv.userno }" class="btn btn-secondary btn-block">뒤로가기</a>
-			<a href="${path }/user/myCurriculum.shop?cvno=${cv.cvno }" class="btn btn-primary btn-block">수정하기</a>
 		</div>
 	</div>
 </div>

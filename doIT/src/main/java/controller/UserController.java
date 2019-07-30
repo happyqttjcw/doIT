@@ -170,7 +170,7 @@ public class UserController {
 		int maxNo = service.likeMaxNo();
 		st.setSetno(maxNo + 1);
 		st.setUserno(setting.getUserno());
-		st.setComno(null);
+		st.setComno(0);
 
 		if (setting.getSkill() != null) {
 			length = setting.getSkill().length;

@@ -100,7 +100,6 @@ public class Company {
    }
 
    public void setManageremail(String manageremail) {
-      System.out.println(manageremail);
       this.manageremail = manageremail;
    }
 

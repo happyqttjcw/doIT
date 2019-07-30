@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
    pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +33,7 @@ th, td {
          <table>
             <tr>
                <td rowspan="2"><div class="w3-panel w3-card w3-center">
-                     <img style="width: 200px; height: 250px;" src="../img/bonobono.jpg">
+                     <img style="width: 200px; height: 250px;" src="${path }/comImg/${com.compic }">
                   </div></td>
                <td rowspan="2" width="70%">
                   <table
