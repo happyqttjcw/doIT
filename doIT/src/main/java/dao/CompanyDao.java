@@ -49,4 +49,5 @@ public class CompanyDao {
 		sqlSession.getMapper(CompanyMapper.class).compasschg(com);
 
 	}
+
 }

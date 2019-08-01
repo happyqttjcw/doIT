@@ -14,34 +14,58 @@ import logic.Job;
 
 @Repository
 public class JobDao {
-   @Autowired
-   private SqlSessionTemplate sqlSession;
-   private final String NS = "dao.mapper.JobMapper.";
-   private Map<String, Object> param = new HashMap<>();
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	private final String NS = "dao.mapper.JobMapper.";
+	private Map<String, Object> param = new HashMap<>();
 
-   public List<Job> list(int comno) {
-      param.clear();
-      param.put("comno", comno);
-      return sqlSession.selectList(NS + "list", param);
-   }
+	public List<Job> list(int comno) {
+		param.clear();
+		param.put("comno", comno);
+		return sqlSession.selectList(NS + "list", param);
+	}
 
-   public void writejob(Job job) {
-      job.setJobno(sqlSession.getMapper(JobMapper.class).maxComno()+1);
-      sqlSession.getMapper(JobMapper.class).insert(job);
-   }
+	public void writejob(Job job) {
+		job.setJobno(sqlSession.getMapper(JobMapper.class).maxComno() + 1);
+		sqlSession.getMapper(JobMapper.class).insert(job);
+	}
 
-   public Job jobselect(Integer jobno, Integer comno) {
-      param.clear();
-      param.put("comno", comno);
-      param.put("jobno", jobno);
-      return sqlSession.selectOne(NS + "list", param);
-   }
+	public Job jobselect(Integer jobno, Integer comno) {
+		param.clear();
+		param.put("comno", comno);
+		param.put("jobno", jobno);
+		return sqlSession.selectOne(NS + "list", param);
+	}
 
-   public void deletejob(Job job) {
-      sqlSession.getMapper(JobMapper.class).deletejob(job);
-   }
+	public void deletejob(Job job) {
+		sqlSession.getMapper(JobMapper.class).deletejob(job);
+	}
 
-   public void deletejobbyjobno(Job job) {
-      sqlSession.getMapper(JobMapper.class).deletejobbyjobno(job);
-   }
+	public void deletejobbyjobno(Job job) {
+		sqlSession.getMapper(JobMapper.class).deletejobbyjobno(job);
+	}
+
+	public List<Job> getJobList() {
+		param.clear();
+		return sqlSession.selectList(NS + "list", param);
+	}
+
+	public List<Job> getJobListByStr(String search, String type) {
+		param.clear();
+		param.put("search", search);
+		param.put("type", type);
+		return sqlSession.selectList(NS + "list", param);
+	}
+
+	public int getJobCnt() {
+		param.clear();
+		return sqlSession.selectOne(NS + "listCnt", param);
+	}
+
+	public int getJobCnt2(String search, String type) {
+		param.clear();
+		param.put("search", search);
+		param.put("type", type);
+		return sqlSession.selectOne(NS + "listCnt", param);
+	}
 }

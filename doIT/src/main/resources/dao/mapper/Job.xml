@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.JobMapper">
-   <select id="list" parameterType="Job" resultType="Job">
+   <select id="list" parameterType="map" resultType="Job">
       select * from job 
         <if test="comno!=null and jobno!=null">
             where comno=#{comno} and jobno=#{jobno}
@@ -11,5 +11,15 @@
         <if test="comno != null and jobno==null">
            where comno = #{comno}
         </if>
+        <if test="comno == null and jobno == null and type != null and search != null">
+           where ${type} like '%${search}%'
+        </if>
+        order by jdate desc
    </select>
-</mapper>
+   <select id="listCnt" parameterType="map" resultType="int">
+      select count(*) from job
+      <if test="type != null and search != null">
+         where ${type} like '%${search}%'
+      </if>
+   </select>
+</mapper>   

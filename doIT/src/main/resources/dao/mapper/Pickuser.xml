@@ -5,8 +5,11 @@
 <mapper namespace="dao.mapper.PickuserMapper">
    <select id="list" resultType="Pickuser" parameterType="Pickuser">
       select * from pickuser 
-      <if test="comno!=null">
+      <if test="comno!=null and cvno==null">
          where comno=#{comno}
+      </if>
+      <if test="comno!=null and cvno!=null">
+         where comno=#{comno} and cvno=#{cvno}
       </if>
    </select>
 </mapper>

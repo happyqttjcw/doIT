@@ -57,10 +57,19 @@
       </div>
    </div><br><br>
    <h3 style="text-align:left;">회원님과 높은 확률로 매칭된 <font color="blue" style="font-weight:bold;">추천인재</font></h3><br>
-   <c:forEach var="cv" items="${viewcv }">
+   <c:forEach var="cv" items="${viewcv }" varStatus="stat">
    		<div class="w3-card">
    		<table class="w3-table">
           <tr>
+          	 <td rowspan="2" style="width:3%;"><br><br>
+	          	 <c:if test="${cv.pu.pickuserno==0 }">
+	          	 	<a href="addpickuser.shop?comno=${com.comno }&cvno=${cv.cvno}" onclick="return addpickuser()">
+	          	 	<i class="fa fa-star-o" id="${stat.index }" style="font-size:15px; text-align: center;" ></i></a>
+	          	 </c:if>
+	          	 <c:if test="${cv.pu.pickuserno!=0 }">
+	          	 	<a href="delpickuser.shop?comno=${com.comno }&cvno=${cv.cvno}" onclick="return delpickuser()">
+	          	 	<i class="fa fa-star checked" id="fullstar${stat.index }" style="font-size:15px; text-align: center; color:orange;"></i></a>
+	          	 </c:if></td>
              <td rowspan="2" class="w3-center"><img style="width: 100px; height: 130px;" src="${path }/curriImg/${cv.picture }"></td>
              <td colspan="2" width="20%" style="font-size:25px;">${cv.user.name }</td>
              <td rowspan="2" width="60%" style="margin:10px;">

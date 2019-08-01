@@ -84,4 +84,8 @@ public interface UserMapper {
 
 	@Insert("insert into resume (resumeno,cvno,jemokno,rsubject,rcontent,rdate) values(#{resumeno},#{cvno},#{jemokno},#{rsubject},#{rcontent},now())")
 	void insertResume(Resume rs);
+
+	@Update("update setting set skill=#{skill},welfare=#{welfare},pluse=#{pluse},location=#{location},job=#{job},salary=#{salary},education=#{education},workform=#{workform} where setno=#{setno}")
+	void likeUpdate(Setting st);
+
 }

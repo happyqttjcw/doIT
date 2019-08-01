@@ -114,17 +114,20 @@ function updateset(){
       <div style="display: inline-block; margin-right: 200px;">
       <div style="padding-left: 10px; font-size: 30px; font-family:'Do Hyeon', sans-serif; color: #333c;">급여</div>
       <div style="height: 100%; padding-left: 50px; margin-bottom: 30px;">
-      <select name="minpay" class="w3-button"> 
-         <c:forEach var="min_pay" begin="1800" end="5000" step="100">
-            <option value="${min_pay }" id="${min_pay }">${min_pay }</option>            
+       
+       <select name="salary" class="w3-button">
+         <option value="회사내규에 따름">회사내규에 따름</option>
+         <option value="면접후 결정">면접후 결정</option>
+         <option value="1400만원 이하">1400만원 이하</option>
+         <c:forEach var="pay" begin="1400" end="3800" step="200">
+            <option value="${pay}~${pay+200}">${pay }~${pay+200 }</option>
          </c:forEach>
-      </select>
-      <span>~</span> 
-      <select name="maxpay" class="w3-button"> 
-         <c:forEach var="max_pay" begin="1800" end="5000" step="100">
-            <option value="${max_pay }" id="${max_pay }">${max_pay }</option>            
+         <c:forEach var="pay" begin="4000" end="9000" step="1000">
+            <option value="${pay}~${pay+1000}">${pay }~${pay+1000 }</option>
          </c:forEach>
+         <option value="1억원 이상">1억원 이상</option>
       </select>
+
       </div>
       </div>
       <div style="display: inline-block;"> 
@@ -199,20 +202,11 @@ function updateset(){
       });
    </script>
 </c:forTokens>
-<c:forTokens items="${setting.minpay }" delims="," var="minpay">
-   <script>
-      $(document).ready(function(){
-         $('#${minpay }').attr('selected','selected');
-      });
-   </script>
-</c:forTokens>
-<c:forTokens items="${setting.maxpay }" delims="," var="maxpay">
-   <script>
-      $(document).ready(function(){
-         $('#${maxpay }').attr('selected','selected');
-      });
-   </script>
-</c:forTokens>
+<script>
+   $(document).ready(function(){
+      $('select[name="salary"]').children('option[value="${setting.salary }"]').attr('selected','selected');
+   });
+</script>
 <c:forTokens items="${setting.workform }" delims="," var="workform">
    <script>
       $(document).ready(function(){

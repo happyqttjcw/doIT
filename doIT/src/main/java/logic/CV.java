@@ -46,6 +46,15 @@ public class CV {
 	private List<Portfolio> portfolio;
 	private List<Resume> resume;
 	private User user;
+	private Pickuser pu;
+	
+	
+	public Pickuser getPu() {
+		return pu;
+	}
+	public void setPu(Pickuser pu) {
+		this.pu = pu;
+	}
 	public User getUser() {
 		return user;
 	}

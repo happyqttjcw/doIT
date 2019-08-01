@@ -15,6 +15,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -117,6 +118,7 @@ public class ComController {
 		}
 		job = service.jobselect(com.getComno());
 
+		session.setAttribute("logincom", com);
 		mav.addObject("pulist", pulist);
 		mav.addObject("com", com);
 		mav.addObject("job", job);
@@ -168,17 +170,16 @@ public class ComController {
 		Setting comset = service.getcomset(comno);
 		List<Setting> recomUser = new ArrayList<Setting>();
 		recomUser = service.getsameuser(comno);
-
 		List<CV> cv = new ArrayList<CV>();
 		List<CV> viewcv = new ArrayList<CV>();
 
 		for (int i = 0; i < recomUser.size(); i++) {
 			for (int j = 0; j < service.getCVlist(recomUser.get(i).getUserno()).size(); j++) {
-				cv = service.getCVlist(recomUser.get(i).getUserno());
+				cv = service.getCVlist(recomUser.get(i).getUserno(),comno);
 				viewcv.add(cv.get(j));
 			}
 		}
-
+		
 		mav.addObject("viewcv", viewcv);
 		mav.addObject("comset", comset);
 		mav.addObject("com", com);
@@ -267,6 +268,7 @@ public class ComController {
 		try {
 			com.setCompass(password);
 			service.comUpdate(com, request);
+			mav.addObject("com", service.comselect(com.getComid()));
 			mav.setViewName("redirect:commypage.shop?comid=" + com.getComid());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -428,13 +430,68 @@ public class ComController {
 		return null;
 	}
 
-//   @RequestMapping("searchuser")
-//   public ModelAndView searchuser() {
-//      ModelAndView mav = new ModelAndView();
-//      CV cv = service.getallCV();
-//      mav.addObject("cv",cv);
-//      return null;
-//   }
+//	@RequestMapping("searchuser")
+//	public ModelAndView searchuser(HttpServletRequest request) {
+//		ModelAndView mav = new ModelAndView();
+//		List<CV> cv = new ArrayList<CV>();
+//		cv = service.getallCV();
+//		mav.addObject("cvlist",cv);
+//		return mav;
+//	}
 
-	// End 기환, 태민 부분//
+	@GetMapping("addpickuser")
+	public ModelAndView addpickuser(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		Integer comno = Integer.parseInt(request.getParameter("comno"));
+		Integer cvno = Integer.parseInt(request.getParameter("cvno"));
+		Pickuser pu = new Pickuser();
+		pu.setPickuserno(service.getpumaxno()+1);
+		pu.setComno(comno);
+		pu.setCvno(cvno);
+		service.addpickuser(pu);
+		mav.setViewName("redirect:recommenduser.shop?comno="+comno);
+		return mav;
+	}
+
+	@GetMapping("delpickuser")
+	public ModelAndView delpickuser(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		Integer comno = Integer.parseInt(request.getParameter("comno"));
+		Integer cvno = Integer.parseInt(request.getParameter("cvno"));
+		Pickuser pu = new Pickuser();
+		pu.setComno(comno);
+		pu.setCvno(cvno);
+		service.delpickuser(pu);
+		mav.setViewName("redirect:recommenduser.shop?comno="+comno);
+		return mav;
+	}
+
+	@GetMapping("pickeduser")
+	public ModelAndView pickeduser(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		Integer comno = Integer.parseInt(request.getParameter("comno"));
+		List<Pickuser> pu = new ArrayList<Pickuser>();
+		pu = service.getlist(comno);
+		for(Pickuser p : pu) {
+			p.setCv(service.getCV(p.getCvno()));
+			p.setUser(service.selectOne(p.getCv().getUserno()));
+		}
+		mav.addObject("pulist",pu);
+		return mav;
+	}
+	
+	@PostMapping("deletepu")
+	public ModelAndView deletepu(HttpServletRequest request, String comno, String cvno) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(cvno);
+		String[] cvnos = cvno.split(",");
+		System.out.println(cvnos);
+		for(String s : cvnos) {
+			service.deletepu(Integer.parseInt(comno), Integer.parseInt(s));
+		}
+		mav.setViewName("redirect:pickeduser.shop?comno="+Integer.parseInt(comno));
+		return mav;
+	}
+	
+
 }

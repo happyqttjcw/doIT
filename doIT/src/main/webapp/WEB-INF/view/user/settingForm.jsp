@@ -197,67 +197,58 @@
 
 <c:if test="${!empty setting }">
 <c:forTokens items="${setting.skill }" delims="," var="skill">
-	<script>
-		$(document).ready(function(){
-			$('#${skill }').attr('checked','checked');
-		});
-	</script>
+   <script>
+      $(document).ready(function(){
+         $('#${skill }').attr('checked','checked');
+      });
+   </script>
 </c:forTokens>
 <c:forTokens items="${setting.welfare }" delims="," var="welfare">
-	<script>
-		$(document).ready(function(){
-			$('#${welfare }').attr('checked','checked');
-		});
-	</script>
+   <script>
+      $(document).ready(function(){
+         $('#${welfare }').attr('checked','checked');
+      });
+   </script>
 </c:forTokens>
 <c:forTokens items="${setting.pluse }" delims="," var="pluse">
-	<script>
-		$(document).ready(function(){
-			$('#${pluse }').attr('checked','checked');
-		});
-	</script>
+   <script>
+      $(document).ready(function(){
+         $('#${pluse }').attr('checked','checked');
+      });
+   </script>
 </c:forTokens>
 <c:forTokens items="${setting.location }" delims="," var="location">
-	<script>
-		$(document).ready(function(){
-			$('#${location }').attr('checked','checked');
-		});
-	</script>
+   <script>
+      $(document).ready(function(){
+         $('#${location }').attr('checked','checked');
+      });
+   </script>
 </c:forTokens>
 <c:forTokens items="${setting.job }" delims="," var="job">
-	<script>
-		$(document).ready(function(){
-			$('#${job }').attr('checked','checked');
-		});
-	</script>
+   <script>
+      $(document).ready(function(){
+         $('#${job }').attr('checked','checked');
+      });
+   </script>
 </c:forTokens>
 <c:forTokens items="${setting.education }" delims="," var="education">
-	<script>
-		$(document).ready(function(){
-			$('#${education }').attr('selected','selected');
-		});
-	</script>
+   <script>
+      $(document).ready(function(){
+         $('#${education }').attr('selected','selected');
+      });
+   </script>
 </c:forTokens>
-<c:forTokens items="${setting.minpay }" delims="," var="minpay">
-	<script>
-		$(document).ready(function(){
-			$('#${minpay }').attr('selected','selected');
-		});
-	</script>
-</c:forTokens>
-<c:forTokens items="${setting.maxpay }" delims="," var="maxpay">
-	<script>
-		$(document).ready(function(){
-			$('#${maxpay }').attr('selected','selected');
-		});
-	</script>
-</c:forTokens>
+<script>
+   $(document).ready(function(){
+      $('select[name="salary"]').children('option[value="${setting.salary }"]').attr('selected','selected');
+   });
+</script>
 <c:forTokens items="${setting.workform }" delims="," var="workform">
-	<script>
-		$(document).ready(function(){
-			$('#${workform }').attr('checked','checked');
-		});
-	</script>
+   <script>
+      $(document).ready(function(){
+         $('#${workform }').attr('checked','checked');
+      });
+   </script>
 </c:forTokens>
 </c:if>
 
