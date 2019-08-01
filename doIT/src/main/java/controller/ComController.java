@@ -29,6 +29,7 @@ import logic.CV;
 import logic.Company;
 import logic.Job;
 import logic.PageService;
+import logic.Pickjob;
 import logic.Pickuser;
 import logic.Setting;
 import logic.User;
@@ -110,11 +111,11 @@ public class ComController {
 			pulist = service.getlist(com.getComno());
 		}
 
-		for (int i = 0; i < pulist.size(); i++) {
-			cv = service.getCV(pulist.get(i).getUserno(), pulist.get(i).getCvno());
-			user = service.userSelect(pulist.get(i).getUserno());
-			pulist.get(i).setUser(user);
-			pulist.get(i).setCv(cv);
+		for (Pickuser p : pulist) {
+			cv = service.getCV(p.getCvno());
+			user = service.userSelect(cv.getUserno());
+			p.setUser(user);
+			p.setCv(cv);
 		}
 		job = service.jobselect(com.getComno());
 
@@ -175,11 +176,11 @@ public class ComController {
 
 		for (int i = 0; i < recomUser.size(); i++) {
 			for (int j = 0; j < service.getCVlist(recomUser.get(i).getUserno()).size(); j++) {
-				cv = service.getCVlist(recomUser.get(i).getUserno(),comno);
+				cv = service.getCVlist(recomUser.get(i).getUserno(), comno);
 				viewcv.add(cv.get(j));
 			}
 		}
-		
+
 		mav.addObject("viewcv", viewcv);
 		mav.addObject("comset", comset);
 		mav.addObject("com", com);
@@ -198,6 +199,8 @@ public class ComController {
 		cv.setHaveskill(service.getHaveskill(cvno));
 		cv.setPortfolio(service.getPortfolio(cvno));
 		cv.setResume(service.getResume(cvno));
+
+		System.out.println(cv);
 
 		mav.addObject("cv", cv);
 		return mav;
@@ -303,16 +306,35 @@ public class ComController {
 	}
 
 	@RequestMapping("jobdetail")
-	public ModelAndView jobdetail(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		Integer jobno = Integer.parseInt(request.getParameter("jobno"));
-		Integer comno = Integer.parseInt(request.getParameter("comno"));
-		Job job = service.jobselect(jobno, comno);
-		Company com = service.comselect(comno);
-		mav.addObject("job", job);
-		mav.addObject("com", com);
-		return mav;
-	}
+	   public ModelAndView jobdetail(HttpServletRequest request, HttpSession session) {
+	      ModelAndView mav = new ModelAndView();
+	      Integer jobno = Integer.parseInt(request.getParameter("jobno"));
+	      Integer comno = Integer.parseInt(request.getParameter("comno"));
+	      User user = (User)session.getAttribute("loginUser");
+	      
+	      if(user == null) {
+	         mav.addObject("msg", "로그인 후 이용 가능합니다.");
+	         mav.addObject("url", "user/userLogin.shop");
+	         mav.setViewName("alert");
+	         return mav;
+	      } else {
+	         Job job = service.jobselect(jobno, comno);
+	         Company com = service.comselect(comno);
+	         if(!service.selectPickJob(job.getJobno(),user.getUserno())) {
+	            Pickjob pickjob = new Pickjob();
+	            pickjob.setPickjobno(service.pickJobNo()+1);
+	            pickjob.setJobno(jobno);
+	            pickjob.setUserno(user.getUserno());
+	            pickjob.setReadornot(1);
+	            pickjob.setApply(null);
+	            pickjob.setPick(null);
+	            service.insertPickJob(pickjob);
+	         }
+	         mav.addObject("job", job);
+	         mav.addObject("com", com);         
+	      }
+	      return mav;
+	   }
 
 	@RequestMapping("deletejob")
 	public ModelAndView deletejob(HttpServletRequest request) {
@@ -430,26 +452,36 @@ public class ComController {
 		return null;
 	}
 
-//	@RequestMapping("searchuser")
-//	public ModelAndView searchuser(HttpServletRequest request) {
-//		ModelAndView mav = new ModelAndView();
-//		List<CV> cv = new ArrayList<CV>();
-//		cv = service.getallCV();
-//		mav.addObject("cvlist",cv);
-//		return mav;
-//	}
-
 	@GetMapping("addpickuser")
 	public ModelAndView addpickuser(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		Integer comno = Integer.parseInt(request.getParameter("comno"));
 		Integer cvno = Integer.parseInt(request.getParameter("cvno"));
 		Pickuser pu = new Pickuser();
-		pu.setPickuserno(service.getpumaxno()+1);
+		pu.setPickuserno(service.getpumaxno() + 1);
 		pu.setComno(comno);
 		pu.setCvno(cvno);
 		service.addpickuser(pu);
-		mav.setViewName("redirect:recommenduser.shop?comno="+comno);
+		mav.setViewName("redirect:recommenduser.shop?comno=" + comno);
+		return mav;
+	}
+
+	@PostMapping("addpickuser")
+	public ModelAndView addpickuser2(HttpServletRequest request, String comno, String cvno) {
+		ModelAndView mav = new ModelAndView();
+		Pickuser pu = new Pickuser();
+		String[] cvnos = cvno.split(",");
+		for (String s : cvnos) {
+			pu.setPickuserno(service.getpumaxno()+1);
+			pu.setComno(Integer.parseInt(comno));
+			pu.setCvno(Integer.parseInt(s));
+			if(service.selectPU(pu.getComno(),pu.getCvno()).getPickuserno()!=0) {
+				continue;
+			}else {
+				service.addpickuser(pu);
+			}
+		}
+		mav.setViewName("redirect:searchuser.shop");
 		return mav;
 	}
 
@@ -462,7 +494,7 @@ public class ComController {
 		pu.setComno(comno);
 		pu.setCvno(cvno);
 		service.delpickuser(pu);
-		mav.setViewName("redirect:recommenduser.shop?comno="+comno);
+		mav.setViewName("redirect:recommenduser.shop?comno=" + comno);
 		return mav;
 	}
 
@@ -472,26 +504,37 @@ public class ComController {
 		Integer comno = Integer.parseInt(request.getParameter("comno"));
 		List<Pickuser> pu = new ArrayList<Pickuser>();
 		pu = service.getlist(comno);
-		for(Pickuser p : pu) {
+		for (Pickuser p : pu) {
 			p.setCv(service.getCV(p.getCvno()));
 			p.setUser(service.selectOne(p.getCv().getUserno()));
 		}
-		mav.addObject("pulist",pu);
+		mav.addObject("pulist", pu);
 		return mav;
 	}
-	
+
 	@PostMapping("deletepu")
 	public ModelAndView deletepu(HttpServletRequest request, String comno, String cvno) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(cvno);
 		String[] cvnos = cvno.split(",");
 		System.out.println(cvnos);
-		for(String s : cvnos) {
+		for (String s : cvnos) {
 			service.deletepu(Integer.parseInt(comno), Integer.parseInt(s));
 		}
-		mav.setViewName("redirect:pickeduser.shop?comno="+Integer.parseInt(comno));
+		mav.setViewName("redirect:pickeduser.shop?comno=" + Integer.parseInt(comno));
 		return mav;
 	}
 	
+	@RequestMapping("searchuser")
+	public ModelAndView searchuser(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		List<CV> cv = new ArrayList<CV>();
+		cv = service.getallCV();
+		for(CV c : cv) {
+			c.setUser(service.selectOne(c.getUserno()));
+		}
+		mav.addObject("cvlist",cv);
+		return mav;
+	}
 
 }

@@ -369,7 +369,7 @@ public class UserController {
    @PostMapping("curriculum")
    public ModelAndView curriculum(CV cv, HttpServletRequest request) {
       ModelAndView mav = new ModelAndView();
-      cv.setCvno(service.getCvno());
+      cv.setCvno(service.getCvno()+1);
 
       service.cvImg(cv, request); // 사진저장
 

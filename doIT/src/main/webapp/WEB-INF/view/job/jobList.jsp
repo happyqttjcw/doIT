@@ -141,7 +141,7 @@
                <div class="col-sm-2" style="text-align: center; font-size: 14px;">마감등록일</div>
             </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-12" style="min-height: 500px;">
             <c:forEach var="list" items="${list }">
             <div class="col-sm-12 row content" style="margin: 0; padding: 0 19px; min-height: 88px; max-height: 88px; border-bottom: 1px #d6d6d6 solid;">
                <div class="col-sm-3">
@@ -154,7 +154,7 @@
                   </div>
                </div>
                <div class="col-sm-4" style="font-size: 20px; padding: 13px 0;">
-               <div><a href="${path }/com/jobdetail.shop?jobno=${list.jobno }&&comno=${list.com.comno }">${list.subject }</a></div>
+               <div><a href="${path }/job/jobdetail.shop?jobno=${list.jobno }&&comno=${list.com.comno }">${list.subject }</a></div>
                <div>
                   <c:forTokens items="${list.field }" delims="," var="field" begin="0" end="3">
                      <font style="color: #6A84B7; font-size: 1rem;">#${field }</font>&nbsp;

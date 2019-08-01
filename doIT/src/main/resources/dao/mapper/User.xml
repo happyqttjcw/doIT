@@ -13,7 +13,7 @@
 		</if>
 	</select>
 	<select id="selectCV" resultType="CV" parameterType="map">
-		select * from cv cv 
+		select * from cv cv
 		<if test="cvno != null">
 			where cv.cvno = ${cvno}
 		</if>
@@ -21,25 +21,35 @@
 			where cv.userno = ${userno}
 		</if>
 	</select>
-	<select id="selectCareer" resultType="Career" parameterType="map">
+	<select id="selectCareer" resultType="Career"
+		parameterType="map">
 		select * from career cr where cr.cvno = ${cvno}
 	</select>
-	<select id="selectActivity" resultType="Activity" parameterType="map">
+	<select id="selectActivity" resultType="Activity"
+		parameterType="map">
 		select * from activity ac where ac.cvno = ${cvno}
 	</select>
 	<select id="selectLL" resultType="LL" parameterType="map">
-		select * from LL ll where ll.cvno = ${cvno}
+		select *
+		from LL ll where ll.cvno = ${cvno}
 	</select>
-	<select id="selectHaveskill" resultType="Haveskill" parameterType="map">
+	<select id="selectHaveskill" resultType="Haveskill"
+		parameterType="map">
 		select * from haveskill hs where hs.cvno = ${cvno}
 	</select>
-	<select id="selectPortfolio" resultType="Portfolio" parameterType="map">
+	<select id="selectPortfolio" resultType="Portfolio"
+		parameterType="map">
 		select * from portfolio pf where pf.cvno = ${cvno}
 	</select>
-	<select id="selectResume" resultType="Resume" parameterType="map">
+	<select id="selectResume" resultType="Resume"
+		parameterType="map">
 		select * from resume rs where rs.cvno = ${cvno}
 	</select>
-	<select id="selectSetting" resultType="setting" parameterType="map">
+	<select id="selectSetting" resultType="setting"
+		parameterType="map">
 		select * from setting where userno = ${userno}
+	</select>
+	<select id="resumeList" resultType="Resume" parameterType="map">
+		select * from resume where userno = ${userno}
 	</select>
 </mapper>

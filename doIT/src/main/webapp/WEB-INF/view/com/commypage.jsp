@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
    pageEncoding="EUC-KR"%>
-
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 
@@ -96,10 +96,11 @@ th, td {
                      <div class="w3-panel w3-card">
                         <table>
                            <tr>
-                              <td rowspan="2" class="w3-center"><img style="width: 100px; height: 130px;" src="../img/bonobono.jpg"></td>
+                              <td rowspan="2" class="w3-center">
+                              	 <img style="width: 100px; height: 130px;" src="${path }/curriImg/${p.cv.picture }"></td>
                               <td colspan="2" width="20%">이름 : ${p.user.name }</td>
                               <td rowspan="2" width="60%">
-                                 <div>자소서제목 : ${p.cv.subject }</div>
+                                 <div><a href="myCurriculumDetail.shop?cvno=${p.cv.cvno }">자소서제목 : ${p.cv.subject }</a></div>
                                  <div>최종학력 : ${p.cv.school }</div>
                                  <div>희망연봉 : ${p.cv.cdtsalary }</div>
                                  <div>지역 : ${p.cv.addr }</div>

@@ -14,6 +14,7 @@ import logic.CV;
 import logic.Career;
 import logic.Haveskill;
 import logic.LL;
+import logic.Pickjob;
 import logic.Portfolio;
 import logic.Resume;
 import logic.Setting;
@@ -200,5 +201,19 @@ public class UserDao {
 		param.clear();
 		param.put("userno", userno);
 		return sqlSession.selectList(NS + "resumeList", param);
+	}
+
+	// 8.1//
+	// pickjob//
+	public boolean selectPickJob(int jobno, int userno) {
+		return sqlSession.getMapper(UserMapper.class).selectPickJob(jobno, userno);
+	}
+
+	public int pickJobNo() {
+		return sqlSession.getMapper(UserMapper.class).pickJobNo();
+	}
+
+	public void insertPickJob(Pickjob pickjob) {
+		sqlSession.getMapper(UserMapper.class).insertPickJob(pickjob);
 	}
 }

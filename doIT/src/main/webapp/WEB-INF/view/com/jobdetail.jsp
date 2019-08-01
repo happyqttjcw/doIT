@@ -8,6 +8,8 @@
 <c:set var="positions" value="${fn:split(job.position,',')}" />
 <c:set var="cdts" value="${fn:split(job.cdt,',')}" />
 <% pageContext.setAttribute("newline", "\n"); %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +58,7 @@ function delcheck(){
 <span style="color:gray; font-size:15px;">${com.comname}</span>
 <br><hr>
 <div id="table-container" class="w3-center w3-table w3-centered">
-<div><img style="width: 200px; height: 250px;" src="../img/bonobono.jpg"></div>
+<div><img style="width: 200px; height: 250px;" src="${path }/comImg/${sessionScope.logincom.compic }"></div>
 <br><br><br>
 
 <div class="title" style="text-align:left; font-weight:bold; font-size:20px;">01. 모집분야 및 자격요건</div><br><br>
@@ -105,7 +107,7 @@ function delcheck(){
 		<table id="5" class="w3-table w3-center">
             <tr>
                <td style="width:30%;" ><div class="w3-panel w3-card w3-center w3-centered" style="margin-top:15%;">
-                     <img style="width: 160px; height: 200px;" src="../img/bonobono.jpg">
+                     <img style="width: 160px; height: 200px;" src="${path }/comImg/${sessionScope.logincom.compic }">
                   </div></td>
                <td  class="w3-center w3-centered" >
                   <table id="6" class="w3-table w3-centered w3-center" >

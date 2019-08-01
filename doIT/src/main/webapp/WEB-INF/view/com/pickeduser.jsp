@@ -10,10 +10,15 @@
 <title>찜한 인재</title>
 <script type="text/javascript">
 function delpu(){
-	if(confirm("해당 인재를 찜 목록에서 삭제하시겠습니까?")){
-		return true;
-	}else{
+	if($('input:checkbox:checked').length == 0){
+		alert('선택된 인재가 없습니다.');
 		return false;
+	}else{
+		if(confirm("해당 인재를 찜 목록에서 삭제하시겠습니까?")){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
 </script>

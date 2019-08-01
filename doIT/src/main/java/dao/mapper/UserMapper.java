@@ -9,6 +9,7 @@ import logic.CV;
 import logic.Career;
 import logic.Haveskill;
 import logic.LL;
+import logic.Pickjob;
 import logic.Portfolio;
 import logic.Resume;
 import logic.Setting;
@@ -87,5 +88,16 @@ public interface UserMapper {
 
 	@Update("update setting set skill=#{skill},welfare=#{welfare},pluse=#{pluse},location=#{location},job=#{job},salary=#{salary},education=#{education},workform=#{workform} where setno=#{setno}")
 	void likeUpdate(Setting st);
+
+	// 8.1//
+	// pickjob//
+	@Select("select ifnull(max(pickjobno),0) from pickjob")
+	int pickJobNo();
+
+	@Insert("inset into pickjob (pickjobno,userno,jobno,readornot,apply,pick) values(#{pickjobno},#{userno},#{jobno},#{readornot},#{apply},#{pick})")
+	void insertPickJob(Pickjob pickjob);
+
+	@Select("select * from pickjob where jobno = #{jobno} and userno = #{userno}")
+	boolean selectPickJob(int jobno, int userno);
 
 }

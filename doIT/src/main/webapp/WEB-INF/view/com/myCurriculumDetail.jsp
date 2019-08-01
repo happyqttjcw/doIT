@@ -416,8 +416,7 @@
 						</div>
 					</div><br><br>
 					<div class="w3-center">
-						<a href="recommenduser.shop?comno=${sessionScope.logincom.comno }" class="w3-button w3-blue w3-round">목록으로</a>
-						<a href="#" class="w3-button w3-blue w3-round">인재 찜하기</a>
+						<a href="javascript:history.back()" class="w3-button w3-blue w3-round">뒤로가기</a>
 					</div><br><br>
 				</div>
 			</div>

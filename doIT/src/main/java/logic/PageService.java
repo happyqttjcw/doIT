@@ -75,7 +75,7 @@ public class PageService {
 		return list;
 	}
 
-	private Pickuser selectPU(int comno, int cvno) {
+	public Pickuser selectPU(int comno, int cvno) {
 		if (pickuserDao.selectOne(comno, cvno) == null) {
 			return new Pickuser();
 		} else
@@ -535,11 +535,24 @@ public class PageService {
 		return userDao.getResumeListByNo(userno);
 	}
 
-	public void deletepu(Integer comno, Integer userno) {
+	public void deletepu(Integer comno, Integer cvno) {
 		Pickuser pu = new Pickuser();
 		pu.setComno(comno);
-		pu.setUserno(userno);
+		pu.setCvno(cvno);
 		pickuserDao.deletepu(pu);
+	}
+
+	// pickjob//
+	public boolean selectPickJob(int jobno, int userno) {
+		return userDao.selectPickJob(jobno, userno);
+	}
+
+	public int pickJobNo() {
+		return userDao.pickJobNo();
+	}
+
+	public void insertPickJob(Pickjob pickjob) {
+		userDao.insertPickJob(pickjob);
 	}
 
 }
