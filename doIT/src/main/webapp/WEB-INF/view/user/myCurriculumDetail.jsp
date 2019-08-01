@@ -54,7 +54,9 @@
 			<div class="w3-card" style="background-color: #eee1;">
 				<div class="p015" style="font-size: 25px; margin-bottom: 35px; padding: 19px 25px; height: 75px;">${cv.subject }<hr></div>
 				<div class="p1025 row content" style="min-height: 120px; height: 100%; min-width: 1266px;">
-					<div class="col-sm-3" style="text-align: center; min-width: 265px; width: 290px;"><img src="${path }/curriImg/${cv.picture }" style="height: 200px; width: 160px;"></div>
+					<div class="col-sm-3" style="text-align: center; min-width: 265px; width: 290px;">
+					<c:if test="${cv.picture == null }"><img src="${path }/curriImg/basic.jpg" style="height: 200px; width: 160px;"></c:if>
+					<c:if test="${cv.picture != null }"><img src="${path }/curriImg/${cv.picture }" style="height: 200px; width: 160px;"></c:if></div>
 					<div class="col-sm-9" style="padding: 0 78px 0 0; min-width: 800px;">
 						<div style="border: 1px #d6d6d6 solid; min-height: 200px;"><!-- inner div -->
 							<div class="blue bs" style="height: 20%; width: 100%;">      
@@ -247,7 +249,7 @@
 				</div>
 				<div class="p1025 row content">
 					<div class="col-sm-12" style="padding: 0 78px 0 72px;">   
-						<textarea readonly="readonly" style="min-height: 200px; width: 100%; resize: none; border: 1px #d6d6d6 solid; padding: 10px 15px;">${cv.skillcontent }</textarea>
+						<textarea readonly="readonly" style="min-height: 200px; width: 100%; resize: none; border: 1px #d6d6d6 solid; padding: 10px 15px;">경력기술서 내용</textarea>
 					</div>
 				</div>
 				<div class="p1025 row content">

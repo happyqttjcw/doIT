@@ -71,4 +71,15 @@ public class BoardDao {
 	public void addCount(int editno) {
 		sqlSession.getMapper(BoardMapper.class).addCount(editno);
 	}
+
+	public List<ResumeEdit> getSearch(String select, String search) {
+		param.clear();
+		param.put("select",select);
+		param.put("search", search);
+		return sqlSession.selectList(NS+"list",param);
+	}
+
+	public int getBoardListCnt() {
+		return sqlSession.getMapper(BoardMapper.class).getBoardListCnt();
+	}
 }

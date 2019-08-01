@@ -53,16 +53,22 @@
 				  <h3>자소서를 첨삭 받아보세요.</h3>
 				  <p>자소서를 첨삭 받아보세요.자소서를 첨삭 받아보세요.자소서를 첨삭 받아보세요.자소서를 첨삭 받아보세요.자소서를 첨삭 받아보세요.</p>
 				  <div style="text-align: right; padding: 0 25px;">
-				  <form class="form-inline" style="display: inline-block;">
-				  	<select class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" name="search-select" style="margin-right: 7.5px;">
+				  <form:form class="form-inline" style="display: inline-block;" action="search.shop" method="post">
+				  	<select class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" name="select" id="select" style="margin-right: 7.5px;">
 				  		<option>검색어 설정</option>
 				  		<option value="subject">제목</option>
-				  		<option value="writer">작성자</option>
+				  		<option value="name">작성자</option>
 				  		<option value="content">내용</option>
 				  	</select>
 				    <input class="form-control mr-sm-2" type="text" placeholder="검색어" name="search">
     				<button class="btn btn-secondary" type="submit">검색</button>     
-				  </form>
+				  </form:form>
+				  <script>
+				  	$(document).ready(function(){
+				  		$('#select option[value="${select }"]').attr('selected','selected');
+				  		$('input[name="search"]').val('${search }');
+				  	});
+				  </script>
 				  </div>
 				</div>
 				<div class="col-sm-12" style="width: 100%; min-height: 100px; padding: 0 39px;">
@@ -78,7 +84,7 @@
 					      </tr>
 					    </thead>
 					    <tbody>
-					    <c:set var="num" value="1"/>
+					    <c:set var="num" value="${num }"/>
 					    <c:forEach var="list" items="${list }">
 					      <tr>
 					        <td class="rb bb">${num }</td>
@@ -91,10 +97,16 @@
 					        </c:if>
 					        </td>
 					        <td class="rb bb">${list.name }</td>
-					        <td class="rb bb">${list.date }</td>
+					        <fmt:parseDate value="${list.date }" var="date1" pattern="yyyy-MM-dd HH:mm:ss" />
+					        <fmt:formatDate value="${date1 }" var="date2" pattern="HH:mm:ss"/>
+					        <fmt:formatDate value="${date1 }" var="date3" pattern="yyyy-MM-dd"/>
+					        <td class="rb bb">
+					        <c:if test="${now == date }">${date2 }</c:if>
+					        <c:if test="${now != date }">${date3 }</c:if>
+					        </td>
 					        <td class="bb">${list.count }</td>
 					      </tr>
-					      <c:set var="num" value="${num+1 }"/>
+					      <c:set var="num" value="${num-1 }"/>
 					    </c:forEach>
 					    </tbody>
 					  </table>

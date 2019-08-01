@@ -2,6 +2,7 @@ package logic;
 
 public class Resume {
 	private int resumeno;
+	private int userno;
 	private Integer cvno;
 	private Integer jemokno;
 	private String rsubject;
@@ -44,9 +45,15 @@ public class Resume {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	public int getUserno() {
+		return userno;
+	}
+	public void setUserno(int userno) {
+		this.userno = userno;
+	}
 	@Override
 	public String toString() {
-		return "Resume [resumeno=" + resumeno + ", cvno=" + cvno + ", jemokno=" + jemokno + ", rsubject=" + rsubject
-				+ ", rcontent=" + rcontent + ", rdate=" + rdate + "]";
+		return "Resume [resumeno=" + resumeno + ", userno=" + userno + ", cvno=" + cvno + ", jemokno=" + jemokno
+				+ ", rsubject=" + rsubject + ", rcontent=" + rcontent + ", rdate=" + rdate + "]";
 	}
 }

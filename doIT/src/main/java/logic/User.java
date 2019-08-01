@@ -13,8 +13,8 @@ public class User {
 	private String email;
 	private String emailkey;
 	private String emailkeycheck;
-	private MultipartFile pictureUrl;
 	private String picture;
+	private MultipartFile pictureUrl;
 	
 	public int getUserno() {
 		return userno;

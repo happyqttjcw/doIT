@@ -36,7 +36,9 @@ public interface BoardMapper {
 			+ " values(#{editno},#{resumeno},#{userno},#{subject},#{name},now(),#{content},0,#{ref})")
 	void addWrite(ResumeEdit re);
 
-	@Update("update resumeedit set count = count + 1 where editno = #{editno}")
+	@Update("update resumeedit set count = count+1 where editno = #{editno}")
 	void addCount(int editno);
 
+	@Select("select count(*) from resumeedit")
+	int getBoardListCnt();
 }

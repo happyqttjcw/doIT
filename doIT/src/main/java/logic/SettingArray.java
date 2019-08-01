@@ -3,89 +3,89 @@ package logic;
 import java.util.Arrays;
 
 public class SettingArray {
-   private int setno;
-   private int comno;
-   private int userno;
-   private String[] skill;
-   private String[] welfare;
-   private String[] pluse;
-   private String[] location;
-   private String[] job;
-   private String salary;
-   private String education;
-   private String[] workform;
+	private int setno;
+	private int comno;
+	private int userno;
+	private String[] skill;
+	private String[] welfare;
+	private String[] pluse;
+	private String[] location;
+	private String[] job;
+	private String salary;
+	private String education;
+	private String[] workform;
 
-   public int getSetno() {
-      return setno;
-   }
-   public void setSetno(int setno) {
-      this.setno = setno;
-   }
-   public int getComno() {
-      return comno;
-   }
-   public void setComno(int comno) {
-      this.comno = comno;
-   }
-   public int getUserno() {
-      return userno;
-   }
-   public void setUserno(int userno) {
-      this.userno = userno;
-   }
-   public String[] getSkill() {
-      return skill;
-   }
-   public void setSkill(String[] skill) {
-      this.skill = skill;
-   }
-   public String[] getWelfare() {
-      return welfare;
-   }
-   public void setWelfare(String[] welfare) {
-      this.welfare = welfare;
-   }
-   public String[] getPluse() {
-      return pluse;
-   }
-   public void setPluse(String[] pluse) {
-      this.pluse = pluse;
-   }
-   public String[] getLocation() {
-      return location;
-   }
-   public void setLocation(String[] location) {
-      this.location = location;
-   }
-   public String[] getJob() {
-      return job;
-   }
-   public void setJob(String[] job) {
-      this.job = job;
-   }
-   public String getSalary() {
-      return salary;
-   }
-   public void setSalary(String salary) {
-      this.salary = salary;
-   }
-   public String getEducation() {
-      return education;
-   }
-   public void setEducation(String education) {
-      this.education = education;
-   }
-   public String[] getWorkform() {
-      return workform;
-   }
-   public void setWorkform(String[] workform) {
-      this.workform = workform;
-   }
-   @Override
-   public String toString() {
-      return "SettingArray [setno=" + setno + ", comno=" + comno + ", userno=" + userno + ", skill="
-            + Arrays.toString(skill) + ", welfare=" + Arrays.toString(welfare) + ", pluse=" + Arrays.toString(pluse)
-            + ", location=" + Arrays.toString(location) + ", job=" + Arrays.toString(job) + ", salary=" + salary
-            + ", education=" + education + ", workform=" + Arrays.toString(workform) + "]";
-   }
+	public int getSetno() {
+		return setno;
+	}
+	public void setSetno(int setno) {
+		this.setno = setno;
+	}
+	public int getComno() {
+		return comno;
+	}
+	public void setComno(int comno) {
+		this.comno = comno;
+	}
+	public int getUserno() {
+		return userno;
+	}
+	public void setUserno(int userno) {
+		this.userno = userno;
+	}
+	public String[] getSkill() {
+		return skill;
+	}
+	public void setSkill(String[] skill) {
+		this.skill = skill;
+	}
+	public String[] getWelfare() {
+		return welfare;
+	}
+	public void setWelfare(String[] welfare) {
+		this.welfare = welfare;
+	}
+	public String[] getPluse() {
+		return pluse;
+	}
+	public void setPluse(String[] pluse) {
+		this.pluse = pluse;
+	}
+	public String[] getLocation() {
+		return location;
+	}
+	public void setLocation(String[] location) {
+		this.location = location;
+	}
+	public String[] getJob() {
+		return job;
+	}
+	public void setJob(String[] job) {
+		this.job = job;
+	}
+	public String getSalary() {
+		return salary;
+	}
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+	public String getEducation() {
+		return education;
+	}
+	public void setEducation(String education) {
+		this.education = education;
+	}
+	public String[] getWorkform() {
+		return workform;
+	}
+	public void setWorkform(String[] workform) {
+		this.workform = workform;
+	}
+	@Override
+	public String toString() {
+		return "SettingArray [setno=" + setno + ", comno=" + comno + ", userno=" + userno + ", skill="
+				+ Arrays.toString(skill) + ", welfare=" + Arrays.toString(welfare) + ", pluse=" + Arrays.toString(pluse)
+				+ ", location=" + Arrays.toString(location) + ", job=" + Arrays.toString(job) + ", salary=" + salary
+				+ ", education=" + education + ", workform=" + Arrays.toString(workform) + "]";
+	}
 }

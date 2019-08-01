@@ -63,9 +63,20 @@ h1>a {
 </style>
 <meta charset="EUC-KR">
 <title>이력서</title>
+<script>
+	function chk() {
+		if($('#subject').val() == '') {
+			alert('제목은 필수로 입력하셔야 합니다.');
+			$('#subject').focus();
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
 </head>
 <body>
-	<form:form action="curriculum.shop" modelAttribute="cv" enctype="multipart/form-data" name="f">
+	<form:form action="curriculum.shop" modelAttribute="cv" enctype="multipart/form-data" name="f" onsubmit="return chk()">
 	<input type="hidden" value="${param.userno }" name="userno">
 		<div class="container-fluid text-center" style="padding: 5rem 0; background-color: #F6F6F6;">
 			<div class="row content">
@@ -73,7 +84,7 @@ h1>a {
 				<div class="col-sm-6 text-left"
 					style="background-color: #f6f6f6; padding: 1rem; min-width: 950px; height: 100%;">
 					
-					<input class="form-control w3-card" type="text" name="subject" placeholder="제목 입력"
+					<input class="form-control w3-card" type="text" name="subject" placeholder="제목 입력" id="subject"
 					style="border-style: none; width: 940px; margin-bottom: 20px; height: 80px; padding: 10px 30px; font-size: 30px;">
 					
 					<!-- 기본사항 -->
@@ -132,7 +143,6 @@ h1>a {
 						        reader.onload = function(e) {
 						            $('#pic').attr('src', e.target.result);
 						            $('#picture').attr('value',e.target.result);
-						            $('#pictureUrl').attr('value',e.target.result);
 						        }
 						        reader.readAsDataURL(input.files[0]);
 						    }
@@ -995,15 +1005,15 @@ h1>a {
 										<h3>
 											<select name="cdtsalary" class="form-control" style="width: 350px;">
 												<option value="회사내규에 따름">회사내규에 따름</option>
-												<option value="0~1400">1400만원 이하</option>
+												<option value="면접후 결정">면접후 결정</option>
+												<option value="1400만원 이하">1400만원 이하</option>
 												<c:forEach var="salary" begin="1400" end="3800" step="200">
 													<option value="${salary }~${salary+200 }">${salary }만원~${salary+200 }만원</option>
 												</c:forEach>
 												<c:forEach var="salary2" begin="4000" end="9000" step="1000">
 													<option value="${salary2 }~${salary2+1000 }">${salary2 }만원~${salary2+1000 }만원</option>
 												</c:forEach>
-												<option value="10000~">1억원 이상</option>
-												<option value="interview~interview">면접후 결정</option>
+												<option value="1억원 이상">1억원 이상</option>
 											</select>
 										</h3>
 										<div style="margin-bottom: 10px; height: 42px; border: 1px #d6d6d6 solid; padding: 12px 1rem; font-size: 11px;">

@@ -55,10 +55,10 @@
 			<div class="info"><input type="text" class="form-control" style="margin-top: 5px;" value="${user.email }" readonly="readonly"></div>
 			<div class="info"><input type="text" class="form-control" style="margin-top: 5px;" value="${user.phone }" readonly="readonly"></div>
 		</div>
+		<a href="${path }/user/editUser.shop?id=${user.id }" class="btn btn-primary btn-block">수정하기</a>
 	</div>
 </div>
 <div class="col-sm-3">
-	<a href="${path }/user/editUser.shop?" class="btn btn-primary btn-block">수정하기</a>
 </div>
 </div>
 </div>

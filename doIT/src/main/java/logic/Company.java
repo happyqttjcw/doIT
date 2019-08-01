@@ -34,72 +34,56 @@ public class Company {
    public int getComno() {
       return comno;
    }
-
    public void setComno(int comno) {
       this.comno = comno;
    }
-
    public String getComid() {
       return comid;
    }
-
    public void setComid(String comid) {
       this.comid = comid;
    }
-
    public String getCompass() {
       return compass;
    }
-
    public void setCompass(String compass) {
       this.compass = compass;
    }
-
    public int getBussno() {
       return bussno;
    }
-
    public void setBussno(int bussno) {
       this.bussno = bussno;
    }
-
    public String getComtype() {
       return comtype;
    }
-
    public void setComtype(String comtype) {
       this.comtype = comtype;
    }
-
    public String getComsize() {
       return comsize;
    }
-
    public void setComsize(String comsize) {
       this.comsize = comsize;
    }
-
    public String getManagername() {
       return managername;
    }
-
    public void setManagername(String managername) {
       this.managername = managername;
    }
-
    public String getManagerphone() {
       return managerphone;
    }
-
    public void setManagerphone(String managerphone) {
       this.managerphone = managerphone;
    }
-
    public String getManageremail() {
       return manageremail;
    }
-
    public void setManageremail(String manageremail) {
+      System.out.println(manageremail);
       this.manageremail = manageremail;
    }
 

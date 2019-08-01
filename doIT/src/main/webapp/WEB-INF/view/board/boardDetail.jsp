@@ -86,8 +86,8 @@
 				<div style="padding: 10px 25px; text-align: left;">${re.content }</div>
 				<div class="content1" style="border-bottom: 1px #d6d6d6 solid;">${re.date }</div>
 				
-				<h2>***님의 자소서를 첨삭해 주세요.</h2>
-				<p>***님의 자소서를 첨삭해 주세요.***님의 자소서를 첨삭해 주세요.***님의 자소서를 첨삭해 주세요.***님의 자소서를 첨삭해 주세요.***님의 자소서를 첨삭해 주세요.</p> 
+				<h2>${re.name }님의 자소서를 첨삭해 주세요.</h2>
+				<p></p> 
 
 				<div class="comment">
 					<!-- 반복 -->

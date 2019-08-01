@@ -6,6 +6,7 @@
 	<decorator name="user" page="userdecorator.jsp" >
 		<pattern>/user/*.shop</pattern>
 		<pattern>/board/*.shop</pattern>
+		<pattern>/job/*.shop</pattern>
 	</decorator>
 	<!-- layout 제외 설정 -->
 	<excludes>

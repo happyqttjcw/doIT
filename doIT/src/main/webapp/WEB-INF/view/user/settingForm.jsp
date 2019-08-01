@@ -8,17 +8,24 @@
 <title>사용자 맞춤 설정 페이지</title>
 </head>
 <body id="setting">
-<form:form action="setting.shop" modelAttribute="SettingArray">
+<form:form action="setting.shop" modelAttribute="SettingArray" method="post">
+<c:if test="${!empty setting }">
+	<script>
+		$(document).ready(function(){
+			$('form').attr('action','settingUpdate.shop');
+			$('input:submit').attr('value','변경하기');
+		});
+	</script>
+	</c:if>
 <input type="hidden" name="userno" value="${param.userno }">
 <div class="container-fluid">
 <div class="row content">    
 <div class="col-sm-3">
-	<!-- Page Container -->
-	<div class="w3-container w3-content w3-main" style="max-width:1350px;margin-top:200px;">    
+	<!-- Page Container --> 
 	  <!-- The Grid -->
 	  <div class="w3-row">
 	    <!-- Left Column -->
-	    <div class="w3-col m2 w3-hide-small" style="min-width: 420px">
+	    <div class="w3-col m2 w3-hide-small" style="min-width: 220px; float: right;">
 	      <!-- Profile -->
 	      <div class="w3-card w3-round w3-white" style="margin-top:25px;">
 	         <br>
@@ -46,7 +53,6 @@
 	   </div>
 	   <!-- End Middle Column -->
 	  </div>
-	</div>
 </div>
 <div class="col-sm-6">
 	<div> 
@@ -154,18 +160,17 @@
 		<div style="display: inline-block; margin-right: 200px;">
 		<div style="padding-left: 10px; font-size: 30px; font-family:'Do Hyeon', sans-serif; color: #333c;">급여</div>
 		<div style="height: 100%; padding-left: 50px; margin-bottom: 30px;">
-		<select name="minpay" class="w3-button">
-			<option>----</option>
-			<c:forEach var="min_pay" begin="1800" end="5000" step="100">
-				<option value="${min_pay }" id="${min_pay }">${min_pay }</option>				
+		<select name="salary" class="w3-button">
+			<option value="회사내규에 따름">회사내규에 따름</option>
+			<option value="면접후 결정">면접후 결정</option>
+			<option value="1400만원 이하">1400만원 이하</option>
+			<c:forEach var="pay" begin="1400" end="3800" step="200">
+				<option value="${pay}~${pay+200}">${pay }~${pay+200 }</option>
 			</c:forEach>
-		</select>
-		<span>~</span> 
-		<select name="maxpay" class="w3-button">
-			<option>----</option> 
-			<c:forEach var="max_pay" begin="1800" end="5000" step="100">
-				<option value="${max_pay }" id="${max_pay }">${max_pay }</option>				
+			<c:forEach var="pay" begin="4000" end="9000" step="1000">
+				<option value="${pay}~${pay+1000}">${pay }~${pay+1000 }</option>
 			</c:forEach>
+			<option value="1억원 이상">1억원 이상</option>
 		</select>
 		</div>
 		</div>
@@ -197,58 +202,58 @@
 
 <c:if test="${!empty setting }">
 <c:forTokens items="${setting.skill }" delims="," var="skill">
-   <script>
-      $(document).ready(function(){
-         $('#${skill }').attr('checked','checked');
-      });
-   </script>
+	<script>
+		$(document).ready(function(){
+			$('#${skill }').attr('checked','checked');
+		});
+	</script>
 </c:forTokens>
 <c:forTokens items="${setting.welfare }" delims="," var="welfare">
-   <script>
-      $(document).ready(function(){
-         $('#${welfare }').attr('checked','checked');
-      });
-   </script>
+	<script>
+		$(document).ready(function(){
+			$('#${welfare }').attr('checked','checked');
+		});
+	</script>
 </c:forTokens>
 <c:forTokens items="${setting.pluse }" delims="," var="pluse">
-   <script>
-      $(document).ready(function(){
-         $('#${pluse }').attr('checked','checked');
-      });
-   </script>
+	<script>
+		$(document).ready(function(){
+			$('#${pluse }').attr('checked','checked');
+		});
+	</script>
 </c:forTokens>
 <c:forTokens items="${setting.location }" delims="," var="location">
-   <script>
-      $(document).ready(function(){
-         $('#${location }').attr('checked','checked');
-      });
-   </script>
+	<script>
+		$(document).ready(function(){
+			$('#${location }').attr('checked','checked');
+		});
+	</script>
 </c:forTokens>
 <c:forTokens items="${setting.job }" delims="," var="job">
-   <script>
-      $(document).ready(function(){
-         $('#${job }').attr('checked','checked');
-      });
-   </script>
+	<script>
+		$(document).ready(function(){
+			$('#${job }').attr('checked','checked');
+		});
+	</script>
 </c:forTokens>
 <c:forTokens items="${setting.education }" delims="," var="education">
-   <script>
-      $(document).ready(function(){
-         $('#${education }').attr('selected','selected');
-      });
-   </script>
+	<script>
+		$(document).ready(function(){
+			$('select[name="education"]').children('option[value="${setting.education }"]').attr('selected','selected');
+		});
+	</script>
 </c:forTokens>
 <script>
-   $(document).ready(function(){
-      $('select[name="salary"]').children('option[value="${setting.salary }"]').attr('selected','selected');
-   });
+	$(document).ready(function(){
+		$('select[name="salary"]').children('option[value="${setting.salary }"]').attr('selected','selected');
+	});
 </script>
 <c:forTokens items="${setting.workform }" delims="," var="workform">
-   <script>
-      $(document).ready(function(){
-         $('#${workform }').attr('checked','checked');
-      });
-   </script>
+	<script>
+		$(document).ready(function(){
+			$('#${workform }').attr('checked','checked');
+		});
+	</script>
 </c:forTokens>
 </c:if>
 

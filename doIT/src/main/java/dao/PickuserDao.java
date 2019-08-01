@@ -14,34 +14,34 @@ import logic.Pickuser;
 
 @Repository
 public class PickuserDao {
-	@Autowired
-	private SqlSessionTemplate sqlSession;
-	private final String NS = "dao.mapper.PickuserMapper.";
-	private Map<String, Object> param = new HashMap<>();
+   @Autowired
+   private SqlSessionTemplate sqlSession;
+   private final String NS = "dao.mapper.PickuserMapper.";
+   private Map<String, Object> param = new HashMap<>();
 
-	public List<Pickuser> list(Integer comno) {
-		param.clear();
-		param.put("comno", comno);
-		return sqlSession.selectList(NS + "list", param);
-	}
+   public List<Pickuser> list(Integer comno) {
+      param.clear();
+      param.put("comno", comno);
+      return sqlSession.selectList(NS + "list", param);
+   }
 
-	public int puMaxNo() {
-		return sqlSession.getMapper(PickuserMapper.class).pumaxno();
-	}
+   public int puMaxNo() {
+      return sqlSession.getMapper(PickuserMapper.class).pumaxno();
+   }
 
-	public void insert(Pickuser pu) {
-		sqlSession.getMapper(PickuserMapper.class).insert(pu);
-	}
+   public void insert(Pickuser pu) {
+      sqlSession.getMapper(PickuserMapper.class).insert(pu);
+   }
 
-	public Pickuser selectOne(int comno, int cvno) {
-		param.clear();
-		param.put("comno", comno);
-		param.put("cvno", cvno);
-		return sqlSession.selectOne(NS + "list", param);
-	}
+   public Pickuser selectOne(int comno, int cvno) {
+      param.clear();
+      param.put("comno", comno);
+      param.put("cvno", cvno);
+      return sqlSession.selectOne(NS + "list", param);
+   }
 
-	public void deletepu(Pickuser pu) {
-		sqlSession.getMapper(PickuserMapper.class).deletepu(pu);
-	}
+   public void deletepu(Pickuser pu) {
+      sqlSession.getMapper(PickuserMapper.class).deletepu(pu);
+   }
 
 }

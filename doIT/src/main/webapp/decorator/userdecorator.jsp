@@ -17,8 +17,6 @@
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic+Coding|Noto+Sans+KR:100,400|Song+Myung&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/8ee129e7b3.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-<script   src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -56,33 +54,32 @@ $(window).scroll(function() {
    });
    
    $(document).ready(function() {
-         $('#dropdown').hover(function() {
-            $('.dropdown-menu').addClass('show');
-         }, function() {
-            $('.dropdown-menu').removeClass('show');
-         });
+      $('#dropdown').hover(function() {
+         $('.dropdown-menu').addClass('show');
+      }, function() {
+         $('.dropdown-menu').removeClass('show');
       });
-
+   });
 </script>
 <decorator:head/>
 </head>
 <body class="w3-theme-l5">
 <div class="w3-center w3-top" style="height: 100px; padding-top: 10px;">
-   <a href="${path }/user/userMyPage.shop?userno=${sessionScope.loginUser.userno }" style="font-size:20px; color:#46556d; text-decoration: none;">IT에서 일하자<span style="font-size:40px; font-weight: bold;">doIT</span></a>
+   <a href="${path }/user/userMain.shop" style="font-size:20px; color:#46556d; text-decoration: none;">IT에서 일하자<span style="font-size:40px; font-weight: bold;">doIT</span></a>
 </div>
 <div class="w3-top" id="deco1" style="background-color: #46556d; min-width:500px; margin-top:5%; height:80px; padding: 0 30px 0 30px; " >
   <div style="margin-top:20px;">
-     <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;" id="dropdown">기업 공고</a>
-     <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;">맞춤 기업</a>
+ 	 <a href="${path }/job/jobList.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;">기업 공고</a>
+     <a href="${path }/job/settingJob.shop?userno=${sessionScope.loginUser.userno }" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;">맞춤 기업</a>
      <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;">인재 검색</a>
      <a href="${path }/board/resumeBoard.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;">자소서 첨삭</a>
     <c:choose>
        <c:when test="${empty loginUser }">
-              <a href="userEntry.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration:none; font-size:20px;">회원가입</a>
-            <a href="userLogin.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration:none; font-size:20px;">로그인</a>
+              <a href="${path }/user/userEntry.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration:none; font-size:20px;">회원가입</a>
+            <a href="${path }/user/userLogin.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration:none; font-size:20px;">로그인</a>
         </c:when>
         <c:otherwise>
-            <a href="logout.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration: none; font-size: 20px;">로그아웃</a>
+            <a href="${path }/user/logout.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration: none; font-size: 20px;">로그아웃</a>
             <a href="${path }/user/userMyPage.shop?userno=${sessionScope.loginUser.userno }" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration:none; font-size:20px;">마이페이지</a>
         </c:otherwise>
     </c:choose>
@@ -93,17 +90,17 @@ $(window).scroll(function() {
 <div class="w3-top" id="deco2" style="background-color: #46556d; min-width:500px; height:80px; display:none; z-index: 100;" >
    <div style="margin-top:18px;">
       <a href="#" class="w3-bar-item w3-padding-large w3-margin-top" title="doIT" style="font-size:28px; color:white; font-weight:bold; text-decoration: none; "><i class="fa fa-home"></i>&nbsp;doIT</a>
-     <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;" id="dropdown">기업 공고</a>
-     <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;">맞춤 기업</a>
+     <a href="${path }/job/jobList.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;" id="dropdown">기업 공고</a>
+     <a href="${path }/job/settingJob.shop?userno=${sessionScope.loginUser.userno }" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;">맞춤 기업</a>
      <a href="#" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;">인재 검색</a>
      <a href="${path }/board/resumeBoard.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime" style="text-decoration:none; font-size:20px;">자소서 첨삭</a>
     <c:choose>
        <c:when test="${empty loginUser }">
-              <a href="userEntry.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration:none; font-size:20px;">회원가입</a>
-            <a href="userLogin.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration:none; font-size:20px;">로그인</a>
+              <a href="${path }/user/userEntry.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration:none; font-size:20px;">회원가입</a>
+            <a href="${path }/user/userLogin.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration:none; font-size:20px;">로그인</a>
         </c:when>
         <c:otherwise>
-            <a href="logout.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration: none; font-size: 20px;">로그아웃</a>
+            <a href="${path }/user/logout.shop" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration: none; font-size: 20px;">로그아웃</a>
             <a href="${path }/user/userMyPage.shop?userno=${sessionScope.loginUser.userno }" class="w3-bar-item w3-hide-small w3-padding-small w3-text-white w3-hover-text-lime w3-right" style="text-decoration:none; font-size:20px;">마이페이지</a>
         </c:otherwise>
     </c:choose>
